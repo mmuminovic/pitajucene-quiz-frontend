@@ -204,7 +204,7 @@ class Quiz extends Component {
                         <p style={{ fontWeight: 'bold' }}>- Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</p>
                     </div>
                     <Button clicked={this.playAgain} text="Pokreni kviz" />
-                    <table style={{ margin: '0 auto' }}>
+                    <table style={{ margin: '20px auto' }}>
                         <tbody>
                             <tr>
                                 <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Odigrano kvizova:</em></td>
