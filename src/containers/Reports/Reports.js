@@ -79,7 +79,7 @@ class Reports extends Component {
 
         return (
             <div className={classes.ListOfReports}>
-                <p style={{ fontWeight: '500', fontSize: 'medium' }}>Pretrazi primjedbe po kriterijumima</p>
+                <p style={{ fontWeight: '500', fontSize: 'medium' }}>Pretraži primjedbe po kriterijumima</p>
                 <select onChange={(event) => this.onChangeHandler(event)}>
                     <option value={0}>Primjedbe na čekanju</option>
                     <option value={1}>Pročitane primjedbe</option>

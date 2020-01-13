@@ -110,7 +110,7 @@ class Questions extends Component {
 
         return (
             <div className={classes.ListOfQuestions}>
-                <p style={{ fontWeight: '500', fontSize: 'medium' }}>Pretrazi pitanja po kriterijumima</p>
+                <p style={{ fontWeight: '500', fontSize: 'medium' }}>Pretraži pitanja po kriterijumima</p>
                 <select onChange={(event) => this.onChangeHandler(event)}>
                     <option value={0}>Sva pitanja</option>
                     <option value={5}>5 - Laka pitanja</option>
@@ -118,7 +118,7 @@ class Questions extends Component {
                     <option value={10}>10 - Teška pitanja</option>
                 </select>
                 <select onChange={(event) => this.sortQuestions(event)}>
-                    <option value={'createdAt'}>Po datumu - najnovije prvo</option>
+                    <option value={'createdAt'}>Po datumu izmjene - najskorije izmjene prvo</option>
                     <option value={'answeredCorrectly'}>Najviše tačnih odgovora</option>
                     <option value={'answeredIncorrectly'}>Najviše netačnih odgovora</option>
                 </select>

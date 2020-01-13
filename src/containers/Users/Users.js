@@ -106,9 +106,9 @@ class Users extends Component {
 
         return (
             <div className={classes.ListOfUsers}>
-                <p style={{ fontWeight: '500', fontSize: 'medium' }}>Svi korisnici</p>
-                <p>Broj korisnika: {this.state.numberOfusers}</p>
-                <p>Kviz pokrenut ukupno {this.state.quizPlayed} puta.</p>
+                <p style={{ fontWeight: '500', fontSize: 'medium', margin: '5px' }}>Svi korisnici</p>
+                <p style={{ fontWeight: '500', fontSize: 'small', margin: '5px' }}>Broj korisnika: {this.state.numberOfusers}</p>
+                <p style={{ fontWeight: '500', fontSize: 'small', margin: '5px' }}>Kviz pokrenut ukupno {this.state.quizPlayed} puta.</p>
                 <select onChange={(event) => this.choose(event)}>
                     <option value={0}>Aktivni korisnici</option>
                     <option value={1}>Svi korisnici</option>
