@@ -208,11 +208,11 @@ class Quiz extends Component {
                         <tbody>
                             <tr>
                                 <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Odigrano kvizova:</em></td>
-                                <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>Trenutno igra:</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Trenutno igra:</em></td>
                             </tr>
                             <tr>
-                                <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>{this.state.quizPlayed}</em></td>
-                                <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>{this.state.activeGames}</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>{this.state.quizPlayed}</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>{this.state.activeGames}</em></td>
                             </tr>
                         </tbody>
                     </table>
