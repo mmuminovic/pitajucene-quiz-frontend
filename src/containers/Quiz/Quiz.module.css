@@ -1,0 +1,282 @@
+.Quiz {
+    width: 100%;
+    height: 600px;
+    margin: 60px auto 0; 
+}
+
+.Rules {
+    background-color: rgba(188, 188, 248, 0.15);
+    padding: 10px;
+    margin: 5px auto;
+    border-radius: 10px;
+    width: 70%;
+}
+
+@media(max-width: 1000px){
+    .Rules {
+        width: 85%;
+    }
+}
+
+@media(min-width: 1000px){
+    .Quiz {
+        margin: 150px auto 0;
+    }
+}
+
+.Rules p {
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.TimerText {
+    display: none;
+    font-size: small;
+    text-align: center;
+    margin: 0 auto;
+}
+
+@media(max-height: 650px){
+    .TimerText {
+        display: block;
+    }
+}
+
+.Question {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.Question p {
+    font-size: small;
+    border: 1px solid rgb(5, 130, 202);
+    text-align: justify;
+    text-align-last: center;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    font-weight: 500;
+    background-color: rgb(5, 130, 202);
+}
+
+.Answers {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.Answers ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.Answers ul li {
+    font-size: small;
+    font-weight: 500;
+    border: 1px solid rgb(5, 130, 202);
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.Answers ul li:hover {
+    background-color: rgb(5, 130, 202);
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.Answers ul li:active {
+    background-color: #4CAF50;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+@media (hover: none) {
+    .Answers ul li {
+        font-size: 14px;
+        border: 1px solid rgb(5, 130, 202);
+        margin: 5px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .Answers ul li:hover {
+        background-color: transparent;
+        font-weight: inherit;
+        color: inherit;
+        cursor: pointer;
+    }
+    .Answers ul li:active {
+        background-color: #4CAF50;
+        font-weight: inherit;
+        color: inherit;
+        cursor: pointer;
+    }
+}
+
+.Score {
+    width: 50%;
+    margin: 15px auto;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    background-color:#4CAF50;
+    padding: 10px;
+}
+
+.Score p {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.Gameover {
+    font-size: small;
+    text-align: center;
+    margin: 120px auto 0;
+}
+
+@media(min-width: 950px){
+    .Gameover {
+        margin: 150px auto 0;
+    }
+}
+
+.Gameover button {
+    color: white;
+    background-color: rgb(5, 130, 202);
+    font-weight: bold;border: 2px solid rgb(5, 130, 202);
+    border-radius: 10px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+     margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.Gameover button:hover {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+    color: white;
+}
+
+.Gameover button:active {
+    color: rgba(0, 0, 255, 0.61);
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 255, 0.61);
+}
+
+.ModalInfo {
+    text-align: center;
+    padding: 20px;
+}
+
+.ModalInfo p {
+    font-size: small;
+}
+
+.ModalInfo button {
+    color: white;
+    background-color: rgb(5, 130, 202);
+    font-weight: bold;border: 2px solid rgb(5, 130, 202);
+    border-radius: 10px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+     margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.ModalInfo button:hover {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+    color: white;
+}
+
+.ModalInfo button:active {
+    color: rgba(0, 0, 255, 0.61);
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 255, 0.61);
+}
+
+.ModalInfo div {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.ModalInfo h6 {
+    text-align: center;
+    font-style: italic;
+    color: red;
+}
+
+.Incorrect {
+    color: red;
+    margin: 10px 0;
+}
+
+.Link {
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
+.Link a {
+    color: blue;
+    text-decoration: none;
+}
+
+.Link a:hover {
+    color: red;
+}
+
+.Button button {
+    color: white;
+    background-color: rgb(5, 130, 202);
+    font-weight: bold;border: 2px solid rgb(5, 130, 202);
+    border-radius: 10px;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+     margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.Button button:hover {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+    color: white;
+}
+
+.Button button:active {
+    color: rgba(0, 0, 255, 0.61);
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 255, 0.61);
+}
+
+.Danger button {
+    background-color: #cc6a66;
+    font-weight: bold;border: 2px solid #cc6a66;
+}
+
+.Danger button:hover {
+    background-color: red;
+    border: 2px solid red;
+}

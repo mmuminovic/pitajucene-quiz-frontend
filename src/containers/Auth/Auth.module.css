@@ -1,0 +1,74 @@
+.Contents {
+    width: 80%;
+    text-align: center;
+    padding: 10% 0;
+    margin: 0;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.Contents div {
+    margin: 10px auto;
+    text-align: center;
+}
+
+.Contents div input {
+    width: 45%;
+    height: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.Contents div button {
+    color: white;
+    background-color: rgb(5, 130, 202);
+    font-weight: bold;border: 2px solid rgb(5, 130, 202);
+    border-radius: 10px;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+     margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.Contents div button:hover {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+    color: white;
+}
+.Contents div button:active {
+    color: rgba(0, 0, 255, 0.61);
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 255, 0.61);
+}
+
+.Link a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    margin: 20px 14px;
+    cursor: pointer;
+}
+
+.Link a:hover {
+    color: rgb(0, 26, 173)
+}
+
+.Link a:active {
+    color: red;
+}
+
+@media(max-width: 800px) {
+    .Contents div input {
+        width: 80%;
+        height: 30px;
+        border-radius: 10px;
+        text-align: center;
+    }
+}

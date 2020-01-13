@@ -1,0 +1,96 @@
+.List {
+    width: 100%;
+    text-align: center;
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    overflow: auto;
+    height: 600px;
+}
+
+.List li {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    background-color: rgba(188, 188, 248, 0.15);
+}
+
+.List li p {
+    font-size: small;
+    margin: 5px;
+    padding: 0;
+    font-weight: 500;
+}
+
+.List .Question {
+    text-align: justify;
+    text-align-last: center;
+    margin: 0 20px;
+    font-size: small;
+    color: #555;
+    font-weight: bold;
+}
+.List li a {
+    font-size: small;
+    color: rgb(0, 81, 255);
+    font-weight: 500;
+}
+
+.ListOfReports {
+    font-size: small;
+    width: 80%;
+    margin: 120px auto 0;
+    text-align: center;
+}
+
+.ListOfReports select {
+    font-size: small;
+    width: 30%;
+    border-radius: 10px;
+    text-align-last: center;
+}
+
+.ListOfReports ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+.ListOfReports li {
+    font-size: small;
+    font-weight: 500;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid rgb(5, 130, 202);
+    border-radius: 10px;
+    text-align: center;
+    overflow: auto;
+}
+
+.ListOfReports li button {
+    color: white;
+    background-color: rgb(5, 130, 202);
+    font-weight: bold;border: 2px solid rgb(5, 130, 202);
+    border-radius: 10px;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+     margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.ListOfReports li button:hover {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+    color: white;
+}
+
+.ListOfReports li button:active {
+    color: rgba(0, 0, 255, 0.61);
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 255, 0.61);
+}
+

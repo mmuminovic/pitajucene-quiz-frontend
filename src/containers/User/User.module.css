@@ -1,0 +1,111 @@
+.Title {
+    text-align: center;
+    color: #555;
+}
+
+.Title div {
+    border: 1px solid black;
+    padding: 20px 0;
+}
+
+.Title div p {
+    margin: 0;
+    padding: 0;
+}
+
+.Heading p {
+    padding: 10px 0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 100px auto 0; 
+    text-align: center;
+    color: #555;
+    background-color:rgba(188, 188, 248, 0.15);
+}
+
+@media(min-width: 1000px){
+    .Heading p {
+        margin: 100px auto 0;
+    }
+}
+
+.Games {
+    margin-top: 10px;
+    border-top: 1px solid black;
+}
+
+.Games p {
+    text-align: center;
+}
+
+.Field {
+    background-color: rgba(188, 188, 248, 0.15);
+    text-align: center;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.Field p {
+    font-size: small;
+}
+
+.Title {
+    margin: 0;
+    padding: 10px 0 5px 5px;
+    font-weight: 500;
+}
+
+.Field button {
+    color: white;
+    background-color: rgb(5, 130, 202);
+    font-weight: bold;
+    border: 2px solid rgb(5, 130, 202);
+    border-radius: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 0 auto;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.List {
+    width: 100%;
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    height: 450px;
+    margin-bottom: 100px;
+}
+
+.List li {
+    border-bottom: 1px solid rgb(0, 0, 0);
+    background-color: rgba(188, 188, 248, 0.15);
+}
+
+.List li p {
+    font-size: small;
+    margin: 5px;
+    padding: 0;
+    font-weight: 500;
+}
+
+.List .Question {
+    text-align: justify;
+    text-align-last: center;
+    margin: 0 20px;
+    font-size: small;
+    color: #555;
+    font-weight: bold;
+}
+.List li a {
+    font-size: small;
+    color: rgb(0, 81, 255);
+    font-weight: 500;
+}

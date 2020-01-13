@@ -1,0 +1,107 @@
+.ListOfUsers {
+    font-size: small;
+    width: 80%;
+    margin: 120px auto;
+    text-align: center;
+}
+
+.ListOfUsers select {
+    font-size: small;
+    width: 30%;
+    border-radius: 10px;
+    text-align-last: center;
+}
+
+
+.ListOfUsers ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+.ListOfUsers li {
+    font-size: small;
+    font-weight: 500;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid rgb(5, 130, 202);
+    border-radius: 10px;
+    text-align: left;
+    overflow: auto;
+}
+
+.ListOfUsers li button {
+    font-size: small;
+    float: right;
+}
+
+.ListOfUsers li span {
+    font-size: small;
+    float: right;
+    padding: 0 10px;
+}
+
+.Button {
+    color: white;
+    background-color: rgb(5, 130, 202);
+    font-weight: 500;
+    border: 2px solid rgb(5, 130, 202);
+    border-radius: 10px;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+     margin: 0 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.Button:hover {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+    color: white;
+}
+
+.Button:active {
+    color: rgba(0, 0, 255, 0.61);
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 255, 0.61);
+}
+
+.Danger {
+    color: white;
+    background-color: #cc6a66;
+    font-weight: 500;
+    border: 2px solid #cc6a66;
+    border-radius: 10px;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+     margin: 0 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.Danger:hover {
+    background-color: red;
+    border: 2px solid red;
+    color: white;
+}
+
+.Danger:active {
+    color: rgba(0, 0, 255, 0.61);
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 255, 0.61);
+}
+
+.ListButton {
+    padding: 5px 10px;
+    font-size: small;
+    font-weight: 500;
+}

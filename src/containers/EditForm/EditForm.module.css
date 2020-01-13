@@ -1,0 +1,65 @@
+.InputField {
+    width: 90%;
+    text-align: center;
+    margin: 110px auto 0;
+}
+
+.InputField p {
+    margin: 0 auto;
+    width: 100%;
+    padding: 10px;
+}
+
+.InputField input {
+    margin: 0 auto;
+    width: 60%;
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.InputField textarea {
+    width: 60%;
+    height: 60px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.InputField select {
+    width: 30%;
+    border-radius: 10px;
+    text-align-last: center;
+}
+
+.InputField div {
+    margin: 5px;
+ } 
+
+ .InputField button {
+    color: white;
+    background-color: rgb(5, 130, 202);
+    font-weight: bold;
+    border: 2px solid rgb(5, 130, 202);
+    border-radius: 10px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+     margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.InputField button:hover {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+    color: white;
+}
+
+.InputField button:active {
+    color: rgba(0, 0, 255, 0.61);
+    background-color: transparent;
+    border: 2px solid rgba(0, 0, 255, 0.61);
+}
