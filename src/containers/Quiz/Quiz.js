@@ -41,12 +41,14 @@ class Quiz extends Component {
                 .then(result => {
                     if (result.data.message) {
                         this.setState({ message: result.data.message, quizNotActive: true, loading: false, incorrect: true, started: false });
+                        this.props.history.push('/');
                     } else {
                         const data = result.data;
                         this.setState({ question: data.question, quiz: this.props.match.params.quizId, gameover: false, currentScore: data.score, ans: null, started: true, loading: true, finished: false, continuing: true, remainingTime: data.timeRemaining });
                     }
                 })
         } else {
+            this.props.history.push('/');
             this.getUserInfo();
             this.getNumOfActiveGames();
             this.getNumOfAllGames();
@@ -204,7 +206,7 @@ class Quiz extends Component {
                         <p style={{ fontWeight: 'bold' }}>- Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</p>
                     </div>
                     <Button clicked={this.playAgain} text="Pokreni kviz" />
-                    <table style={{ margin: '20px auto' }}>
+                    <table style={{ margin: '10px auto' }}>
                         <tbody>
                             <tr>
                                 <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Odigrano kvizova:</em></td>
