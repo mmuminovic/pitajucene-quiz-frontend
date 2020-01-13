@@ -4,7 +4,7 @@ import axios from 'axios';
 import Spinner from '../Spinner/Spinner';
 import Modal from '../Modal/Modal';
 
-class Questions extends Component {
+class Users extends Component {
 
     state = {
         users: null,
@@ -26,7 +26,7 @@ class Questions extends Component {
         axios.get('/get-users')
             .then(users => {
                 let loadedUsers = users.data;
-                this.setState({ users: loadedUsers.ranking, numberOfusers: loadedUsers.ranking.length, quizPlayed: loadedUsers.quizPlayed, loading: false });
+                this.setState({ users: loadedUsers.users, numberOfusers: loadedUsers.users.length, quizPlayed: loadedUsers.quizPlayed, loading: false });
             });
     }
 
@@ -125,4 +125,4 @@ class Questions extends Component {
     }
 }
 
-export default Questions;
+export default Users;

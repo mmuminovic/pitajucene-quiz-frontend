@@ -38,7 +38,6 @@ class Quiz extends Component {
             axios.post(`/quiz/${this.props.match.params.quizId}`, { continuing: true })
                 .then(result => {
                     if (result.data.message) {
-                        console.log('this');
                         this.setState({ message: result.data.message, quizNotActive: true, loading: false, incorrect: true, started: false });
                     } else {
                         const data = result.data;
@@ -55,7 +54,6 @@ class Quiz extends Component {
             const userId = this.props.user.userId;
             axios.get(`/users/${userId}`)
                 .then(result => {
-                    console.log(result);
                     const data = result.data;
                     this.setState({ games: data.quiz })
                 })
