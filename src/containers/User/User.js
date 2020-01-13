@@ -147,7 +147,7 @@ class User extends Component {
                                 <p>{q.time}</p>
                                 <p className={classes.Question}>{q.questionText}</p>
                                 <div className={classes.Field}>
-                                    <Link to={link}><button style={{ backgroundColor: '#4CAF50', border: '#4CAF50', margin: '5px' }}>Nastavi kviz</button></Link>
+                                    {this.props.match.params.userId === this.props.user.userId ? <Link to={link}><button style={{ backgroundColor: '#4CAF50', border: '#4CAF50', margin: '5px' }}>Nastavi kviz</button></Link> : <button style={{ backgroundColor: '#4CAF50', border: '#4CAF50', margin: '5px' }}>Kviz u toku</button>}
                                 </div>
                             </li>
                         )
