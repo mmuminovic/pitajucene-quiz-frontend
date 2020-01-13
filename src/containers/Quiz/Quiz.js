@@ -29,7 +29,9 @@ class Quiz extends Component {
         continuing: false,
         remainingTime: 1800,
         quizNotActive: false,
-        games: null
+        games: null,
+        activeGames: null,
+        quizPlayed: null
     }
 
     componentDidMount() {
@@ -46,7 +48,21 @@ class Quiz extends Component {
                 })
         } else {
             this.getUserInfo();
+            this.getNumOfActiveGames();
+            this.getNumOfAllGames();
         }
+    }
+
+    getNumOfActiveGames = () => {
+        axios.get('/active-games').then(result => {
+            this.setState({ activeGames: result.data.activeGames })
+        })
+    }
+
+    getNumOfAllGames = () => {
+        axios.get('/num-of-games').then(result => {
+            this.setState({ quizPlayed: result.data.quizPlayed })
+        })
     }
 
     getUserInfo = () => {
@@ -188,6 +204,18 @@ class Quiz extends Component {
                         <p style={{ fontWeight: 'bold' }}>- Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</p>
                     </div>
                     <Button clicked={this.playAgain} text="Pokreni kviz" />
+                    <table style={{ margin: '0 auto' }}>
+                        <tbody>
+                            <tr>
+                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Odigrano kvizova:</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>Trenutno igra:</em></td>
+                            </tr>
+                            <tr>
+                                <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>{this.state.quizPlayed}</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>{this.state.activeGames}</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             );
             if (this.state.quizNotActive) {
