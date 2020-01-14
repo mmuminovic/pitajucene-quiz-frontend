@@ -20,6 +20,8 @@ if (localStorage.token !== undefined && localStorage.token !== '' && localStorag
   //   store.dispatch(logoutUser());
   //   window.location.href = '/login'
   // }
+} else {
+  store.dispatch(setCurrentUser({}));
 }
 
 class App extends Component {

@@ -18,24 +18,33 @@ import Reports from '../Reports/Reports';
 // import logo from '../../images/logo.png';
 
 class MainPage extends Component {
-
     render() {
         // console.log(this.props);
         return (
             <Aux>
-                {!this.props.isAuth ? <Redirect to="/prijava" /> : <Redirect to="/" />}
-                <Switch>
-                    <Route path="/korisnik/:userId" component={User} />
-                    <Route path="/korisnici" component={Users} />
-                    <Route path="/prijava" component={Auth} />
-                    <Route path="/primjedbe" component={Reports} />
-                    <Route path="/ranglista" component={Ranking} />
-                    <Route path="/sva-pitanja" component={Questions} />
-                    <Route path="/input" exact component={EditForm} />
-                    <Route path="/input/:questionId" component={EditForm} />
-                    <Route path="/quiz/:quizId" exact component={Quiz} />
-                    <Route path="/" exact component={Quiz} />
-                </Switch>
+                {this.props.isAdmin ?
+                    <Switch>
+                        <Route path="/korisnik/:userId" component={User} />
+                        <Route path="/korisnici" component={Users} />
+                        <Route path="/primjedbe" component={Reports} />
+                        <Route path="/sva-pitanja" component={Questions} />
+                        <Route path="/input" exact component={EditForm} />
+                        <Route path="/input/:questionId" component={EditForm} />
+                        <Route path="/prijava" component={Auth} />
+                        <Route path="/ranglista" component={Ranking} />
+                        <Route path="/quiz/:quizId" exact component={Quiz} />
+                        <Route path="/" exact component={Quiz} />
+                    </Switch>
+                    :
+                    <Switch>
+                        <Route path="/prijava" component={Auth} />
+                        {!this.props.isAuth ? <Redirect to="/prijava" /> : null}
+                        <Route path="/ranglista" component={Ranking} />
+                        <Route path="/korisnik/:userId" component={User} />
+                        <Route path="/quiz/:quizId" exact component={Quiz} />
+                        <Route path="/" exact component={Quiz} />
+                    </Switch>
+                }
             </Aux>
         )
     }
