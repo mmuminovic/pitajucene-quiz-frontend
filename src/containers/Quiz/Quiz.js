@@ -202,7 +202,7 @@ class Quiz extends Component {
                         </table>
                         <p>- Kviz traje 30 minuta.</p>
                         <p>- Koje su nagrade ovog mjeseca možete vidjeti na našoj stranici <a href="https://pitajucene.com">pitajucene.com</a></p>
-                        <p>- Najbolji u mjesecu će biti kontaktirani putem email adresa s kojom su se registrovali.</p>
+                        <p>- Najbolji u mjesecu će biti kontaktirani putem email adrese s kojom su se registrovali.</p>
                         <p style={{ fontWeight: 'bold' }}>- Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</p>
                     </div>
                     <Button clicked={this.playAgain} text="Pokreni kviz" />
