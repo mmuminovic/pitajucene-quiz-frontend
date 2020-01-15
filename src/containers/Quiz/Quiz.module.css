@@ -104,6 +104,13 @@
     cursor: pointer;
 }
 
+.Answers ul li.Selected:hover {
+    background-color: #4CAF50;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
 @media (hover: none) {
     .Answers ul li {
         font-size: small;
