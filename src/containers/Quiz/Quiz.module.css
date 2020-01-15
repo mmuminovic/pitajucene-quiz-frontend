@@ -111,16 +111,17 @@
         margin: 5px;
         padding: 10px;
         border-radius: 10px;
+        font-weight: 500;
     }
     .Answers ul li:hover {
         background-color: transparent;
-        font-weight: inherit;
+        font-weight: 500;
         color: inherit;
         cursor: pointer;
     }
     .Answers ul li:active {
         background-color: #4CAF50;
-        font-weight: inherit;
+        font-weight: 500;
         color: inherit;
         cursor: pointer;
     }

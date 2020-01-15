@@ -90,9 +90,10 @@ class Quiz extends Component {
     submitAnswer = (ans, i) => {
         this.setState({ ans: ans, selected: i });
         setTimeout(() => {
+            this.setState({ loading: true });
             axios.post(`/quiz/${this.state.quiz}`, { answer: ans })
                 .then(result => {
-                    this.setState({ loading: true, selected: null });
+                    this.setState({ selected: null });
                     if (result.data.incorrect) {
                         this.setState({ gameover: true, incorrect: true, loading: false })
                     } else if (result.data.gameover) {
