@@ -97,9 +97,16 @@
     cursor: pointer;
 }
 
+.Answers ul li.Selected {
+    background-color: #4CAF50;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
 @media (hover: none) {
     .Answers ul li {
-        font-size: 14px;
+        font-size: small;
         border: 1px solid rgb(5, 130, 202);
         margin: 5px;
         padding: 10px;

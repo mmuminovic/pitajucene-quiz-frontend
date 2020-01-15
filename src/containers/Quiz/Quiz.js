@@ -31,7 +31,8 @@ class Quiz extends Component {
         quizNotActive: false,
         games: null,
         activeGames: null,
-        quizPlayed: null
+        quizPlayed: null,
+        selected: null
     }
 
     componentDidMount() {
@@ -86,34 +87,37 @@ class Quiz extends Component {
             });
     }
 
-    submitAnswer = (ans) => {
-        this.setState({ ans: ans, loading: true })
-        axios.post(`/quiz/${this.state.quiz}`, { answer: ans })
-            .then(result => {
-                if (result.data.incorrect) {
-                    this.setState({ gameover: true, incorrect: true, loading: false })
-                } else if (result.data.gameover) {
-                    if (result.data.finished) {
-                        this.setState({ gameover: true, finished: true, incorrect: true, loading: false });
+    submitAnswer = (ans, i) => {
+        this.setState({ ans: ans, selected: i });
+        setTimeout(() => {
+            this.setState({ loading: true, selected: null });
+            axios.post(`/quiz/${this.state.quiz}`, { answer: ans })
+                .then(result => {
+                    if (result.data.incorrect) {
+                        this.setState({ gameover: true, incorrect: true, loading: false })
+                    } else if (result.data.gameover) {
+                        if (result.data.finished) {
+                            this.setState({ gameover: true, finished: true, incorrect: true, loading: false });
+                        } else {
+                            this.setState({ message: result.data.message, gameover: true, loading: false });
+                        }
+                        if (result.data.score) {
+                            this.setState({ currentScore: result.data.score, loading: false })
+                        }
                     } else {
-                        this.setState({ message: result.data.message, gameover: true, loading: false });
+                        this.setState({
+                            question: result.data.question,
+                            gameover: result.data.gameover,
+                            currentScore: result.data.score,
+                            loading: false
+                        });
                     }
-                    if (result.data.score) {
-                        this.setState({ currentScore: result.data.score, loading: false })
-                    }
-                } else {
-                    this.setState({
-                        question: result.data.question,
-                        gameover: result.data.gameover,
-                        currentScore: result.data.score,
-                        loading: false
-                    });
-                }
-            })
+                })
+        }, 500);
     }
 
     playAgain = () => {
-        this.setState({ gameover: false, currentScore: 0, ans: null, started: true, loading: true, finished: false });
+        this.setState({ gameover: false, currentScore: 0, ans: null, started: true, loading: true, finished: false, selected: null });
         this.createQuiz();
     }
 
@@ -254,10 +258,10 @@ class Quiz extends Component {
             timerText = <p className={classes.TimerText}>Tajmer se nalazi na dnu ekrana</p>;
             points = (<p style={{ textAlign: 'center', fontWeight: '500', margin: '0' }}>Tačan odgovor nosi: {question.points} bodova</p>);
             let answersArray = [
-                <li key="4" onClick={() => this.submitAnswer(question.answer0)}>{question.answer0}</li>,
-                <li key="1" onClick={() => this.submitAnswer(question.answer1)}>{question.answer1}</li>,
-                <li key="2" onClick={() => this.submitAnswer(question.answer2)}>{question.answer2}</li>,
-                <li key="3" onClick={() => this.submitAnswer(question.answer3)}>{question.answer3}</li>
+                <li key="0" className={this.state.selected === 0 ? classes.Selected : ''} onClick={() => this.submitAnswer(question.answer0, 0)}>{question.answer0}</li>,
+                <li key="1" className={this.state.selected === 1 ? classes.Selected : ''} onClick={() => this.submitAnswer(question.answer1, 1)}>{question.answer1}</li>,
+                <li key="2" className={this.state.selected === 2 ? classes.Selected : ''} onClick={() => this.submitAnswer(question.answer2, 2)}>{question.answer2}</li>,
+                <li key="3" className={this.state.selected === 3 ? classes.Selected : ''} onClick={() => this.submitAnswer(question.answer3, 3)}>{question.answer3}</li>
             ];
             answers = (
                 <div className={classes.Answers}>
