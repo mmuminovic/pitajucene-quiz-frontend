@@ -118,7 +118,7 @@ class Quiz extends Component {
     }
 
     playAgain = () => {
-        this.setState({ gameover: false, currentScore: 0, ans: null, started: true, loading: true, finished: false, selected: null });
+        this.setState({ gameover: false, currentScore: 0, ans: null, started: true, loading: true, finished: false, selected: null, question: null });
         this.createQuiz();
     }
 
