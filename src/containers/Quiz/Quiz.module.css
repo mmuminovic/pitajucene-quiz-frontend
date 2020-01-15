@@ -124,6 +124,12 @@
         color: inherit;
         cursor: pointer;
     }
+    .Answers ul li.Selected {
+        background-color: #4CAF50;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+    }
 }
 
 .Score {
