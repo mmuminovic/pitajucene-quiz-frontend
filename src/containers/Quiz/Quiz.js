@@ -10,6 +10,7 @@ import Logo from '../../images/logo.png';
 import Spinner from '../Spinner/Spinner';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import timerClasses from './Timer.module.css';
+import theBest from '../../images/0.png';
 
 class Quiz extends Component {
     state = {
@@ -32,7 +33,8 @@ class Quiz extends Component {
         games: null,
         activeGames: null,
         quizPlayed: null,
-        selected: null
+        selected: null,
+        theBestToday: null
     }
 
     componentDidMount() {
@@ -53,6 +55,7 @@ class Quiz extends Component {
             this.getUserInfo();
             this.getNumOfActiveGames();
             this.getNumOfAllGames();
+            this.getTheBestToday();
         }
     }
 
@@ -65,6 +68,12 @@ class Quiz extends Component {
     getNumOfAllGames = () => {
         axios.get('/num-of-games').then(result => {
             this.setState({ quizPlayed: result.data.quizPlayed })
+        })
+    }
+
+    getTheBestToday = () => {
+        axios.get('/best-today').then(result => {
+            this.setState({ theBestToday: result.data })
         })
     }
 
@@ -216,10 +225,12 @@ class Quiz extends Component {
                             <tr>
                                 <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Odigrano kvizova:</em></td>
                                 <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Trenutno igra:</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Najuspješniji/a danas:</em></td>
                             </tr>
                             <tr>
-                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>{this.state.quizPlayed}</em></td>
-                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>{this.state.activeGames}</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: '500' }}><em>{this.state.quizPlayed}</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: '500' }}><em>{this.state.activeGames}</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: '500' }}><em>{this.state.theBestToday ? <div><img src={theBest} alt="medal" style={{ width: '20px' }} /> {this.state.theBestToday.fullName}: {this.state.theBestToday.score} bodova</div> : null}</em></td>
                             </tr>
                         </tbody>
                     </table>
