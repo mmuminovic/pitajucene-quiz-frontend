@@ -5,8 +5,9 @@ import Modal from '../Modal/Modal';
 import Button from '../Button/Button';
 import classes from './Ranking.module.css';
 import icon0 from '../../images/0.png';
-import icon1 from '../../images/1.png';
-import icon2 from '../../images/2.png';
+import userIcon from '../../images/user.png';
+import timeIcon from '../../images/clock.png';
+import star from '../../images/star.png';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Spinner from '../Spinner/Spinner';
@@ -25,7 +26,8 @@ class Ranking extends Component {
         showLastMonth: false,
         showTheBest: false,
 
-        loading: false
+        loading: false,
+        myResults: false
     }
 
     componentDidMount() {
@@ -65,7 +67,7 @@ class Ranking extends Component {
         const userId = this.props.user.userId;
         axios.get(`/myscore/${userId}`)
             .then(res => {
-                this.setState({ currentScore: res.data.score })
+                this.setState({ currentScore: res.data })
             })
     }
 
@@ -73,7 +75,7 @@ class Ranking extends Component {
         const userId = this.props.user.userId;
         axios.get(`/thebestscore/${userId}`)
             .then(result => {
-                this.setState({ theBestScore: result.data.score })
+                this.setState({ theBestScore: result.data })
             })
     }
 
@@ -81,7 +83,7 @@ class Ranking extends Component {
         const userId = this.props.user.userId;
         axios.get(`/scorelastmonth/${userId}`)
             .then(result => {
-                this.setState({ scoreOfTheLastMonth: result.data.score });
+                this.setState({ scoreOfTheLastMonth: result.data });
             })
     }
 
@@ -96,14 +98,17 @@ class Ranking extends Component {
         this.setState({ showLastMonth: true });
     }
 
+    showMyResults = () => {
+        this.setState({ myResults: true });
+    }
+
     closeModalHandler = () => {
-        this.setState({ showLastMonth: false, showTheBest: false });
+        this.setState({ showLastMonth: false, showTheBest: false, myResults: false });
     }
 
 
     render() {
         let list, loading, loadingModal;
-        const icons = [icon0, icon1, icon2];
         const date = new Date();
         let thisMonth = new Date(date.getFullYear(), date.getMonth());
         thisMonth = thisMonth.toString();
@@ -113,7 +118,9 @@ class Ranking extends Component {
         let modalDetails;
 
         if (this.state.loading && !this.state.showLastMonth && !this.state.showTheBest) {
-            loading = <Spinner />;
+            loading = (<tr>
+                <td colSpan="4"><Spinner /></td>
+            </tr>);
             list = null;
         } else if (this.state.loading && (this.state.showLastMonth || this.state.showTheBest)) {
             loadingModal = <Spinner />
@@ -126,18 +133,21 @@ class Ranking extends Component {
             if (this.state.top10.length > 0) {
                 list = this.state.top10.map((player, i) => {
                     let userProfile = `/korisnik/${player.userId}`;
-                    if (i < 3) {
-                        return (
-                            <li key={i}><img src={icons[i]} alt="medal" style={{ width: '20px' }} /> {i + 1}. {player.fullName} - {player.score} bodova{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'red' }} to={userProfile}> --- Vidi profil</Link> : ''}</li>
-                        )
-                    } else {
-                        return (
-                            <li key={i}> {i + 1}. {player.fullName} - {player.score} bodova{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'red' }} to={userProfile}> --- Vidi profil</Link> : ''}</li>
-                        )
-                    }
+                    // REMOVE COMMENTS
+                    return (
+                        <tr>
+                            <td>{i + 1}.</td>
+                            <td>{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'red' }} to={userProfile}> {player.fullName}</Link> : player.fullName}</td>
+                            <td>{player.score}</td>
+                            <td>-</td>
+                            {/* <td>{player.duration}</td> */}
+                        </tr>
+                    )
                 })
             } else {
-                list = <p>Lista još uvijek ne postoji.</p>;
+                list = <tr>
+                    <td colSpan="4">Još niko nije igrao kviz ovog mjeseca</td>
+                </tr>;
             }
         }
 
@@ -155,29 +165,112 @@ class Ranking extends Component {
             if (listOfWinners.length > 0) {
                 list = listOfWinners.map((player, i) => {
                     let userProfile = `/korisnik/${player.userId}`;
-                    if (i < 3) {
-                        return (
-                            <li key={i}><img src={icons[i]} alt="medal" style={{ width: '20px' }} /> {i + 1}. {player.fullName} - {player.score} bodova{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'red' }} to={userProfile}> --- Vidi profil</Link> : ''}</li>
-                        )
-                    } else {
-                        return (
-                            <li key={i}> {i + 1}. {player.fullName} - {player.score} bodova{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'red' }} to={userProfile}> --- Vidi profil</Link> : ''}</li>
-                        )
-                    }
+                    // REMOVE COMMENTS
+                    return (
+                        <tr>
+                            <td>{i + 1}.</td>
+                            <td>{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'red' }} to={userProfile}> {player.fullName}</Link> : player.fullName}</td>
+                            <td>{player.score}</td>
+                            {/* <td>{player.duration}</td> */}
+                            <td>-</td>
+                        </tr>
+                    )
                 });
             } else {
-                list = <p>Lista još uvijek ne postoji.</p>;
+                list = <tr>
+                    <td colSpan="4">Lista još uvijek ne postoji.</td>
+                </tr>;
             }
             modalDetails = (
                 <div className={classes.List}>
                     {title}
-                    <ul>
+                    <table className={classes.Table}>
                         {loadingModal}
-                        {list}
-                    </ul>
+                        <thead>
+                            <tr>
+                                <th><img src={icon0} alt="medal" style={{ width: '20px' }} /></th>
+                                <th><img src={userIcon} alt="medal" style={{ width: '20px' }} /></th>
+                                <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
+                                <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {list}
+                        </tbody>
+                    </table>
                     <Button clicked={this.closeModalHandler} text="Zatvori" />
                 </div>
             )
+        }
+
+        let myResults;
+
+        if (this.state.currentScore && this.state.theBestScore && this.state.scoreOfTheLastMonth) {
+            // REMOVE COMMENTS
+            myResults = (<tr>
+                <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
+                <td>{this.state.currentScore.score}</td>
+                <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
+                <td>-</td>
+                {/* <td>{this.state.currentScore.duration}</td> */}
+                <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
+                <td>{this.state.scoreOfTheLastMonth.score}</td>
+                <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
+                <td>-</td>
+                {/* <td>{this.state.scoreOfTheLastMonth.duration}</td> */}
+                <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
+                <td>{this.state.theBestScore.score}</td>
+                <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
+                <td>-</td>
+                {/* <td>{this.state.theBestScore.duration}</td> */}
+            </tr>);
+            if (this.state.myResults) {
+                // REMOVE COMMENTS
+                modalDetails = (
+                    <div>
+                        <table className={classes.Table} style={{ width: '80%' }}>
+                            <thead>
+                                <tr>
+                                    <th colSpan="12">Moji najbolji rezultati</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colSpan="4" style={{ backgroundColor: '#4CAF50', fontWeight: '500', color: 'white' }}>Ovog mjeseca:</td>
+                                </tr>
+                                <tr>
+                                    <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
+                                    <td>{this.state.currentScore.score}</td>
+                                    <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
+                                    <td>-</td>
+                                    {/* <td>{this.state.currentScore.duration}</td> */}
+                                </tr>
+                                <tr>
+                                    <td colSpan="4" style={{ backgroundColor: '#4CAF50', fontWeight: '500', color: 'white' }}>Prošlog mjeseca:</td>
+                                </tr>
+                                <tr>
+                                    <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
+                                    <td>{this.state.scoreOfTheLastMonth.score}</td>
+                                    <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
+                                    {/* <td>{this.state.scoreOfTheLastMonth.duration}</td> */}
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td colSpan="4" style={{ backgroundColor: '#4CAF50', fontWeight: '500', color: 'white' }}>Najbolji rezultat ikad:</td>
+                                </tr>
+                                <tr>
+                                    <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
+                                    <td>{this.state.theBestScore.score}</td>
+                                    <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
+                                    {/* <td>{this.state.theBestScore.duration}</td> */}
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <Button clicked={this.closeModalHandler} text="Zatvori" />
+                    </div>
+                )
+            }
         }
 
         return (
@@ -185,25 +278,48 @@ class Ranking extends Component {
                 <Row>
                     <Col md={12}>
                         <div className={classes.Ranking}>
-                            <Modal show={this.state.showLastMonth || this.state.showTheBest} modalClosed={this.closeModalHandler}>
+                            <Modal show={this.state.showLastMonth || this.state.showTheBest || this.state.myResults} modalClosed={this.closeModalHandler}>
                                 {modalDetails}
                             </Modal>
                             <p style={{ fontSize: 'medium', fontWeight: 'bold', color: 'rgb(102,149,204)', margin: '0' }}>Rang lista</p>
                             <p style={{ fontSize: '11px', color: 'rgb(5, 130, 202)', fontWeight: 'bold' }}>{month} {year}</p>
-                            <div className={classes.List} style={{height: '200px'}}>
-                                <ul style={{height: '200px'}}>
-                                    {loading}
-                                    {list}
-                                </ul>
+                            <div className={classes.List} style={{ maxHeight: '300px' }}>
+                                <table className={classes.Table}>
+                                    <thead>
+                                        <tr>
+                                            <th><img src={icon0} alt="medal" style={{ width: '20px' }} /></th>
+                                            <th><img src={userIcon} alt="medal" style={{ width: '20px' }} /></th>
+                                            <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
+                                            <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {loading}
+                                        {list}
+                                    </tbody>
+                                </table>
                             </div>
-                            <div className={classes.List}>
-                                <ul>
-                                    <li>Moj najbolji rezultat ovog mjeseca: {this.state.currentScore}</li>
-                                    <li>Moj najbolji rezultat prošlog mjeseca: {this.state.scoreOfTheLastMonth}</li>
-                                    <li>Moj najbolji rezultat do sad: {this.state.theBestScore}</li>
-                                </ul>
+                            <div className={classes.MyResults}>
+                                <table className={classes.Table} style={{ width: '80%' }}>
+                                    <thead>
+                                        <tr>
+                                            <th colSpan="12">Moji najbolji rezultati</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colSpan="4" style={{ width: '33%' }}>Ovog mjeseca:</td>
+                                            <td colSpan="4" style={{ width: '34%' }}>Prošlog mjeseca:</td>
+                                            <td colSpan="4" style={{ width: '33%' }}>Najbolji rezultat ikad:</td>
+                                        </tr>
+                                        {myResults}
+                                    </tbody>
+                                </table>
                             </div>
-                            <Button clicked={this.listOfTop10} text="Najbolji rezultati" />
+                            <div className={classes.MyResultsButton}>
+                                <Button clicked={this.showMyResults} text="Moji najbolji rezultati" />
+                            </div>
+                            <Button clicked={this.listOfTop10} text="Rang lista najboljih ikad" />
                             <Button clicked={this.listOfLastMonth} text="Rang lista prošlog mjeseca" />
                         </div>
                     </Col>

@@ -11,6 +11,8 @@ import Spinner from '../Spinner/Spinner';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import timerClasses from './Timer.module.css';
 import theBest from '../../images/0.png';
+import timeIcon from '../../images/clock.png';
+import starIcon from '../../images/star.png'
 
 class Quiz extends Component {
     state = {
@@ -33,8 +35,10 @@ class Quiz extends Component {
         games: null,
         activeGames: null,
         quizPlayed: null,
+        playedToday: null,
         selected: null,
-        theBestToday: null
+        theBestToday: null,
+        numOfQuestion: 1
     }
 
     componentDidMount() {
@@ -56,6 +60,8 @@ class Quiz extends Component {
             this.getNumOfActiveGames();
             this.getNumOfAllGames();
             this.getTheBestToday();
+            // REMOVE COMMENT
+            // this.playedToday();
         }
     }
 
@@ -77,6 +83,13 @@ class Quiz extends Component {
         })
     }
 
+    playedToday = () => {
+        axios.get('/played-today').then(result => {
+            console.log(result);
+            this.setState({ playedToday: result.data.playedToday })
+        })
+    }
+
     getUserInfo = () => {
         if (this.props.isAuth) {
             const userId = this.props.user.userId;
@@ -92,16 +105,19 @@ class Quiz extends Component {
         axios.post('/create-quiz', { userId: this.props.user.userId })
             .then(result => {
                 const data = result.data;
-                this.setState({ question: data.firstQuestion, quiz: data.quiz, loading: false });
+                this.setState({ question: data.firstQuestion, quiz: data.quiz, loading: false, numOfQuestion: 1 });
             });
     }
 
-    submitAnswer = (ans, i) => {
-        this.setState({ ans: ans, selected: i });
+    submitAnswer = (i) => {
+        let question = this.state.question;
+        let answers = [question.answer0, question.answer1, question.answer2, question.answer3];
+        this.setState({ selected: i, ans: answers[i] });
         setTimeout(() => {
             this.setState({ loading: true });
-            axios.post(`/quiz/${this.state.quiz}`, { answer: ans })
+            axios.post(`/quiz/${this.state.quiz}`, { answer: answers[i] })
                 .then(result => {
+                    const numOfQuestion = this.state.numOfQuestion;
                     this.setState({ selected: null });
                     if (result.data.incorrect) {
                         this.setState({ gameover: true, incorrect: true, loading: false })
@@ -119,11 +135,12 @@ class Quiz extends Component {
                             question: result.data.question,
                             gameover: result.data.gameover,
                             currentScore: result.data.score,
-                            loading: false
+                            loading: false,
+                            numOfQuestion: numOfQuestion + 1
                         });
                     }
                 })
-        }, 500);
+        }, 300);
     }
 
     playAgain = () => {
@@ -133,6 +150,12 @@ class Quiz extends Component {
 
     closeModalHandler = () => {
         this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false });
+        this.props.history.push('/');
+        this.getNumOfActiveGames();
+        this.getNumOfAllGames();
+        this.getTheBestToday();
+        // REMOVE COMMENT
+        // this.playedToday();
     }
 
     reportModeHandler = () => {
@@ -160,7 +183,7 @@ class Quiz extends Component {
 
 
     render() {
-        let question, questionText, answers, currentScore, gameover, modalDetails, quizDetails, points, timer, timerText, quizRemaining;
+        let question, questionText, answers, currentScore, gameover, modalDetails, quizDetails, points, timer, timerText, quizRemaining, ordinalNumOfQuestion;
         const renderTime = value => {
             if (value === 0) {
                 return <div className={timerClasses.timer}>0</div>;
@@ -220,20 +243,43 @@ class Quiz extends Component {
                         <p style={{ fontWeight: 'bold' }}>- Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</p>
                     </div>
                     <Button clicked={this.playAgain} text="Pokreni kviz" />
-                    <table style={{ margin: '15px auto' }}>
-                        <tbody>
-                            <tr>
-                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Odigrano kvizova:</em></td>
-                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Trenutno igra:</em></td>
-                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: 'bold' }}><em>Najuspješniji/a danas:</em></td>
-                            </tr>
-                            <tr>
-                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: '500' }}><em>{this.state.quizPlayed}</em></td>
-                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: '500' }}><em>{this.state.activeGames}</em></td>
-                                <td style={{ border: '1px solid black', padding: '5px 10px', fontWeight: '500' }}><em>{this.state.theBestToday ? <div><img src={theBest} alt="medal" style={{ width: '20px' }} /> {this.state.theBestToday.fullName}: {this.state.theBestToday.score} bodova</div> : null}</em></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    {/* <p style={{fontWeight: 'bold', color: 'red'}}>KVIZ TRENUTNO NE RADI. IZMJENE SU U TOKU. USKORO POČINJEMO.</p> */}
+                    <div className={classes.TableInfo}>
+                        <table className={classes.Table}>
+                            <thead>
+                                <tr>
+                                    {/* <th>Odigrano kvizova:</th>
+                                    <th>Trenutno igra:</th> */}
+                                    <th style={{ borderRight: 'none' }}><img src={theBest} alt="medal" /> Najuspješniji/a danas:</th>
+                                    <th style={{ borderLeft: 'none', borderRight: 'none' }}><img src={starIcon} alt="medal" /></th>
+                                    <th style={{ borderLeft: 'none' }}><img src={timeIcon} alt="medal" /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {/* <td>{this.state.quizPlayed}</td>
+                                    <td>{this.state.activeGames}</td> */}
+                                    <td style={{ borderRight: 'none' }}>{this.state.theBestToday ? this.state.theBestToday.fullName : null}</td>
+                                    <td style={{ borderLeft: 'none', borderRight: 'none' }}>{this.state.theBestToday ? this.state.theBestToday.score : null}</td>
+                                    {/* REMOVE COMMENT */}
+                                    {/* <td style={{ borderLeft: 'none' }}>{this.state.theBestToday ? this.state.theBestToday.duration : null}</td> */}
+                                    <td style={{ borderLeft: 'none' }}>-</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Odigrano kvizova:</th>
+                                    <th>Odigrano danas:</th>
+                                    <th>Trenutno igra:</th>
+                                </tr>
+
+                                <tr>
+                                    <td>{this.state.quizPlayed}</td>
+                                    <td>-</td>
+                                    <td>{this.state.activeGames}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             );
             if (this.state.quizNotActive) {
@@ -267,13 +313,14 @@ class Quiz extends Component {
                     <p>{question.text}</p>
                 </div>
             );
+            ordinalNumOfQuestion = <p style={{ fontSize: 'small', textAlign: 'center' }}>Pitanje: {this.state.numOfQuestion}/60</p>
             timerText = <p className={classes.TimerText}>Tajmer se nalazi na dnu ekrana</p>;
             points = (<p style={{ textAlign: 'center', fontWeight: '500', margin: '0' }}>Tačan odgovor nosi: {question.points} bodova</p>);
             let answersArray = [
-                <li key="0" className={this.state.selected === 0 ? classes.Selected : ''} onClick={() => this.submitAnswer(question.answer0, 0)}>{question.answer0}</li>,
-                <li key="1" className={this.state.selected === 1 ? classes.Selected : ''} onClick={() => this.submitAnswer(question.answer1, 1)}>{question.answer1}</li>,
-                <li key="2" className={this.state.selected === 2 ? classes.Selected : ''} onClick={() => this.submitAnswer(question.answer2, 2)}>{question.answer2}</li>,
-                <li key="3" className={this.state.selected === 3 ? classes.Selected : ''} onClick={() => this.submitAnswer(question.answer3, 3)}>{question.answer3}</li>
+                <li key="0" className={this.state.selected === 0 ? classes.Selected : ''} onClick={() => this.submitAnswer(0)}>{question.answer0}</li>,
+                <li key="1" className={this.state.selected === 1 ? classes.Selected : ''} onClick={() => this.submitAnswer(1)}>{question.answer1}</li>,
+                <li key="2" className={this.state.selected === 2 ? classes.Selected : ''} onClick={() => this.submitAnswer(2)}>{question.answer2}</li>,
+                <li key="3" className={this.state.selected === 3 ? classes.Selected : ''} onClick={() => this.submitAnswer(3)}>{question.answer3}</li>
             ];
             answers = (
                 <div className={classes.Answers}>
@@ -355,6 +402,7 @@ class Quiz extends Component {
                         <div className={classes.Quiz}>
                             {quizDetails}
                             {questionText}
+                            {ordinalNumOfQuestion}
                             {timerText}
                             {answers}
                             {gameover}

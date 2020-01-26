@@ -13,12 +13,65 @@
     margin: 0;
 }
 
+.Table {
+    margin: 10px auto;
+    width: 100%;
+}
+
+.Table tr td {
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-weight: 500;
+    font-size: small;
+}
+
+.Table tr td img {
+    width: 15px;
+}
+
+.Table tr th {
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: small;
+    color: white;
+    background-color: rgb(5, 130, 202);
+}
+
+.Table tr th img {
+    width: 15px;
+}
+
+.MyResults {
+    width: 80%;
+    margin: 10px auto;
+    text-align: center;
+    background-color: rgba(188, 188, 248, 0.15);
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.MyResultsButton {
+    display: none;
+}
+
+@media(max-width: 1000px) {
+    .MyResults {
+        display: none
+    }
+    .MyResultsButton {
+        display: block;
+    }
+}
+
+
 .List {
     width: 80%;
     margin: 10px auto;
     text-align: center;
     background-color: rgba(188, 188, 248, 0.15);
     border-radius: 10px;
+    overflow: auto;
 }
 
 .List ul {
