@@ -25,7 +25,7 @@
 }
 
 .Rules p {
-    margin: 5px 0;
+    margin: 2px 0;
     font-weight: 500;
 }
 
@@ -173,7 +173,7 @@
     background-color: rgb(5, 130, 202);
     font-weight: bold;border: 2px solid rgb(5, 130, 202);
     border-radius: 10px;
-    padding: 16px 32px;
+    padding: 10px 50px;
     text-align: center;
     text-decoration: none;
     display: inline-block;

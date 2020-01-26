@@ -30,7 +30,7 @@ class Quiz extends Component {
         reportMessage: '',
         errorMessage: '',
         continuing: false,
-        remainingTime: 1800,
+        remainingTime: 600,
         quizNotActive: false,
         games: null,
         activeGames: null,
@@ -60,8 +60,7 @@ class Quiz extends Component {
             this.getNumOfActiveGames();
             this.getNumOfAllGames();
             this.getTheBestToday();
-            // REMOVE COMMENT
-            // this.playedToday();
+            this.playedToday();
         }
     }
 
@@ -85,7 +84,6 @@ class Quiz extends Component {
 
     playedToday = () => {
         axios.get('/played-today').then(result => {
-            console.log(result);
             this.setState({ playedToday: result.data.playedToday })
         })
     }
@@ -154,8 +152,7 @@ class Quiz extends Component {
         this.getNumOfActiveGames();
         this.getNumOfAllGames();
         this.getTheBestToday();
-        // REMOVE COMMENT
-        // this.playedToday();
+        this.playedToday();
     }
 
     reportModeHandler = () => {
@@ -242,14 +239,12 @@ class Quiz extends Component {
                         <p>- Najbolji u mjesecu će biti kontaktirani putem email adrese s kojom su se registrovali.</p>
                         <p style={{ fontWeight: 'bold' }}>- Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</p>
                     </div>
-                    <Button clicked={this.playAgain} text="Pokreni kviz" />
-                    {/* <p style={{fontWeight: 'bold', color: 'red'}}>KVIZ TRENUTNO NE RADI. IZMJENE SU U TOKU. USKORO POČINJEMO.</p> */}
+                    {/* <Button clicked={this.playAgain} text="Pokreni kviz" /> */}
+                    <p style={{fontWeight: 'bold', color: 'red'}}>KVIZ TRENUTNO NE RADI. IZMJENE SU U TOKU. USKORO POČINJEMO.</p>
                     <div className={classes.TableInfo}>
                         <table className={classes.Table}>
                             <thead>
                                 <tr>
-                                    {/* <th>Odigrano kvizova:</th>
-                                    <th>Trenutno igra:</th> */}
                                     <th style={{ borderRight: 'none' }}><img src={theBest} alt="medal" /> Najuspješniji/a danas:</th>
                                     <th style={{ borderLeft: 'none', borderRight: 'none' }}><img src={starIcon} alt="medal" /></th>
                                     <th style={{ borderLeft: 'none' }}><img src={timeIcon} alt="medal" /></th>
@@ -257,13 +252,9 @@ class Quiz extends Component {
                             </thead>
                             <tbody>
                                 <tr>
-                                    {/* <td>{this.state.quizPlayed}</td>
-                                    <td>{this.state.activeGames}</td> */}
                                     <td style={{ borderRight: 'none' }}>{this.state.theBestToday ? this.state.theBestToday.fullName : null}</td>
                                     <td style={{ borderLeft: 'none', borderRight: 'none' }}>{this.state.theBestToday ? this.state.theBestToday.score : null}</td>
-                                    {/* REMOVE COMMENT */}
-                                    {/* <td style={{ borderLeft: 'none' }}>{this.state.theBestToday ? this.state.theBestToday.duration : null}</td> */}
-                                    <td style={{ borderLeft: 'none' }}>-</td>
+                                    <td style={{ borderLeft: 'none' }}>{this.state.theBestToday ? this.state.theBestToday.duration : null}</td>
                                 </tr>
 
                                 <tr>
@@ -274,7 +265,7 @@ class Quiz extends Component {
 
                                 <tr>
                                     <td>{this.state.quizPlayed}</td>
-                                    <td>-</td>
+                                    <td>{this.state.playedToday}</td>
                                     <td>{this.state.activeGames}</td>
                                 </tr>
                             </tbody>
@@ -335,7 +326,7 @@ class Quiz extends Component {
                     <CountdownCircleTimer
                         isPlaying
                         durationSeconds={this.state.remainingTime}
-                        colors={[["#0582ca"]]}
+                        colors={[["#0582ca", .75], ["#ff6600", .20], ["#ff0000", .05]]}
                         renderTime={renderTime}
                         onComplete={() => [false]}
                         size={65}

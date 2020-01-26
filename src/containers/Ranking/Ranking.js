@@ -123,7 +123,9 @@ class Ranking extends Component {
             </tr>);
             list = null;
         } else if (this.state.loading && (this.state.showLastMonth || this.state.showTheBest)) {
-            loadingModal = <Spinner />
+            loadingModal = (<tr>
+                <td colSpan="4"><Spinner /></td>
+            </tr>);
         } else {
             loadingModal = null;
         }
@@ -133,14 +135,12 @@ class Ranking extends Component {
             if (this.state.top10.length > 0) {
                 list = this.state.top10.map((player, i) => {
                     let userProfile = `/korisnik/${player.userId}`;
-                    // REMOVE COMMENTS
                     return (
-                        <tr>
+                        <tr key={i}>
                             <td>{i + 1}.</td>
                             <td>{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'red' }} to={userProfile}> {player.fullName}</Link> : player.fullName}</td>
                             <td>{player.score}</td>
-                            <td>-</td>
-                            {/* <td>{player.duration}</td> */}
+                            <td>{player.duration}</td>
                         </tr>
                     )
                 })
@@ -165,14 +165,12 @@ class Ranking extends Component {
             if (listOfWinners.length > 0) {
                 list = listOfWinners.map((player, i) => {
                     let userProfile = `/korisnik/${player.userId}`;
-                    // REMOVE COMMENTS
                     return (
-                        <tr>
+                        <tr key={i}>
                             <td>{i + 1}.</td>
                             <td>{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'red' }} to={userProfile}> {player.fullName}</Link> : player.fullName}</td>
                             <td>{player.score}</td>
-                            {/* <td>{player.duration}</td> */}
-                            <td>-</td>
+                            <td>{player.duration}</td>
                         </tr>
                     )
                 });
@@ -185,7 +183,6 @@ class Ranking extends Component {
                 <div className={classes.List}>
                     {title}
                     <table className={classes.Table}>
-                        {loadingModal}
                         <thead>
                             <tr>
                                 <th><img src={icon0} alt="medal" style={{ width: '20px' }} /></th>
@@ -195,6 +192,7 @@ class Ranking extends Component {
                             </tr>
                         </thead>
                         <tbody>
+                            {loadingModal}
                             {list}
                         </tbody>
                     </table>
@@ -206,26 +204,21 @@ class Ranking extends Component {
         let myResults;
 
         if (this.state.currentScore && this.state.theBestScore && this.state.scoreOfTheLastMonth) {
-            // REMOVE COMMENTS
             myResults = (<tr>
                 <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
                 <td>{this.state.currentScore.score}</td>
                 <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
-                <td>-</td>
-                {/* <td>{this.state.currentScore.duration}</td> */}
+                <td>{this.state.currentScore.duration}</td>
                 <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
                 <td>{this.state.scoreOfTheLastMonth.score}</td>
                 <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
-                <td>-</td>
-                {/* <td>{this.state.scoreOfTheLastMonth.duration}</td> */}
+                <td>{this.state.scoreOfTheLastMonth.duration}</td>
                 <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
                 <td>{this.state.theBestScore.score}</td>
                 <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
-                <td>-</td>
-                {/* <td>{this.state.theBestScore.duration}</td> */}
+                <td>{this.state.theBestScore.duration}</td>
             </tr>);
             if (this.state.myResults) {
-                // REMOVE COMMENTS
                 modalDetails = (
                     <div>
                         <table className={classes.Table} style={{ width: '80%' }}>
@@ -242,8 +235,7 @@ class Ranking extends Component {
                                     <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
                                     <td>{this.state.currentScore.score}</td>
                                     <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
-                                    <td>-</td>
-                                    {/* <td>{this.state.currentScore.duration}</td> */}
+                                    <td>{this.state.currentScore.duration}</td>
                                 </tr>
                                 <tr>
                                     <td colSpan="4" style={{ backgroundColor: '#4CAF50', fontWeight: '500', color: 'white' }}>Prošlog mjeseca:</td>
@@ -252,8 +244,7 @@ class Ranking extends Component {
                                     <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
                                     <td>{this.state.scoreOfTheLastMonth.score}</td>
                                     <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
-                                    {/* <td>{this.state.scoreOfTheLastMonth.duration}</td> */}
-                                    <td>-</td>
+                                    <td>{this.state.scoreOfTheLastMonth.duration}</td>
                                 </tr>
                                 <tr>
                                     <td colSpan="4" style={{ backgroundColor: '#4CAF50', fontWeight: '500', color: 'white' }}>Najbolji rezultat ikad:</td>
@@ -262,8 +253,7 @@ class Ranking extends Component {
                                     <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
                                     <td>{this.state.theBestScore.score}</td>
                                     <th><img src={timeIcon} alt="medal" style={{ width: '20px' }} /></th>
-                                    {/* <td>{this.state.theBestScore.duration}</td> */}
-                                    <td>-</td>
+                                    <td>{this.state.theBestScore.duration}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -105,9 +105,9 @@ class EditForm extends Component {
                     {/* <p>Broj bodova koje nosi tacan odgovor</p> */}
                     <select value={this.state.points} onChange={(event) => this.setState({ points: event.target.value })}>
                         <option disabled value={0} >Broj bodova koje nosi tačan odgovor</option>
-                        <option value={5}>5 - Laka pitanja</option>
-                        <option value={8}>8 - Srednji nivo</option>
-                        <option value={10}>10 - Teška pitanja</option>
+                        <option value={10}>10 - Laka pitanja</option>
+                        <option value={15}>15 - Srednji nivo</option>
+                        <option value={20}>20 - Teška pitanja</option>
                     </select>
                 </div>
                 <div style={{ borderBottom: '1px solid black', paddingBottom: '15px', width: '60%', margin: '0 auto' }}>

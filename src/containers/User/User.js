@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import classes from './User.module.css';
 import Spinner from '../Spinner/Spinner';
 import { Link } from 'react-router-dom';
@@ -103,7 +102,11 @@ class User extends Component {
         }
 
         if (this.state.quizRemaining) {
-            quizRemaining = <p style={{color: 'red', fontSize: 'small', fontWeight: 'bold', margin: '0', backgroundColor: 'transparent'}}>Imate nezavršen kviz. Skrolajte na dole, pronađite ga i nastavite.</p>
+            quizRemaining = (
+                <tr>
+                    <th colSpan="2" style={{ backgroundColor: '#cc6a66', padding: '10px' }}>Imate nezavršen kviz. Skrolajte na dole, pronađite ga i nastavite.</th>
+                </tr>
+            )
         }
 
         if (this.state.editMode) {
@@ -178,67 +181,95 @@ class User extends Component {
         }
 
         return (
-            <Container>
-                <Row>
-                    <Col md={12}>
-                        <div className={classes.Heading}>
-                            <p style={{ fontSize: 'medium', fontWeight: 'bold', color: 'rgb(102,149,204)' }}>Profil korisnika: {this.state.fullName}</p>
-                            {quizRemaining}
-                        </div>
-                    </Col>
-                    <Col md={4} style={{ margin: '10px 0' }}>
-                        <div className={classes.Field}>
-                            <p className={classes.Title}>Ime korisnika: </p>
-                            <p>{this.state.fullName}</p>
-                        </div>
-                    </Col>
-                    <Col md={4} style={{ margin: '10px 0' }}>
-                        <div className={classes.Field}>
-                            <p className={classes.Title}>Email: </p>
-                            <p>{this.state.email}</p>
-                        </div>
-                    </Col>
-                    <Col md={4} style={{ margin: '10px 0' }}>
-                        <div className={classes.Field}>
-                            <p className={classes.Title}>Broj odigranih kvizova: </p>
-                            <p>{this.state.numOfGames}</p>
-                        </div>
-                    </Col>
-                    <Col md={4} style={{ margin: '10px 0' }}>
-                        <div className={classes.Field}>
-                            <p className={classes.Title}>Najbolji rezultat ovog mjeseca:</p>
-                            <p>{this.state.currentScore}</p>
-                        </div>
-                    </Col>
-                    <Col md={4} style={{ margin: '10px 0' }}>
-                        <div className={classes.Field}>
-                            <p className={classes.Title}>Najbolji rezultat prošlog mjeseca: </p>
-                            <p>{this.state.lastMonthScore}</p>
-                        </div>
-                    </Col>
-                    <Col md={4} style={{ margin: '10px 0' }}>
-                        <div className={classes.Field}>
-                            <p className={classes.Title}>Najbolji rezultat ikad: </p>
-                            <p>{this.state.theBestScore}</p>
-                        </div>
-                    </Col>
-                    <Col md={12}>
-                        <div className={classes.Field}>
-                            <p className={classes.Title}>Šifra: </p>
-                            {errorMessage}
-                            {inputPassword}
-                            {button}
-                        </div>
-                    </Col>
-                    <Col md={12}>
-                        <div className={classes.Games}>
-                            <p className={classes.Title} style={{ fontSize: 'medium', fontWeight: 'bold', color: 'rgb(102,149,204)', margin: '0' }}>Odigrani kvizovi</p>
-                            <p style={{ fontWeight: '500' }}>Učite iz svojih grešaka. Pogledajte pitanja na koja ste dali netačan odgovor i pronađite tačan odgovor na datom linku.</p>
-                            {games}
-                        </div>
-                    </Col>
-                </Row>
-            </Container >
+            <div className={classes.Heading}>
+                <table className={classes.Table}>
+                    <thead>
+                        <tr>
+                            <th colSpan="2" style={{ paddingTop: '15px' }}>
+                                <p>Profil korisnika: {this.state.fullName}</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                <p>Ime korisnika: </p>
+                            </th>
+                            <td>
+                                <p>{this.state.fullName}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Email: </p>
+                            </th>
+                            <td>
+                                <p>{this.state.email}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Broj odigranih kvizova: </p>
+                            </th>
+                            <td>
+                                <p>{this.state.numOfGames}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Najbolji rezultat ovog mjeseca:</p>
+                            </th>
+                            <td>
+                                <p>{this.state.currentScore}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Najbolji rezultat prošlog mjeseca: </p>
+                            </th>
+                            <td>
+                                <p>{this.state.lastMonthScore}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Najbolji rezultat ikad: </p>
+                            </th>
+                            <td>
+                                <p>{this.state.theBestScore}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Šifra</p>
+                            </th>
+                            <td>
+                                <p className={classes.Title}>Šifra: </p>
+                                {errorMessage}
+                                {inputPassword}
+                                {button}
+                            </td>
+                        </tr>
+                        {quizRemaining}
+                    </tbody>
+                </table>
+
+                <table className={classes.Table} style={{ marginTop: '20px' }}>
+                    <thead>
+                        <tr>
+                            <th style={{backgroundColor: '#4CAF50'}}>
+                                <p>Odigrani kvizovi</p>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><p>Pogledajte pitanja na koja ste dali netačan odgovor i pronađite tačan odgovor na datom linku.</p></td>
+                        </tr>
+                        {games}
+                    </tbody>
+                </table>
+            </div >
         )
     }
 };

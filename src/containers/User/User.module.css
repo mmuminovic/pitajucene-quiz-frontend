@@ -13,21 +13,51 @@
     padding: 0;
 }
 
-.Heading p {
+.Heading {
+    width: 80%;
     padding: 10px 0;
-    border-radius: 10px;
-    font-size: 1rem;
+    font-size: small;
     font-weight: bold;
-    margin: 70px auto 0; 
+    margin: 60px auto 0; 
     text-align: center;
-    color: #555;
-    background-color:rgba(188, 188, 248, 0.15);
 }
 
 @media(min-width: 1000px){
-    .Heading p {
+    .Heading {
         margin: 80px auto 0;
     }
+}
+
+.Table {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.Table tr td {
+    border: 1px solid black;
+    padding: 0 10px;
+    font-weight: 500;
+    font-size: small;
+    overflow-x: auto;
+    width: 50%;
+}
+
+.Table tr td img {
+    width: 15px;
+}
+
+.Table tr th {
+    border: 1px solid black;
+    padding: 0 10px;
+    font-weight: bold;
+    font-size: small;
+    color: white;
+    background-color: rgb(5, 130, 202);
+    width: 50%;
+}
+
+.Table tr th img {
+    width: 15px;
 }
 
 .Games {
@@ -56,7 +86,8 @@
     font-weight: 500;
 }
 
-.Field button {
+.Table button,
+.List button {
     color: white;
     background-color: rgb(5, 130, 202);
     font-weight: bold;
@@ -67,7 +98,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 13px;
-    margin: 0 auto;
+    margin: 0 auto 5px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;

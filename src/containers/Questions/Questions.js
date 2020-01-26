@@ -113,9 +113,9 @@ class Questions extends Component {
                 <p style={{ fontWeight: '500', fontSize: 'medium' }}>Pretraži pitanja po kriterijumima</p>
                 <select onChange={(event) => this.onChangeHandler(event)}>
                     <option value={0}>Sva pitanja</option>
-                    <option value={5}>5 - Laka pitanja</option>
-                    <option value={8}>8 - Srednji nivo</option>
-                    <option value={10}>10 - Teška pitanja</option>
+                    <option value={10}>10 - Laka pitanja</option>
+                    <option value={15}>15 - Srednji nivo</option>
+                    <option value={20}>20 - Teška pitanja</option>
                 </select>
                 <select onChange={(event) => this.sortQuestions(event)}>
                     <option value={'createdAt'}>Po datumu izmjene - najskorije izmjene prvo</option>

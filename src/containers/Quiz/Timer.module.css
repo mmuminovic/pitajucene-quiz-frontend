@@ -9,6 +9,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-weight: bold;
   }
 
   .timer p {
@@ -21,8 +22,9 @@ h1 {
   }
   
   .value {
-    font-size: small;
+    font-size: medium;
     text-align: center;
+    font-weight: bold;
   }
   
   .info {
