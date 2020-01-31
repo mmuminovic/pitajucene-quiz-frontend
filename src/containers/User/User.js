@@ -136,7 +136,7 @@ class User extends Component {
                             </li>
                         )
 
-                    } else if (!q.incorrect && q.score === 1000) {
+                    } else if (!q.incorrect && q.score === 900) {
                         return (
                             <li key={i} style={{ backgroundColor: '#4CAF50' }}>
                                 <p>{q.time}</p>
