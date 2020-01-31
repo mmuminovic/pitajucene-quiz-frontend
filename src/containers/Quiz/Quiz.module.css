@@ -25,7 +25,7 @@
 }
 
 .Rules p {
-    margin: 2px 0;
+    margin: 1px;
     font-weight: 500;
 }
 
@@ -209,8 +209,7 @@
 .Table tr th {
     border: 1px solid black;
     padding: 5px 10px;
-    font-weight: bold;
-    font-size: small;
+    font-size: smaller;
     color: white;
     background-color: rgb(5, 130, 202);
 }
@@ -223,7 +222,7 @@
     border: 1px solid black;
     padding: 5px 10px;
     font-weight: 500;
-    font-size: small;
+    font-size: smaller;
 }
 
 .Table tr td img {

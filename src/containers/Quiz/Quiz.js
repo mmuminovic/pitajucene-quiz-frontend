@@ -38,7 +38,8 @@ class Quiz extends Component {
         playedToday: null,
         selected: null,
         theBestToday: null,
-        numOfQuestion: 1
+        numOfQuestion: 1,
+        link: null
     }
 
     componentDidMount() {
@@ -51,7 +52,16 @@ class Quiz extends Component {
                         this.props.history.push('/');
                     } else {
                         const data = result.data;
-                        this.setState({ question: data.question, quiz: this.props.match.params.quizId, gameover: false, currentScore: data.score, ans: null, started: true, loading: true, finished: false, continuing: true, remainingTime: data.timeRemaining });
+                        let p = data.score;
+                        let k = 1;
+                        if (p - 500 >= 0) {
+                            k = 41 + (p - 500) / 20;
+                        } else if (p - 200 >= 0) {
+                            k = 21 + (p - 200) / 15;
+                        } else {
+                            k = 1 + p / 10;
+                        }
+                        this.setState({ question: data.question, quiz: this.props.match.params.quizId, gameover: false, currentScore: data.score, ans: null, started: true, loading: true, finished: false, continuing: true, remainingTime: data.timeRemaining, numOfQuestion: k});
                     }
                 })
         } else {
@@ -118,7 +128,11 @@ class Quiz extends Component {
                     const numOfQuestion = this.state.numOfQuestion;
                     this.setState({ selected: null });
                     if (result.data.incorrect) {
-                        this.setState({ gameover: true, incorrect: true, loading: false })
+                        this.setState({ gameover: true, incorrect: true, loading: false });
+                        axios.get(`/get-link/${this.state.question.id}`)
+                            .then(result => {
+                                this.setState({ link: result.data.link });
+                            })
                     } else if (result.data.gameover) {
                         if (result.data.finished) {
                             this.setState({ gameover: true, finished: true, incorrect: true, loading: false });
@@ -228,19 +242,20 @@ class Quiz extends Component {
                         <table style={{ margin: '0 auto' }}>
                             <tbody>
                                 <tr>
-                                    <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 5 bodova</em></td>
-                                    <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 8 bodova</em></td>
                                     <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 10 bodova</em></td>
+                                    <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 15 bodova</em></td>
+                                    <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 20 bodova</em></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <p>- Kviz traje 30 minuta.</p>
-                        <p>- Koje su nagrade ovog mjeseca možete vidjeti na našoj stranici <a href="https://pitajucene.com">pitajucene.com</a></p>
+                        <p>- Kviz traje <strong>10 minuta.</strong></p>
+                        <p>- Ukoliko takmičari imaju isti broj bodova biće rangirani prema najkraćem vremenu.</p>
+                        <p>- Koje su nagrade ovog mjeseca možete vidjeti na našoj stranici <a href="https://pitajucene.com/nagradni-kviz">pitajucene.com/nagradni-kviz</a></p>
                         <p>- Najbolji u mjesecu će biti kontaktirani putem email adrese s kojom su se registrovali.</p>
                         <p style={{ fontWeight: 'bold' }}>- Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</p>
+                        <p style={{ fontStyle: 'italic' }}>"Ko nas vara nije od nas" - Muhammed, sallallahu alejhi ve sellem</p>
                     </div>
-                    {/* <Button clicked={this.playAgain} text="Pokreni kviz" /> */}
-                    <p style={{fontWeight: 'bold', color: 'red'}}>KVIZ TRENUTNO NE RADI. IZMJENE SU U TOKU. USKORO POČINJEMO.</p>
+                    <Button clicked={this.playAgain} text="Pokreni kviz" />
                     <div className={classes.TableInfo}>
                         <table className={classes.Table}>
                             <thead>
@@ -349,7 +364,7 @@ class Quiz extends Component {
                             <p style={{ textAlign: 'justify', margin: '10px' }}><strong>{this.state.question.text}</strong></p>
                         </div>
                         <p className={classes.Incorrect}>Vaš odgovor: <strong>{this.state.ans}</strong></p>
-                        <p className={classes.Link}>Pronađite tačan odgovor na linku:<br /><a target="_blank" href={this.state.question.link} rel="noopener noreferrer">{this.state.question.link}</a></p>
+                        <p className={classes.Link}>Pronađite tačan odgovor na linku:<br /><a target="_blank" href={this.state.link} rel="noopener noreferrer">{this.state.link}</a></p>
                         <div style={{ border: 'none' }} className={classes.Button}>
                             <Button clicked={this.closeModalHandler} text="Zatvori" />
                         </div>

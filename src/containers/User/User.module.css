@@ -70,7 +70,6 @@
 }
 
 .Field {
-    background-color: rgba(188, 188, 248, 0.15);
     text-align: center;
     border-radius: 10px;
     height: 100%;
@@ -118,13 +117,14 @@
 .List li {
     border-bottom: 1px solid rgb(0, 0, 0);
     background-color: rgba(188, 188, 248, 0.15);
+    padding: 10px 0;
 }
 
 .List li p {
     font-size: small;
-    margin: 5px;
+    margin: 2px;
     padding: 0;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .List .Question {
@@ -132,11 +132,12 @@
     text-align-last: center;
     margin: 0 20px;
     font-size: small;
-    color: #555;
+    color: white;
     font-weight: bold;
 }
 .List li a {
     font-size: small;
-    color: rgb(0, 81, 255);
+    color: white;
     font-weight: 500;
+    font-style: italic;
 }

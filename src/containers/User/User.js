@@ -3,6 +3,8 @@ import classes from './User.module.css';
 import Spinner from '../Spinner/Spinner';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import timeIcon from '../../images/clock.png';
+import star from '../../images/star.png';
 
 import axios from 'axios';
 
@@ -56,7 +58,7 @@ class User extends Component {
         axios.get(`/myscore/${userId}`)
             .then(result => {
                 if (result.data.score) {
-                    this.setState({ currentScore: result.data.score });
+                    this.setState({ currentScore: result.data });
                 }
             })
     }
@@ -66,7 +68,7 @@ class User extends Component {
         axios.get(`/scorelastmonth/${userId}`)
             .then(result => {
                 if (result.data.score) {
-                    this.setState({ lastMonthScore: result.data.score });
+                    this.setState({ lastMonthScore: result.data });
                 }
             })
     }
@@ -76,7 +78,7 @@ class User extends Component {
         axios.get(`/thebestscore/${userId}`)
             .then(result => {
                 if (result.data.score) {
-                    this.setState({ theBestScore: result.data.score });
+                    this.setState({ theBestScore: result.data });
                 }
             })
     }
@@ -125,28 +127,28 @@ class User extends Component {
                 let wrongAnswers = this.state.games.map((q, i) => {
                     if (q.questionText && q.incorrect) {
                         return (
-                            <li key={i}>
+                            <li key={i} style={{ backgroundColor: '#cc6a66' }}>
                                 <p>{q.time}</p>
                                 <p>Pitanje:</p>
                                 <p className={classes.Question}>{q.questionText}</p>
                                 <p>Tačan odgovor možete naći na linku: <a href={q.questionLink} target="_blank" rel="noopener noreferrer">{q.questionLink}</a></p>
-                                <p>Ostvareni rezultat: {q.score}</p>
+                                <span>Ostvareni rezultat:</span><span><img src={star} alt="medal" style={{ width: '12px', marginLeft: '5px', marginRight: '5px' }} /></span><span style={{ paddingTop: '15px' }}>{q.score}</span>
                             </li>
                         )
 
-                    } else if (!q.incorrect && q.score === 460) {
+                    } else if (!q.incorrect && q.score === 1000) {
                         return (
-                            <li key={i}>
+                            <li key={i} style={{ backgroundColor: '#4CAF50' }}>
                                 <p>{q.time}</p>
                                 <p className={classes.Question}>Osvojili ste maksimalan broj bodova. Čestitamo!</p>
-                                <p>Ostvareni rezultat: {q.score}</p>
+                                <span>Ostvareni rezultat:</span><span><img src={star} alt="medal" style={{ width: '12px', marginLeft: '5px', marginRight: '5px' }} /></span><span style={{ paddingTop: '15px' }}>{q.score}</span>
                             </li>
                         )
 
                     } else if (!q.timeIsUp) {
                         const link = `/quiz/${q.questionLink}`;
                         return (
-                            <li key={i}>
+                            <li key={i} style={{ backgroundColor: 'rgb(5, 130, 202)' }}>
                                 <p>{q.time}</p>
                                 <p className={classes.Question}>{q.questionText}</p>
                                 <div className={classes.Field}>
@@ -157,10 +159,10 @@ class User extends Component {
 
                     } else if (q.timeIsUp && !q.incorrect) {
                         return (
-                            <li key={i}>
+                            <li key={i} style={{ backgroundColor: '#6795cc' }}>
                                 <p>{q.time}</p>
                                 <p className={classes.Question}>{q.questionText}</p>
-                                <p>Ostvareni rezultat: {q.score}</p>
+                                <span>Ostvareni rezultat:</span><span><img src={star} alt="medal" style={{ width: '12px', marginLeft: '5px', marginRight: '5px' }} /></span><span style={{ paddingTop: '15px' }}>{q.score}</span>
                             </li>
                         )
                     }
@@ -220,7 +222,10 @@ class User extends Component {
                                 <p>Najbolji rezultat ovog mjeseca:</p>
                             </th>
                             <td>
-                                <p>{this.state.currentScore}</p>
+                                <img src={star} alt="medal" style={{ width: '20px', marginLeft: '15px', marginRight: '5px' }} />
+                                <span>{this.state.currentScore.score}</span>
+                                <img src={timeIcon} alt="medal" style={{ width: '20px', marginLeft: '15px', marginRight: '5px' }} />
+                                <span>{this.state.currentScore.duration}</span>
                             </td>
                         </tr>
                         <tr>
@@ -228,7 +233,10 @@ class User extends Component {
                                 <p>Najbolji rezultat prošlog mjeseca: </p>
                             </th>
                             <td>
-                                <p>{this.state.lastMonthScore}</p>
+                                <img src={star} alt="medal" style={{ width: '20px', marginLeft: '15px', marginRight: '5px' }} />
+                                <span>{this.state.lastMonthScore.score}</span>
+                                <img src={timeIcon} alt="medal" style={{ width: '20px', marginLeft: '15px', marginRight: '5px' }} />
+                                <span>{this.state.lastMonthScore.duration}</span>
                             </td>
                         </tr>
                         <tr>
@@ -236,7 +244,10 @@ class User extends Component {
                                 <p>Najbolji rezultat ikad: </p>
                             </th>
                             <td>
-                                <p>{this.state.theBestScore}</p>
+                                <img src={star} alt="medal" style={{ width: '20px', marginLeft: '15px', marginRight: '5px' }} />
+                                <span>{this.state.theBestScore.score}</span>
+                                <img src={timeIcon} alt="medal" style={{ width: '20px', marginLeft: '15px', marginRight: '5px' }} />
+                                <span>{this.state.theBestScore.duration}</span>
                             </td>
                         </tr>
                         <tr>
@@ -257,18 +268,18 @@ class User extends Component {
                 <table className={classes.Table} style={{ marginTop: '20px' }}>
                     <thead>
                         <tr>
-                            <th style={{backgroundColor: '#4CAF50'}}>
-                                <p>Odigrani kvizovi</p>
+                            <th style={{ backgroundColor: '#4CAF50', padding: '10px 0' }}>
+                                Odigrani kvizovi
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><p>Pogledajte pitanja na koja ste dali netačan odgovor i pronađite tačan odgovor na datom linku.</p></td>
+                            <td style={{padding: '5px 0'}}>Pogledajte pitanja na koja ste dali netačan odgovor i pronađite tačan odgovor na datom linku.</td>
                         </tr>
-                        {games}
                     </tbody>
                 </table>
+                {games}
             </div >
         )
     }
