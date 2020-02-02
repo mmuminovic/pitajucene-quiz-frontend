@@ -39,7 +39,8 @@ class Quiz extends Component {
         selected: null,
         theBestToday: null,
         numOfQuestion: 1,
-        link: null
+        link: null,
+        about: false
     }
 
     componentDidMount() {
@@ -61,7 +62,7 @@ class Quiz extends Component {
                         } else {
                             k = 1 + p / 10;
                         }
-                        this.setState({ question: data.question, quiz: this.props.match.params.quizId, gameover: false, currentScore: data.score, ans: null, started: true, loading: true, finished: false, continuing: true, remainingTime: data.timeRemaining, numOfQuestion: k});
+                        this.setState({ question: data.question, quiz: this.props.match.params.quizId, gameover: false, currentScore: data.score, ans: null, started: true, loading: true, finished: false, continuing: true, remainingTime: data.timeRemaining, numOfQuestion: k });
                     }
                 })
         } else {
@@ -161,7 +162,7 @@ class Quiz extends Component {
     }
 
     closeModalHandler = () => {
-        this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false });
+        this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false, about: false });
         this.props.history.push('/');
         this.getNumOfActiveGames();
         this.getNumOfAllGames();
@@ -236,26 +237,6 @@ class Quiz extends Component {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.pitajucene.com"><img src={Logo} width="100px" alt="logo" /></a>
                     </div>
                     {quizRemaining}
-                    <div className={classes.Rules}>
-                        <p style={{ fontSize: 'medium', fontWeight: 'bold' }}>Pravila igre:</p>
-                        <p>- Kviz se sastoji od 60 pitanja i 3 nivoa:</p>
-                        <table style={{ margin: '0 auto' }}>
-                            <tbody>
-                                <tr>
-                                    <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 10 bodova</em></td>
-                                    <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 15 bodova</em></td>
-                                    <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 20 bodova</em></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p>- Kviz traje <strong>10 minuta.</strong></p>
-                        <p>- Ukoliko takmičari imaju isti broj bodova biće rangirani prema najkraćem vremenu.</p>
-                        <p>- Koje su nagrade ovog mjeseca možete vidjeti na našoj stranici <a href="https://pitajucene.com/nagradni-kviz">pitajucene.com/nagradni-kviz</a></p>
-                        <p>- Najbolji u mjesecu će biti kontaktirani putem email adrese s kojom su se registrovali.</p>
-                        <p style={{ fontWeight: 'bold' }}>- Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</p>
-                        <p style={{ fontStyle: 'italic' }}>"Ko nas vara nije od nas" - Muhammed, sallallahu alejhi ve sellem</p>
-                    </div>
-                    <Button clicked={this.playAgain} text="Pokreni kviz" />
                     <div className={classes.TableInfo}>
                         <table className={classes.Table}>
                             <thead>
@@ -286,8 +267,98 @@ class Quiz extends Component {
                             </tbody>
                         </table>
                     </div>
+                    <div className={[classes.Button, classes.Danger].join(' ')}>
+                        <button onClick={() => this.setState({ incorrect: true })}>Pravila igre</button>
+                    </div>
+                    <div className={[classes.Button, classes.InfoButton].join(' ')}>
+                        <button onClick={() => this.setState({ incorrect: true, about: true })}>O aplikaciji</button>
+                    </div>
+                    <div className={classes.Button}>
+                        <button onClick={this.playAgain}>Pokreni kviz</button>
+                    </div>
                 </div>
             );
+            modalDetails = (
+                <div className={classes.Rules}>
+                    <p style={{ fontSize: 'medium', fontWeight: 'bold' }}>Pravila igre:</p>
+                    <p>- Kviz se sastoji od 60 pitanja i 3 nivoa:</p>
+                    <table style={{ margin: '0 auto' }}>
+                        <tbody>
+                            <tr>
+                                <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 10 bodova</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 15 bodova</em></td>
+                                <td style={{ border: '1px solid black', padding: '5px 10px' }}><em>20 pitanja od po 20 bodova</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul>
+                        <li>Ovaj kviz je edukativno-zabavanog karaktera, sistemske greške su rijetke ali su moguće te smo iz tog razloga ostavili mogućnost prijave pitanja i link na kojem možete pročitati original odgovor na svako pitanje.</li>
+                        <li>Kviz traje <strong>10 minuta.</strong></li>
+                        <li>Ukoliko takmičari imaju isti broj bodova biće rangirani prema najkraćem vremenu.</li>
+                        <li>Koje su nagrade ovog mjeseca možete vidjeti na našoj stranici <a href="https://pitajucene.com/nagradni-kviz">pitajucene.com/nagradni-kviz</a></li>
+                        <li>Najbolji u mjesecu će biti kontaktirani putem email adrese s kojom su se registrovali.</li>
+                        <li>Knjige koje dajemo kao nagradu su nove ili korištene bez velikih oštećenja, jer mnoge knjige dobijemo kao donaciju.</li>
+                        <li>Poštarinu za dostavu knjige izvan Bosne i Hercegovine plaća dobitnik knjige.</li>
+                        <li style={{ fontWeight: 'bold' }}>Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</li>
+                        <li style={{ fontStyle: 'italic' }}>"Ko nas vara nije od nas" - Muhammed, sallallahu alejhi ve sellem</li>
+                    </ul>
+                    <div className={classes.Button}>
+                        <button onClick={this.closeModalHandler}>Zatvori</button>
+                    </div>
+                </div>
+            );
+            if (this.state.about) {
+                modalDetails = (
+                    <div className={classes.Rules}>
+                        <table className={classes.Table} style={{ width: '100%' }}>
+                            <thead>
+                                <tr>
+                                    <th>Verzija kviza</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>v1.2</td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Datum početka kviza</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10.01.2020.</td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Unosio pitanja</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="https://pitajucene.com/profile/sedin/" target="_blank" rel="noopener noreferrer">Sedin Kutlovac</a></td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Aplikaciju razvio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="https://pitajucene.com/profile/muhamed-muminovic/" target="_blank" rel="noopener noreferrer">Muhamed Muminović</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div className={classes.Button}>
+                            <button onClick={this.closeModalHandler}>Zatvori</button>
+                        </div>
+                        <p>© 2020 Pitaj Učene - <a href="https://pitajucene.com" target="_blank" rel="noopener noreferrer">pitajucene.com</a></p>
+                    </div>
+                )
+            }
             if (this.state.quizNotActive) {
                 modalDetails = (
                     <div className={classes.ModalInfo}>

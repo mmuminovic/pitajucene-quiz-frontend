@@ -9,13 +9,8 @@
     padding: 10px;
     margin: 5px auto;
     border-radius: 10px;
-    width: 70%;
-}
-
-@media(max-width: 1000px){
-    .Rules {
-        width: 85%;
-    }
+    width: 100%;
+    text-align: center;
 }
 
 @media(min-width: 1000px){
@@ -24,9 +19,21 @@
     }
 }
 
-.Rules p {
+.Rules ul {
+    overflow: auto;
+    width: 100%;
+    height: 220px;
+    text-align: left;
+}
+
+.Rules li, .Rules p {
+    font-size: small;
     margin: 1px;
     font-weight: 500;
+}
+
+.Rules table td {
+    font-size: small;
 }
 
 .TimerText {
@@ -173,11 +180,11 @@
     background-color: rgb(5, 130, 202);
     font-weight: bold;border: 2px solid rgb(5, 130, 202);
     border-radius: 10px;
-    padding: 10px 50px;
+    padding: 10px 40px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 13px;
      margin: 4px 2px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -302,7 +309,7 @@
     background-color: rgb(5, 130, 202);
     font-weight: bold;border: 2px solid rgb(5, 130, 202);
     border-radius: 10px;
-    padding: 10px 32px;
+    padding: 10px 40px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -311,11 +318,12 @@
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
+    width: 250px;
 }
 
 .Button button:hover {
-    background-color: #4CAF50;
-    border: 2px solid #4CAF50;
+    background-color: #0471b0;
+    border: 2px solid #0471b0;
     color: white;
 }
 
@@ -331,6 +339,16 @@
 }
 
 .Danger button:hover {
-    background-color: red;
-    border: 2px solid red;
+    background-color: #c4443f;
+    border: 2px solid #c4443f;
+}
+
+.InfoButton button {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+}
+
+.InfoButton button:hover {
+    background-color: #39963d;
+    border: 2px solid #39963d;
 }
