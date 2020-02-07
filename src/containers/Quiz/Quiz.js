@@ -13,6 +13,8 @@ import timerClasses from './Timer.module.css';
 import theBest from '../../images/0.png';
 import timeIcon from '../../images/clock.png';
 import starIcon from '../../images/star.png'
+import like from '../../images/like.png'
+import liked from '../../images/liked.png'
 
 class Quiz extends Component {
     state = {
@@ -40,7 +42,9 @@ class Quiz extends Component {
         theBestToday: null,
         numOfQuestion: 1,
         link: null,
-        about: false
+        about: false,
+        quote: null,
+        liked: false
     }
 
     componentDidMount() {
@@ -72,7 +76,24 @@ class Quiz extends Component {
             this.getNumOfAllGames();
             this.getTheBestToday();
             this.playedToday();
+            this.getQuote();
         }
+    }
+
+    getQuote = () => {
+        axios.get('/quotes/get-random-quote', { params: { userId: this.props.user.userId } })
+            .then(result => {
+                this.setState({ quote: result.data });
+            })
+    }
+
+    likeQuote = () => {
+        this.setState({ liked: true });
+        let userId = this.props.user.userId;
+        axios.patch(`/quotes/like/${this.state.quote.quoteId}`, { userId: userId })
+            .then(result => {
+                // console.log(result);
+            })
     }
 
     getNumOfActiveGames = () => {
@@ -129,11 +150,7 @@ class Quiz extends Component {
                     const numOfQuestion = this.state.numOfQuestion;
                     this.setState({ selected: null });
                     if (result.data.incorrect) {
-                        this.setState({ gameover: true, incorrect: true, loading: false });
-                        axios.get(`/get-link/${this.state.question.id}`)
-                            .then(result => {
-                                this.setState({ link: result.data.link });
-                            })
+                        this.setState({ gameover: true, incorrect: true, loading: false, link: result.data.link });
                     } else if (result.data.gameover) {
                         if (result.data.finished) {
                             this.setState({ gameover: true, finished: true, incorrect: true, loading: false });
@@ -162,7 +179,7 @@ class Quiz extends Component {
     }
 
     closeModalHandler = () => {
-        this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false, about: false });
+        this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false, about: false, quizNotActive: false });
         this.props.history.push('/');
         this.getNumOfActiveGames();
         this.getNumOfAllGames();
@@ -195,7 +212,7 @@ class Quiz extends Component {
 
 
     render() {
-        let question, questionText, answers, currentScore, gameover, modalDetails, quizDetails, points, timer, timerText, quizRemaining, ordinalNumOfQuestion;
+        let question, questionText, answers, currentScore, gameover, modalDetails, quizDetails, points, timer, timerText, quizRemaining, ordinalNumOfQuestion, quote;
         const renderTime = value => {
             if (value === 0) {
                 return <div className={timerClasses.timer}>0</div>;
@@ -230,6 +247,14 @@ class Quiz extends Component {
                     quizRemaining = (<Link style={{ color: 'red', fontWeight: 'bold' }} to={myProfileLink}>Imate kviz koji niste završili! Kliknite na ovaj link da nastavite.</Link>)
                 }
             }
+            if (this.state.quote) {
+                quote = <blockquote className={classes.Blockquote}>
+                    &quot;{this.state.quote.quoteText}&quot;
+                        <p style={{ marginTop: '5px' }}>({this.state.quote.quoteSource})</p>
+                    <span>{this.state.quote.quoteAuthor}</span>
+                    <span><img src={this.state.liked ? liked : like} width="20px" alt="like" onClick={this.likeQuote} style={{ cursor: 'pointer', marginRight: '5px' }} />{this.state.quote.likes}</span>
+                </blockquote>
+            }
             quizDetails = (
                 <div className={classes.Gameover}>
                     <p style={{ fontSize: 'medium', fontWeight: 'bold', color: 'rgb(102,149,204)', margin: '0' }}>Dobrodošli na islamski kviz znanja</p>
@@ -237,6 +262,16 @@ class Quiz extends Component {
                         <a target="_blank" rel="noopener noreferrer" href="http://www.pitajucene.com"><img src={Logo} width="100px" alt="logo" /></a>
                     </div>
                     {quizRemaining}
+                    {quote}
+                    <div className={classes.Button}>
+                        <button onClick={this.playAgain}>Pokreni kviz</button>
+                    </div>
+                    <div className={[classes.Button, classes.Danger].join(' ')}>
+                        <button onClick={() => this.setState({ incorrect: true })}>Pravila igre</button>
+                    </div>
+                    <div className={[classes.Button, classes.InfoButton].join(' ')}>
+                        <button onClick={() => this.setState({ incorrect: true, about: true })}>O aplikaciji</button>
+                    </div>
                     <div className={classes.TableInfo}>
                         <table className={classes.Table}>
                             <thead>
@@ -267,15 +302,7 @@ class Quiz extends Component {
                             </tbody>
                         </table>
                     </div>
-                    <div className={[classes.Button, classes.Danger].join(' ')}>
-                        <button onClick={() => this.setState({ incorrect: true })}>Pravila igre</button>
-                    </div>
-                    <div className={[classes.Button, classes.InfoButton].join(' ')}>
-                        <button onClick={() => this.setState({ incorrect: true, about: true })}>O aplikaciji</button>
-                    </div>
-                    <div className={classes.Button}>
-                        <button onClick={this.playAgain}>Pokreni kviz</button>
-                    </div>
+
                 </div>
             );
             modalDetails = (

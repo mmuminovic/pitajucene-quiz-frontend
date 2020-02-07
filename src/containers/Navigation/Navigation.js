@@ -38,7 +38,7 @@ class Navigation extends Component {
         if (this.props.isAuth) {
             let profil = `/korisnik/${this.props.user.userId}`
             navlinks = (
-                <Navbar bg="white" expand="lg" style={{ zIndex: '10' }} fixed="top" onToggle={this.setNavExpanded} expanded={this.state.expanded}>
+                <Navbar expand="lg" style={{ zIndex: '10', backgroundColor: '#d0e6f3' }} fixed="top" onToggle={this.setNavExpanded} expanded={this.state.expanded}>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => this.setState({ expanded: !this.state.expanded })} />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto" onSelect={this.closeNav} style={{ margin: '5px auto' }}>

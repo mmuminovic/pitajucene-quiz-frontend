@@ -203,6 +203,47 @@
     border: 2px solid rgba(0, 0, 255, 0.61);
 }
 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
+.Blockquote{
+  font-size: 12px;
+  width:80%;
+  margin: 10px auto;
+  font-family:Open Sans;
+  font-style:italic;
+  color: black;
+  padding:1.2em 30px 1.2em 30px;
+  border-left:8px solid rgb(102,149,204) ;
+  line-height:1.6;
+  position: relative;
+  background-image: url('../../images/oldpaper.jpg');
+  background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      background-size:cover;
+}
+
+.Blockquote::before{
+  font-family:Arial;
+  content: "\201C";
+  color:rgb(102,149,204);
+  font-size:4em;
+  position: absolute;
+  left: 0;
+  top:-10px;
+}
+
+.Blockquote::after{
+  content: '';
+}
+
+.Blockquote span{
+  display:block;
+  color:#333333;
+  font-style: normal;
+  font-weight: bold;
+  margin-top:1em;
+}
+
 .TableInfo {
     margin: 0 auto;
     width: 80%;
@@ -306,7 +347,7 @@
 
 .Button button {
     color: white;
-    background-color: rgb(5, 130, 202);
+    background-color: #0582ca;
     font-weight: bold;border: 2px solid rgb(5, 130, 202);
     border-radius: 10px;
     padding: 10px 40px;
