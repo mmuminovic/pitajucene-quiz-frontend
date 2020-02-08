@@ -83,17 +83,26 @@ class Quiz extends Component {
     getQuote = () => {
         axios.get('/quotes/get-random-quote', { params: { userId: this.props.user.userId } })
             .then(result => {
-                this.setState({ quote: result.data });
+                if(result.data.quoteId) {
+                    this.setState({ quote: result.data });
+                }
             })
     }
 
     likeQuote = () => {
-        this.setState({ liked: true });
+        const quote = {
+            quoteId: this.state.quote.quoteId,
+            quoteText: this.state.quote.quoteText,
+            quoteAuthor: this.state.quote.quoteAuthor,
+            quoteSource: this.state.quote.quoteSource,
+            likes: this.state.quote.likes + 1,
+            likedByMe: true
+        }
+        this.setState({ liked: true, quote: quote });
         let userId = this.props.user.userId;
-        axios.patch(`/quotes/like/${this.state.quote.quoteId}`, { userId: userId })
-            .then(result => {
-                // console.log(result);
-            })
+        if (!this.state.quote.likedByMe) {
+            axios.patch(`/quotes/like/${this.state.quote.quoteId}`, { userId: userId })
+        }
     }
 
     getNumOfActiveGames = () => {
@@ -252,7 +261,7 @@ class Quiz extends Component {
                     &quot;{this.state.quote.quoteText}&quot;
                         <p style={{ marginTop: '5px' }}>({this.state.quote.quoteSource})</p>
                     <span>{this.state.quote.quoteAuthor}</span>
-                    <span><img src={this.state.liked ? liked : like} width="20px" alt="like" onClick={this.likeQuote} style={{ cursor: 'pointer', marginRight: '5px' }} />{this.state.quote.likes}</span>
+                    <span><img src={this.state.quote.likedByMe || this.state.liked ? liked : like} width="20px" alt="like" onClick={this.likeQuote} style={{ cursor: 'pointer', marginRight: '5px' }} />{this.state.quote.likes}</span>
                 </blockquote>
             }
             quizDetails = (
@@ -263,15 +272,6 @@ class Quiz extends Component {
                     </div>
                     {quizRemaining}
                     {quote}
-                    <div className={classes.Button}>
-                        <button onClick={this.playAgain}>Pokreni kviz</button>
-                    </div>
-                    <div className={[classes.Button, classes.Danger].join(' ')}>
-                        <button onClick={() => this.setState({ incorrect: true })}>Pravila igre</button>
-                    </div>
-                    <div className={[classes.Button, classes.InfoButton].join(' ')}>
-                        <button onClick={() => this.setState({ incorrect: true, about: true })}>O aplikaciji</button>
-                    </div>
                     <div className={classes.TableInfo}>
                         <table className={classes.Table}>
                             <thead>
@@ -301,6 +301,15 @@ class Quiz extends Component {
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div className={classes.Button}>
+                        <button onClick={this.playAgain}>Pokreni kviz</button>
+                    </div>
+                    <div className={[classes.Button, classes.Danger].join(' ')}>
+                        <button onClick={() => this.setState({ incorrect: true })}>Pravila igre</button>
+                    </div>
+                    <div className={[classes.Button, classes.InfoButton].join(' ')}>
+                        <button onClick={() => this.setState({ incorrect: true, about: true })}>O aplikaciji</button>
                     </div>
 
                 </div>
@@ -345,7 +354,7 @@ class Quiz extends Component {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>v1.2</td>
+                                    <td>v1.3</td>
                                 </tr>
                             </tbody>
                             <thead>

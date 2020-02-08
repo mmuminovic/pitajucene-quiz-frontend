@@ -20,16 +20,16 @@ class Navigation extends Component {
         if (this.props.isAdmin) {
             adminPanel = (
                 <Aux>
-                    <NavItem eventkey={1} href="/">
-                        <Nav.Link onClick={() => this.setState({ expanded: false })} as={Link} to="/sva-pitanja">Sva pitanja</Nav.Link>
+                    <NavItem eventkey={11} href="/">
+                        <Nav.Link onClick={() => this.setState({ expanded: false })} as={Link} to="/sva-pitanja">Pitanja</Nav.Link>
                     </NavItem>
-                    <NavItem eventkey={2} href="/">
-                        <Nav.Link onClick={() => this.setState({ expanded: false })} as={Link} to="/input">Dodaj pitanje</Nav.Link>
+                    <NavItem eventkey={21} href="/">
+                        <Nav.Link onClick={() => this.setState({ expanded: false })} as={Link} to="/korisnici">Korisnici</Nav.Link>
                     </NavItem>
-                    <NavItem eventkey={2} href="/">
-                        <Nav.Link onClick={() => this.setState({ expanded: false })} as={Link} to="/korisnici">Svi korisnici</Nav.Link>
+                    <NavItem eventkey={41} href="/">
+                        <Nav.Link onClick={() => this.setState({ expanded: false })} as={Link} to="/citati">Citati</Nav.Link>
                     </NavItem>
-                    <NavItem eventkey={2} href="/">
+                    <NavItem eventkey={31} href="/">
                         <Nav.Link onClick={() => this.setState({ expanded: false })} as={Link} to="/primjedbe">Primjedbe</Nav.Link>
                     </NavItem>
                 </Aux>

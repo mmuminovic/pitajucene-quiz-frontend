@@ -126,6 +126,7 @@ class Questions extends Component {
                 <Modal show={this.state.showModal} modalClosed={this.closeModalHandler}>
                     {modalDetails}
                 </Modal>
+                <button className={[classes.Button, classes.ListButton].join(' ')} onClick={() => { this.props.history.push('/input') }}>Dodaj pitanje</button>
                 {loading}
                 <ul>
                     {list}

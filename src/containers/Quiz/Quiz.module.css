@@ -211,15 +211,14 @@
   font-family:Open Sans;
   font-style:italic;
   color: black;
-  padding:1.2em 30px 1.2em 30px;
+  padding:1.2em 30px 1em 30px;
   border-left:8px solid rgb(102,149,204) ;
-  line-height:1.6;
   position: relative;
   background-image: url('../../images/oldpaper.jpg');
   background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
-      background-size:cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-size:cover;
 }
 
 .Blockquote::before{
@@ -236,12 +235,16 @@
   content: '';
 }
 
-.Blockquote span{
+.Blockquote p {
+    margin-bottom: 5px;
+}
+
+.Blockquote span {
   display:block;
   color:#333333;
   font-style: normal;
   font-weight: bold;
-  margin-top:1em;
+  padding-bottom: 5px;
 }
 
 .TableInfo {

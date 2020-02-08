@@ -15,6 +15,7 @@ import Questions from '../Questions/Questions';
 import EditForm from '../EditForm/EditForm';
 import User from '../User/User';
 import Reports from '../Reports/Reports';
+import Quotes from '../Quotes/Quotes';
 // import logo from '../../images/logo.png';
 
 class MainPage extends Component {
@@ -28,6 +29,7 @@ class MainPage extends Component {
                         <Route path="/korisnici" component={Users} />
                         <Route path="/primjedbe" component={Reports} />
                         <Route path="/sva-pitanja" component={Questions} />
+                        <Route path="/citati" exact component={Quotes} />
                         <Route path="/input" exact component={EditForm} />
                         <Route path="/input/:questionId" component={EditForm} />
                         <Route path="/prijava" component={Auth} />
