@@ -262,7 +262,7 @@ class Quiz extends Component {
             if (this.state.quote) {
                 quote = <blockquote className={classes.Blockquote}>
                     &quot;{this.state.quote.quoteText}&quot;
-                        <p style={{ marginTop: '5px' }}>({this.state.quote.quoteSource})</p>
+                        <p style={{ marginTop: '5px' }}>{this.state.quote.quoteSource ? `(${this.state.quote.quoteSource})` : null}</p>
                     <span>{this.state.quote.quoteAuthor}</span>
                     <span><img src={this.state.quote.likedByMe || this.state.liked ? liked : like} width="20px" alt="like" onClick={this.likeQuote} style={{ cursor: 'pointer', marginRight: '5px' }} />{this.state.quote.likes}</span>
                 </blockquote>
