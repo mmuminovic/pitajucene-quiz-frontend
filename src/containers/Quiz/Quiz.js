@@ -101,9 +101,9 @@ class Quiz extends Component {
             likes: this.state.quote.likes + 1,
             likedByMe: true
         }
-        this.setState({ liked: true, quote: quote });
         let userId = this.props.user.userId;
         if (!this.state.quote.likedByMe) {
+            this.setState({ liked: true, quote: quote });
             axios.patch(`/quotes/like/${this.state.quote.quoteId}`, { userId: userId })
         }
     }
