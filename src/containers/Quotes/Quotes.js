@@ -26,7 +26,6 @@ class Quotes extends Component {
     getAllQuotes = () => {
         axios.get('/quotes/get-all-quotes')
             .then(q => {
-                console.log(q);
                 let loadedQuotes = q.data;
                 this.setState({ quotes: loadedQuotes, loading: false });
             });
@@ -46,7 +45,6 @@ class Quotes extends Component {
             editQuote: true,
             addQuote: false
         })
-        console.log(q);
     }
 
     submitQuote = () => {
