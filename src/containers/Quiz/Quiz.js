@@ -12,11 +12,12 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import timerClasses from './Timer.module.css';
 import theBest from '../../images/0.png';
 import timeIcon from '../../images/clock.png';
-import starIcon from '../../images/star.png'
-import like from '../../images/like.png'
-import liked from '../../images/liked.png'
-import chart from '../../images/chart.png'
-import quiz from '../../images/quiz.png'
+import starIcon from '../../images/star.png';
+import like from '../../images/like.png';
+import liked from '../../images/liked.png';
+import chart from '../../images/chart.png';
+import quiz from '../../images/quiz.png';
+import user from '../../images/user.png';
 
 class Quiz extends Component {
     state = {
@@ -329,15 +330,15 @@ class Quiz extends Component {
                                     <th colSpan="2"><img src={theBest} alt="medal" /> Najuspješniji/a danas:</th>
                                 </tr>
                                 <tr>
-                                    <th>User</th>
+                                    <th><img src={user} width="20px" alt="user" /></th>
                                     <td>{this.state.theBestToday ? this.state.theBestToday.fullName : null}</td>
                                 </tr>
                                 <tr>
-                                    <th><img src={starIcon} alt="medal" /></th>
+                                    <th><img src={starIcon} alt="score" /></th>
                                     <td>{this.state.theBestToday ? this.state.theBestToday.score : null}</td>
                                 </tr>
                                 <tr>
-                                    <th><img src={timeIcon} alt="medal" /></th>
+                                    <th><img src={timeIcon} alt="time" /></th>
                                     <td>{this.state.theBestToday ? this.state.theBestToday.duration : null}</td>
                                 </tr>
                             </thead>
