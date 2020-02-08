@@ -15,6 +15,8 @@ import timeIcon from '../../images/clock.png';
 import starIcon from '../../images/star.png'
 import like from '../../images/like.png'
 import liked from '../../images/liked.png'
+import chart from '../../images/chart.png'
+import quiz from '../../images/quiz.png'
 
 class Quiz extends Component {
     state = {
@@ -44,7 +46,8 @@ class Quiz extends Component {
         link: null,
         about: false,
         quote: null,
-        liked: false
+        liked: false,
+        stats: false
     }
 
     componentDidMount() {
@@ -83,7 +86,7 @@ class Quiz extends Component {
     getQuote = () => {
         axios.get('/quotes/get-random-quote', { params: { userId: this.props.user.userId } })
             .then(result => {
-                if(result.data.quoteId) {
+                if (result.data.quoteId) {
                     this.setState({ quote: result.data });
                 }
             })
@@ -148,13 +151,13 @@ class Quiz extends Component {
             });
     }
 
-    submitAnswer = (i) => {
+    submitAnswer = (i, skip) => {
         let question = this.state.question;
         let answers = [question.answer0, question.answer1, question.answer2, question.answer3];
         this.setState({ selected: i, ans: answers[i] });
         setTimeout(() => {
             this.setState({ loading: true });
-            axios.post(`/quiz/${this.state.quiz}`, { answer: answers[i] })
+            axios.post(`/quiz/${this.state.quiz}`, { answer: answers[i], skip: skip })
                 .then(result => {
                     const numOfQuestion = this.state.numOfQuestion;
                     this.setState({ selected: null });
@@ -188,7 +191,7 @@ class Quiz extends Component {
     }
 
     closeModalHandler = () => {
-        this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false, about: false, quizNotActive: false });
+        this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false, about: false, quizNotActive: false, stats: false });
         this.props.history.push('/');
         this.getNumOfActiveGames();
         this.getNumOfAllGames();
@@ -272,35 +275,9 @@ class Quiz extends Component {
                     </div>
                     {quizRemaining}
                     {quote}
-                    <div className={classes.TableInfo}>
-                        <table className={classes.Table}>
-                            <thead>
-                                <tr>
-                                    <th style={{ borderRight: 'none' }}><img src={theBest} alt="medal" /> Najuspješniji/a danas:</th>
-                                    <th style={{ borderLeft: 'none', borderRight: 'none' }}><img src={starIcon} alt="medal" /></th>
-                                    <th style={{ borderLeft: 'none' }}><img src={timeIcon} alt="medal" /></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style={{ borderRight: 'none' }}>{this.state.theBestToday ? this.state.theBestToday.fullName : null}</td>
-                                    <td style={{ borderLeft: 'none', borderRight: 'none' }}>{this.state.theBestToday ? this.state.theBestToday.score : null}</td>
-                                    <td style={{ borderLeft: 'none' }}>{this.state.theBestToday ? this.state.theBestToday.duration : null}</td>
-                                </tr>
 
-                                <tr>
-                                    <th>Odigrano kvizova:</th>
-                                    <th>Odigrano danas:</th>
-                                    <th>Trenutno igra:</th>
-                                </tr>
-
-                                <tr>
-                                    <td>{this.state.quizPlayed}</td>
-                                    <td>{this.state.playedToday}</td>
-                                    <td>{this.state.activeGames}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div className={[classes.Button, classes.Stats].join(' ')}>
+                        <button onClick={() => this.setState({ incorrect: true, stats: true })}><img src={chart} alt="quiz" width="20px" /></button>
                     </div>
                     <div className={classes.Button}>
                         <button onClick={this.playAgain}>Pokreni kviz</button>
@@ -343,6 +320,52 @@ class Quiz extends Component {
                     </div>
                 </div>
             );
+            if (this.state.stats) {
+                modalDetails = (
+                    <div className={classes.TableInfo}>
+                        <table className={classes.Table}>
+                            <thead>
+                                <tr>
+                                    <th colSpan="2"><img src={theBest} alt="medal" /> Najuspješniji/a danas:</th>
+                                </tr>
+                                <tr>
+                                    <th>User</th>
+                                    <td>{this.state.theBestToday ? this.state.theBestToday.fullName : null}</td>
+                                </tr>
+                                <tr>
+                                    <th><img src={starIcon} alt="medal" /></th>
+                                    <td>{this.state.theBestToday ? this.state.theBestToday.score : null}</td>
+                                </tr>
+                                <tr>
+                                    <th><img src={timeIcon} alt="medal" /></th>
+                                    <td>{this.state.theBestToday ? this.state.theBestToday.duration : null}</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th colSpan="2"><img src={quiz} alt="medal" />Kviz</th>
+                                </tr>
+                                <tr>
+                                    <th>Odigrano kvizova:</th>
+                                    <td>{this.state.quizPlayed}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Odigrano danas:</th>
+                                    <td>{this.state.playedToday}</td>
+                                </tr>
+                                <tr>
+                                    <th>Trenutno igra:</th>
+                                    <td>{this.state.activeGames}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div className={classes.Button} style={{textAlign: 'center'}}>
+                            <button onClick={this.closeModalHandler} style={{padding: '5px'}}>Zatvori</button>
+                        </div>
+                    </div>
+                )
+            }
             if (this.state.about) {
                 modalDetails = (
                     <div className={classes.Rules}>
@@ -426,14 +449,19 @@ class Quiz extends Component {
                     <p>{question.text}</p>
                 </div>
             );
-            ordinalNumOfQuestion = <p style={{ fontSize: 'small', textAlign: 'center' }}>Pitanje: {this.state.numOfQuestion}/60</p>
+            ordinalNumOfQuestion = (
+                <div className={classes.Button} style={{ textAlign: 'center' }}>
+                    <p style={{ fontSize: 'small', textAlign: 'center', margin: '0' }}>Pitanje: {this.state.numOfQuestion}/60</p>
+                    <button onClick={() => this.submitAnswer(null, true)} style={{ padding: '5px' }}>Preskoči pitanje</button>
+                </div>
+            );
             timerText = <p className={classes.TimerText}>Tajmer se nalazi na dnu ekrana</p>;
             points = (<p style={{ textAlign: 'center', fontWeight: '500', margin: '0' }}>Tačan odgovor nosi: {question.points} bodova</p>);
             let answersArray = [
-                <li key="0" className={this.state.selected === 0 ? classes.Selected : ''} onClick={() => this.submitAnswer(0)}>{question.answer0}</li>,
-                <li key="1" className={this.state.selected === 1 ? classes.Selected : ''} onClick={() => this.submitAnswer(1)}>{question.answer1}</li>,
-                <li key="2" className={this.state.selected === 2 ? classes.Selected : ''} onClick={() => this.submitAnswer(2)}>{question.answer2}</li>,
-                <li key="3" className={this.state.selected === 3 ? classes.Selected : ''} onClick={() => this.submitAnswer(3)}>{question.answer3}</li>
+                <li key="0" className={this.state.selected === 0 ? classes.Selected : ''} onClick={() => this.submitAnswer(0, false)}>{question.answer0}</li>,
+                <li key="1" className={this.state.selected === 1 ? classes.Selected : ''} onClick={() => this.submitAnswer(1, false)}>{question.answer1}</li>,
+                <li key="2" className={this.state.selected === 2 ? classes.Selected : ''} onClick={() => this.submitAnswer(2, false)}>{question.answer2}</li>,
+                <li key="3" className={this.state.selected === 3 ? classes.Selected : ''} onClick={() => this.submitAnswer(3, false)}>{question.answer3}</li>
             ];
             answers = (
                 <div className={classes.Answers}>

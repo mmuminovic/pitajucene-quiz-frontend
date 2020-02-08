@@ -53,7 +53,6 @@
     width: 80%;
     margin: 0 auto;
     text-align: center;
-    padding-top: 50px;
 }
 
 .Question p {
@@ -395,4 +394,14 @@
 .InfoButton button:hover {
     background-color: #39963d;
     border: 2px solid #39963d;
+}
+
+.Stats button {
+    background-color: #bbb;
+    border: 2px solid #bbb;
+}
+
+.Stats button:hover {
+    background-color: rgb(197, 197, 197);
+    border: 2px solid rgb(197, 197, 197);
 }
