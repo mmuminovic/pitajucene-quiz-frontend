@@ -3,6 +3,7 @@ import classes from './Quotes.module.css';
 import axios from 'axios';
 import Spinner from '../Spinner/Spinner';
 import Modal from '../Modal/Modal';
+import liked from '../../images/liked.png'
 
 class Quotes extends Component {
 
@@ -136,7 +137,7 @@ class Quotes extends Component {
         if (this.state.quotes) {
             list = this.state.quotes.map(q => {
                 return (
-                    <li key={q.quoteId}><span style={{ float: 'left', padding: '5px' }}>{q.quoteText}</span><span><button className={[classes.Danger, classes.ListButton].join(' ')} onClick={() => this.deleteHandler(q.quoteId, q.quoteText)}>izbriši</button><button className={[classes.Button, classes.ListButton].join(' ')} onClick={() => this.editQuote(q)}>Izmijeni</button></span></li>
+                    <li key={q.quoteId}><span style={{ float: 'left', padding: '5px' }}>{q.quoteText}</span><span><button className={[classes.Danger, classes.ListButton].join(' ')} onClick={() => this.deleteHandler(q.quoteId, q.quoteText)}>izbriši</button><button className={[classes.Button, classes.ListButton].join(' ')} onClick={() => this.editQuote(q)}>Izmijeni</button><span style={{paddingTop: '5px'}}><img src={liked} width="20px" alt="liked" style={{marginRight: '5px'}} />{q.likes}</span></span></li>
                 );
             })
         }
