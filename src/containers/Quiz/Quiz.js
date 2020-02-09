@@ -18,6 +18,7 @@ import liked from '../../images/liked.png';
 import chart from '../../images/chart.png';
 import quiz from '../../images/quiz.png';
 import user from '../../images/user.png';
+import paypal from '../../images/paypal.png';
 
 class Quiz extends Component {
     state = {
@@ -61,16 +62,7 @@ class Quiz extends Component {
                         this.props.history.push('/');
                     } else {
                         const data = result.data;
-                        let p = data.score;
-                        let k = 1;
-                        if (p - 500 >= 0) {
-                            k = 41 + (p - 500) / 20;
-                        } else if (p - 200 >= 0) {
-                            k = 21 + (p - 200) / 15;
-                        } else {
-                            k = 1 + p / 10;
-                        }
-                        this.setState({ question: data.question, quiz: this.props.match.params.quizId, gameover: false, currentScore: data.score, ans: null, started: true, loading: true, finished: false, continuing: true, remainingTime: data.timeRemaining, numOfQuestion: k });
+                        this.setState({ question: data.question, quiz: this.props.match.params.quizId, gameover: false, currentScore: data.score, ans: null, started: true, loading: true, finished: false, continuing: true, remainingTime: data.timeRemaining, numOfQuestion: data.question.num });
                     }
                 })
         } else {
@@ -289,6 +281,12 @@ class Quiz extends Component {
                     <div className={[classes.Button, classes.InfoButton].join(' ')}>
                         <button onClick={() => this.setState({ incorrect: true, about: true })}>O aplikaciji</button>
                     </div>
+                    <div>
+                        <a href="https://www.paypal.me/pitajucenefond" target="_blank" rel="noopener noreferrer">
+                            <p style={{ margin: '0', fontWeight: 'bold', color: 'blue' }}>Ugradi se u ovaj hajr, podrži rad stranice i kviza</p>
+                            <img src={paypal} alt="donate" width="120px" />
+                        </a>
+                    </div>
 
                 </div>
             );
@@ -361,8 +359,8 @@ class Quiz extends Component {
                                 </tr>
                             </tbody>
                         </table>
-                        <div className={classes.Button} style={{textAlign: 'center'}}>
-                            <button onClick={this.closeModalHandler} style={{padding: '5px'}}>Zatvori</button>
+                        <div className={classes.Button} style={{ textAlign: 'center' }}>
+                            <button onClick={this.closeModalHandler} style={{ padding: '5px' }}>Zatvori</button>
                         </div>
                     </div>
                 )
@@ -447,11 +445,11 @@ class Quiz extends Component {
             question = this.state.question;
             questionText = (
                 <div className={classes.Question}>
-                    <p>{question.text}</p>
+                    <p style={{ margin: '0' }}>{question.text}</p>
                 </div>
             );
             ordinalNumOfQuestion = (
-                <div className={classes.Button} style={{ textAlign: 'center' }}>
+                <div className={classes.Button} style={{ textAlign: 'center', margin: '0' }}>
                     <p style={{ fontSize: 'small', textAlign: 'center', margin: '0' }}>Pitanje: {this.state.numOfQuestion}/60</p>
                     <button onClick={() => this.submitAnswer(null, true)} style={{ padding: '5px' }}>Preskoči pitanje</button>
                 </div>
