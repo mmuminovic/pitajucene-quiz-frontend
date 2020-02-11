@@ -49,7 +49,8 @@ class Quiz extends Component {
         about: false,
         quote: null,
         liked: false,
-        stats: false
+        stats: false,
+        correctAnswer: null
     }
 
     componentDidMount() {
@@ -155,7 +156,7 @@ class Quiz extends Component {
                     const numOfQuestion = this.state.numOfQuestion;
                     this.setState({ selected: null });
                     if (result.data.incorrect) {
-                        this.setState({ gameover: true, incorrect: true, loading: false, link: result.data.link });
+                        this.setState({ gameover: true, incorrect: true, loading: false, link: result.data.link, correctAnswer: result.data.correct });
                     } else if (result.data.gameover) {
                         if (result.data.finished) {
                             this.setState({ gameover: true, finished: true, incorrect: true, loading: false });
@@ -184,7 +185,7 @@ class Quiz extends Component {
     }
 
     closeModalHandler = () => {
-        this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false, about: false, quizNotActive: false, stats: false });
+        this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false, about: false, quizNotActive: false, stats: false, correctAnswer: null });
         this.props.history.push('/');
         this.getNumOfActiveGames();
         this.getNumOfAllGames();
@@ -498,7 +499,8 @@ class Quiz extends Component {
                             <p style={{ textAlign: 'justify', margin: '10px' }}><strong>{this.state.question.text}</strong></p>
                         </div>
                         <p className={classes.Incorrect}>Vaš odgovor: <strong>{this.state.ans}</strong></p>
-                        <p className={classes.Link}>Pronađite tačan odgovor na linku:<br /><a target="_blank" href={this.state.link} rel="noopener noreferrer">{this.state.link}</a></p>
+                        <p className={classes.Incorrect} style={{color: 'green'}}>Tačan odgovor: <strong>{this.state.correctAnswer}</strong></p>
+                        <p className={classes.Link}>Pročitajte više na linku:<br /><a target="_blank" href={this.state.link} rel="noopener noreferrer">{this.state.link}</a></p>
                         <div style={{ border: 'none' }} className={classes.Button}>
                             <Button clicked={this.closeModalHandler} text="Zatvori" />
                         </div>
