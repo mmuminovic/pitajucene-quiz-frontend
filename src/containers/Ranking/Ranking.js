@@ -27,7 +27,10 @@ class Ranking extends Component {
         showTheBest: false,
 
         loading: false,
-        myResults: false
+        myResults: false,
+
+        rankingListTitle: null,
+        rankingListLastTitle: null,
     }
 
     componentDidMount() {
@@ -35,6 +38,7 @@ class Ranking extends Component {
         this.getMyScore();
         this.getMyScoreOfLastMonth();
         this.getMyBest();
+        this.getRankingLastMonth();
     }
 
     getRanking = () => {
@@ -42,7 +46,7 @@ class Ranking extends Component {
         axios.get('/ranking-list')
             .then(top10 => {
                 const top10players = top10.data;
-                this.setState({ top10: top10players, loading: false });
+                this.setState({ top10: top10players.rankingList, rankingListTitle: top10players.rankingListTitle, loading: false });
             })
     }
 
@@ -51,7 +55,7 @@ class Ranking extends Component {
         axios.get('/ranking-list/lastMonth')
             .then(result => {
                 const theBestOfLastMonthData = result.data;
-                this.setState({ theBestOfLastMonth: theBestOfLastMonthData, loading: false });
+                this.setState({ theBestOfLastMonth: theBestOfLastMonthData.rankingList, loading: false, rankingListLastTitle: theBestOfLastMonthData.rankingListTitle });
             })
     }
 
@@ -108,14 +112,7 @@ class Ranking extends Component {
 
 
     render() {
-        let list, loading, loadingModal;
-        const date = new Date();
-        let thisMonth = new Date(date.getFullYear(), date.getMonth());
-        thisMonth = thisMonth.toString();
-        let month, year;
-        month = thisMonth.split(' ')[1];
-        year = thisMonth.split(' ')[3]
-        let modalDetails;
+        let list, loading, loadingModal, modalDetails;
 
         if (this.state.loading && !this.state.showLastMonth && !this.state.showTheBest) {
             loading = (<tr>
@@ -272,7 +269,7 @@ class Ranking extends Component {
                                 {modalDetails}
                             </Modal>
                             <p style={{ fontSize: 'medium', fontWeight: 'bold', color: 'rgb(102,149,204)', margin: '0' }}>Rang lista</p>
-                            <p style={{ fontSize: '11px', color: 'rgb(5, 130, 202)', fontWeight: 'bold' }}>{month} {year}</p>
+                            <p style={{ fontSize: '11px', color: 'rgb(5, 130, 202)', fontWeight: 'bold' }}>{this.state.rankingListTitle}</p>
                             <div className={classes.List} style={{ maxHeight: '300px' }}>
                                 <table className={classes.Table}>
                                     <thead>
@@ -309,8 +306,8 @@ class Ranking extends Component {
                             <div className={classes.MyResultsButton}>
                                 <Button clicked={this.showMyResults} text="Moji najbolji rezultati" />
                             </div>
+                            <button onClick={this.listOfLastMonth}><img src={icon0} width="15px" alt="medal" style={{ marginRight: '5px' }} />{this.state.rankingListLastTitle}</button>
                             <Button clicked={this.listOfTop10} text="Rang lista najboljih ikad" />
-                            <Button clicked={this.listOfLastMonth} text="Rang lista prošlog mjeseca" />
                         </div>
                     </Col>
                 </Row>
