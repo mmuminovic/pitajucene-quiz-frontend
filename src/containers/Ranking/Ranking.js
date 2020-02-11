@@ -153,7 +153,10 @@ class Ranking extends Component {
             let title;
             if (this.state.showLastMonth) {
                 listOfWinners = this.state.theBestOfLastMonth;
-                title = <p>Top 10 najboljih rezultata prošlog mjeseca</p>
+                title = <div>
+                    <p style={{fontSize: 'small', fontWeight: 'bold'}}>Top 10 najboljih rezultata za period:</p>
+                    <p style={{fontSize: 'small'}}>{this.state.rankingListLastTitle}</p>
+                </div> 
             } else if (this.state.showTheBest) {
                 listOfWinners = this.state.top10playersEver;
                 title = <p>Top 10 najboljih rezultata do sad</p>
