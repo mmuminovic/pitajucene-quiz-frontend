@@ -142,6 +142,9 @@ class Quiz extends Component {
             .then(result => {
                 const data = result.data;
                 this.setState({ question: data.firstQuestion, quiz: data.quiz, loading: false, numOfQuestion: 1 });
+            })
+            .catch(err => {
+                console.log(err);
             });
     }
 
