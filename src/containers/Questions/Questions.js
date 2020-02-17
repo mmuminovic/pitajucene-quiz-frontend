@@ -118,7 +118,7 @@ class Questions extends Component {
                     <option value={20}>20 - Teška pitanja</option>
                 </select>
                 <select onChange={(event) => this.sortQuestions(event)}>
-                    <option value={'createdAt'}>Po datumu izmjene - najskorije izmjene prvo</option>
+                    <option value={'createdAt'}>Po datumu kreiranja</option>
                     <option value={'answeredCorrectly'}>Najviše tačnih odgovora</option>
                     <option value={'answeredIncorrectly'}>Najviše netačnih odgovora</option>
                 </select>

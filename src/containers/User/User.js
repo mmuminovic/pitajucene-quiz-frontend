@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import timeIcon from '../../images/clock.png';
 import star from '../../images/star.png';
+import winnerIcon from '../../images/0.png';
 
 import axios from 'axios';
 
@@ -12,6 +13,7 @@ class User extends Component {
     state = {
         fullName: '',
         email: '',
+        isWinner: false,
         newPassword: '',
         currentScore: 0,
         lastMonthScore: 0,
@@ -49,7 +51,7 @@ class User extends Component {
                 if (quizFound) {
                     this.setState({ quizRemaining: true })
                 }
-                this.setState({ email: data.user.email, fullName: data.user.fullName, games: data.quiz, numOfGames: data.numOfGames, loading: false })
+                this.setState({ email: data.user.email, fullName: data.user.fullName, isWinner: data.user.isWinner, games: data.quiz, numOfGames: data.numOfGames, loading: false })
             })
     }
 
@@ -93,6 +95,12 @@ class User extends Component {
                     this.setState({ editMode: false, error: null, updating: false });
                 }
             })
+    }
+
+    changeWinnerStatus = () => {
+        axios.patch(`/set-winner/${this.props.match.params.userId}`).then(result => {
+            this.setState({ isWinner: result.data.isWinner });
+        });
     }
 
 
@@ -264,7 +272,17 @@ class User extends Component {
                         {quizRemaining}
                     </tbody>
                 </table>
-
+                {!this.state.isWinner ?
+                    <div>
+                        {this.props.user.isAdmin ? <img src={winnerIcon} alt="medal" style={{ width: '20px', marginTop: '20px', padding: '0', cursor: 'pointer' }} onClick={this.changeWinnerStatus} /> : null}
+                    </div> :
+                    <div className={classes.List} style={{ margin: '20px', padding: '0', height: 'auto' }}>
+                        <img src={winnerIcon} alt="medal" style={{ width: '20px', marginLeft: '15px', marginRight: '5px' }} />
+                        <span>Korisnik je pobijedio u kvizu</span>
+                        <div>
+                            {this.props.user.isAdmin ? <button onClick={this.changeWinnerStatus}>Ukloni pobjednika</button> : null}
+                        </div>
+                    </div>}
                 <table className={classes.Table} style={{ marginTop: '20px' }}>
                     <thead>
                         <tr>
@@ -275,7 +293,7 @@ class User extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td style={{padding: '5px 0'}}>Pogledajte pitanja na koja ste dali netačan odgovor i pronađite tačan odgovor na datom linku.</td>
+                            <td style={{ padding: '5px 0' }}>Pogledajte pitanja na koja ste dali netačan odgovor i pronađite tačan odgovor na datom linku.</td>
                         </tr>
                     </tbody>
                 </table>

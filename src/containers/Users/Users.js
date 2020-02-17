@@ -3,6 +3,7 @@ import classes from './Users.module.css';
 import axios from 'axios';
 import Spinner from '../Spinner/Spinner';
 import Modal from '../Modal/Modal';
+import winnerIcon from '../../images/0.png';
 
 class Users extends Component {
 
@@ -39,10 +40,18 @@ class Users extends Component {
             })
     }
 
+    getWinners = async () => {
+        this.setState({ loading: true });
+        const winners = await axios.get('/get-winners');
+        this.setState({ users: winners.data, numberOfusers: winners.data.length, loading: false });
+    }
+
     choose = (event) => {
         const index = parseInt(event.target.value);
         if (index === 0) {
             this.getActiveUsers();
+        } else if (index === 1) {
+            this.getWinners();
         } else {
             this.getAllUsers();
         }
@@ -99,7 +108,7 @@ class Users extends Component {
         if (this.state.users) {
             list = this.state.users.map(user => {
                 return (
-                    <li key={user.userId}><span style={{ float: 'left', padding: '5px' }}>{user.fullName}</span><span><button className={[classes.Danger, classes.ListButton].join(' ')} onClick={() => this.deleteHandler(user.userId, user.fullName)}>Izbriši</button><button className={[classes.Button, classes.ListButton].join(' ')} onClick={() => this.editHandler(user.userId)}>Vidi profil</button>{user.numOfGames ? <span style={{ color: 'blue', padding: '5px' }}>Igrao: {user.numOfGames} puta</span> : ''}</span></li>
+                    <li key={user.userId}><span style={{ float: 'left', padding: '5px' }}>{user.fullName}{user.isWinner ? <img src={winnerIcon} alt="medal" style={{ width: '15px', marginLeft: '10px' }} /> : null}</span><span><button className={[classes.Danger, classes.ListButton].join(' ')} onClick={() => this.deleteHandler(user.userId, user.fullName)}>Izbriši</button><button className={[classes.Button, classes.ListButton].join(' ')} onClick={() => this.editHandler(user.userId)}>Vidi profil</button>{user.numOfGames ? <span style={{ color: 'blue', padding: '5px' }}>Igrao: {user.numOfGames} puta</span> : ''}</span></li>
                 );
             })
         }
@@ -111,7 +120,8 @@ class Users extends Component {
                 <p style={{ fontWeight: '500', fontSize: 'small', margin: '5px' }}>Kviz pokrenut ukupno {this.state.quizPlayed} puta.</p>
                 <select onChange={(event) => this.choose(event)}>
                     <option value={0}>Aktivni korisnici</option>
-                    <option value={1}>Svi korisnici</option>
+                    <option value={1}>Pobjednici</option>
+                    <option value={2}>Svi korisnici</option>
                 </select>
                 {loading}
                 <Modal show={this.state.showModal} modalClosed={this.closeModalHandler}>
