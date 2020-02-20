@@ -7,7 +7,7 @@ import { logoutUser } from '../../store/actions/index';
 import Logo from '../../images/logo.png';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import Aux from 'react-aux';
-
+import './Navigation.module.css';
 
 class Navigation extends Component {
     state = {
@@ -38,7 +38,7 @@ class Navigation extends Component {
         if (this.props.isAuth) {
             let profil = `/korisnik/${this.props.user.userId}`
             navlinks = (
-                <Navbar expand="lg" style={{ zIndex: '10', backgroundColor: '#d0e6f3' }} fixed="top" onToggle={this.setNavExpanded} expanded={this.state.expanded}>
+                <Navbar expand="lg" bg="dark" variant="dark" fixed="top" onToggle={this.setNavExpanded} expanded={this.state.expanded}>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => this.setState({ expanded: !this.state.expanded })} />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto" onSelect={this.closeNav} style={{ margin: '5px auto' }}>

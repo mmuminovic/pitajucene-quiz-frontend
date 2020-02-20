@@ -99,11 +99,11 @@ class Auth extends Component {
             <div className={classes.MainPage} >
                 <Navigation isAuth={this.state.isAuth} logout={() => this.props.logout()} />
                 <div className={classes.Contents}>
-                    <p style={{ fontSize: 'medium', fontWeight: 'bold', color: 'rgb(102,149,204)', margin: '0' }}>Islamski kviz znanja - pitajucene.com</p>
+                    <p style={{ fontSize: 'medium', fontWeight: 'bold', color: '#5696BC', margin: '0' }}>Islamski kviz znanja - pitajucene.com</p>
                     <div>
                         <img src={logo} alt="logo" style={{ width: '80px' }} />
                     </div>
-                    <p style={{ fontSize: 'medium', fontWeight: 'bold', color: 'rgb(102,149,204)', margin: '0' }}>{this.state.loginPage ? 'Login' : 'Signup'}</p>
+                    <p style={{ fontSize: 'medium', fontWeight: 'bold', width: '45%', color: '#F39D41', margin: '0 auto', border: '1px solid #F39D41' }}>{this.state.loginPage ? 'Prijavljivanje' : 'Registracija'}</p>
                     {errorOrLoading}
                     <div>
                         {fullName}
@@ -121,9 +121,9 @@ class Auth extends Component {
                         <button className={classes.Button} onClick={this.state.loginPage ? this.loginHandler : this.signupHandler}>{this.state.loginPage ? 'Prijavi se' : 'Registruj se'}</button>
                     </div>
                     <div className={classes.Link} >
-                        {this.state.loginPage ? <Link to="/prijava" onClick={this.switchHandler} style={{ fontSize: 'medium', fontWeight: 'bold', color: '#cc6a66', margin: '0' }}>Nemaš profil? Klikni i registruj se</Link> : <Link style={{ fontSize: 'medium', fontWeight: 'bold', color: '#cc6a66', margin: '0' }} to="/prijava" onClick={this.switchHandler}>Imaš profil? Klikni i prijavi se</Link>}
+                        {this.state.loginPage ? <Link to="/prijava" onClick={this.switchHandler} style={{ fontSize: 'medium', fontWeight: 'bold', color: '#E04836', margin: '0' }}>Nemaš profil? Klikni i registruj se</Link> : <Link style={{ fontSize: 'medium', fontWeight: 'bold', color: '#E04836', margin: '0' }} to="/prijava" onClick={this.switchHandler}>Imaš profil? Klikni i prijavi se</Link>}
                     </div>
-                    <p style={{ fontSize: '13px', fontStyle: 'italic' }}>- Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</p>
+                    <p style={{ fontSize: '13px', fontStyle: 'italic', color: 'white' }}>- Učesnici kviza sa neispravnom email adresom gube pravo na nagradu.</p>
                 </div>
             </div>
         )

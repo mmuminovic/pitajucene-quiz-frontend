@@ -82,6 +82,7 @@
 
 .Answers ul li {
     font-size: small;
+    color: white;
     font-weight: 500;
     border: 1px solid rgb(5, 130, 202);
     margin: 5px;
@@ -120,6 +121,7 @@
 @media (hover: none) {
     .Answers ul li {
         font-size: small;
+        color: white;
         border: 1px solid rgb(5, 130, 202);
         margin: 5px;
         padding: 10px;
