@@ -266,28 +266,24 @@ class Quiz extends Component {
             }
             quizDetails = (
                 <div className={classes.Gameover}>
-                    <p style={{ fontSize: 'medium', fontWeight: 'bold', color: 'rgb(102,149,204)', margin: '0' }}>Dobrodošli na islamski kviz znanja</p>
+                    <p style={{ fontSize: 'medium', fontWeight: 'bold', color: '#5696BC', fontStyle: 'italic', margin: '0' }}>Dobrodošli na islamski kviz znanja</p>
                     <div>
                         <a target="_blank" rel="noopener noreferrer" href="http://www.pitajucene.com"><img src={Logo} width="100px" alt="logo" /></a>
                     </div>
                     {quizRemaining}
-                    {quote}
 
-                    <div className={[classes.Button, classes.Stats].join(' ')}>
-                        <button onClick={() => this.setState({ incorrect: true, stats: true })}><img src={chart} alt="quiz" width="20px" /></button>
-                    </div>
-                    <div className={classes.Button}>
+                    <div>
                         <button onClick={this.playAgain}>Pokreni kviz</button>
-                    </div>
-                    <div className={[classes.Button, classes.Danger].join(' ')}>
                         <button onClick={() => this.setState({ incorrect: true })}>Pravila igre</button>
                     </div>
-                    <div className={[classes.Button, classes.InfoButton].join(' ')}>
+                    <div>
                         <button onClick={() => this.setState({ incorrect: true, about: true })}>O aplikaciji</button>
+                        <button onClick={() => this.setState({ incorrect: true, stats: true })}><img src={chart} alt="quiz" width="20px" />Statistika</button>
                     </div>
+                    {false ? quote : null}
                     <div>
                         <a href="https://www.paypal.me/pitajucenefond" target="_blank" rel="noopener noreferrer">
-                            <p style={{ margin: '0', fontWeight: 'bold', color: 'blue' }}>Ugradi se u ovaj hajr, podrži rad stranice i kviza</p>
+                            <p style={{ margin: '10px', fontWeight: 'bold', color: 'white' }}>Ugradi se u ovaj hajr, podrži rad stranice i kviza</p>
                             <img src={paypal} alt="donate" width="120px" />
                         </a>
                     </div>
@@ -454,12 +450,12 @@ class Quiz extends Component {
             );
             ordinalNumOfQuestion = (
                 <div className={classes.Button} style={{ textAlign: 'center', margin: '0' }}>
-                    <p style={{ fontSize: 'small', textAlign: 'center', margin: '0' }}>Pitanje: {this.state.numOfQuestion}/60</p>
+                    <p style={{ fontSize: 'small', color: 'white', textAlign: 'center', margin: '0' }}>{this.state.numOfQuestion}/60</p>
                     <button onClick={() => this.submitAnswer(null, true)} style={{ padding: '5px' }}>Preskoči pitanje</button>
                 </div>
             );
             timerText = <p className={classes.TimerText}>Tajmer se nalazi na dnu ekrana</p>;
-            points = (<p style={{ textAlign: 'center', fontWeight: '500', margin: '0' }}>Tačan odgovor nosi: {question.points} bodova</p>);
+            points = (<p style={{ textAlign: 'center', color: 'white', margin: '0', fontStyle: 'italic' }}>Tačan odgovor nosi: {question.points} bodova</p>);
             let answersArray = [
                 <li key="0" className={this.state.selected === 0 ? classes.Selected : ''} onClick={() => this.submitAnswer(0, false)}>{question.answer0}</li>,
                 <li key="1" className={this.state.selected === 1 ? classes.Selected : ''} onClick={() => this.submitAnswer(1, false)}>{question.answer1}</li>,
@@ -475,11 +471,11 @@ class Quiz extends Component {
             );
             timer = (
                 <div>
-                    <p style={{ textAlign: 'center', margin: '0', fontWeight: '500' }}>Prostalo vrijeme:</p>
+                    <p style={{ textAlign: 'center', margin: '0', fontWeight: '500', color: 'white' }}>Prostalo vrijeme:</p>
                     <CountdownCircleTimer
                         isPlaying
                         durationSeconds={this.state.remainingTime}
-                        colors={[["#0582ca", .75], ["#ff6600", .20], ["#ff0000", .05]]}
+                        colors={[["#5696BC", .75], ["#ff6600", .20], ["#ff0000", .05]]}
                         renderTime={renderTime}
                         onComplete={() => [false]}
                         size={65}
@@ -502,7 +498,7 @@ class Quiz extends Component {
                             <p style={{ textAlign: 'justify', margin: '10px' }}><strong>{this.state.question.text}</strong></p>
                         </div>
                         <p className={classes.Incorrect}>Vaš odgovor: <strong>{this.state.ans}</strong></p>
-                        <p className={classes.Incorrect} style={{color: 'green'}}>Tačan odgovor: <strong>{this.state.correctAnswer}</strong></p>
+                        <p className={classes.Incorrect} style={{ color: 'green' }}>Tačan odgovor: <strong>{this.state.correctAnswer}</strong></p>
                         <p className={classes.Link}>Pročitajte više na linku:<br /><a target="_blank" href={this.state.link} rel="noopener noreferrer">{this.state.link}</a></p>
                         <div style={{ border: 'none' }} className={classes.Button}>
                             <Button clicked={this.closeModalHandler} text="Zatvori" />

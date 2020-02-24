@@ -13,12 +13,13 @@ h1 {
   }
 
   .timer p {
+    color: white;
     font-weight: bold;
     text-align: center;
   }
   
   .text {
-    color: #aaa;
+    color:white;
   }
   
   .value {

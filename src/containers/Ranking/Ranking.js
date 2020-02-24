@@ -154,9 +154,9 @@ class Ranking extends Component {
             if (this.state.showLastMonth) {
                 listOfWinners = this.state.theBestOfLastMonth;
                 title = <div>
-                    <p style={{fontSize: 'small', fontWeight: 'bold'}}>Top 10 najboljih rezultata za period:</p>
-                    <p style={{fontSize: 'small'}}>{this.state.rankingListLastTitle}</p>
-                </div> 
+                    <p style={{ fontSize: 'small', fontWeight: 'bold' }}>Top 10 najboljih rezultata za period:</p>
+                    <p style={{ fontSize: 'small' }}>{this.state.rankingListLastTitle}</p>
+                </div>
             } else if (this.state.showTheBest) {
                 listOfWinners = this.state.top10playersEver;
                 title = <p>Top 10 najboljih rezultata do sad</p>
@@ -272,7 +272,7 @@ class Ranking extends Component {
                                 {modalDetails}
                             </Modal>
                             <p style={{ fontSize: 'medium', fontWeight: 'bold', color: 'rgb(102,149,204)', margin: '0' }}>Rang lista</p>
-                            <p style={{ fontSize: '11px', color: 'rgb(5, 130, 202)', fontWeight: 'bold' }}>{this.state.rankingListTitle}</p>
+                            <p style={{ fontSize: '11px', color: '#5696BC', fontWeight: 'bold' }}>{this.state.rankingListTitle}</p>
                             <div className={classes.List} style={{ maxHeight: '300px' }}>
                                 <table className={classes.Table}>
                                     <thead>

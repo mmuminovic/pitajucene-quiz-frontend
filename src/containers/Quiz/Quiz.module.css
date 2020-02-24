@@ -37,6 +37,7 @@
 }
 
 .TimerText {
+    color: white;
     display: none;
     font-size: small;
     text-align: center;
@@ -57,14 +58,14 @@
 
 .Question p {
     font-size: small;
-    border: 1px solid rgb(5, 130, 202);
+    border: 1px solid #E04836;
     text-align: justify;
     text-align-last: center;
     color: white;
     border-radius: 10px;
-    padding: 20px;
+    padding: 20px 35px;
     font-weight: 500;
-    background-color: rgb(5, 130, 202);
+    background-color: #E04836;
 }
 
 .Answers {
@@ -84,14 +85,14 @@
     font-size: small;
     color: white;
     font-weight: 500;
-    border: 1px solid rgb(5, 130, 202);
+    border: 1px solid #5696BC;
     margin: 5px;
     padding: 10px;
     border-radius: 10px;
 }
 
 .Answers ul li:hover {
-    background-color: rgb(5, 130, 202);
+    background-color: #5696BC;
     font-weight: bold;
     color: white;
     cursor: pointer;
@@ -122,7 +123,7 @@
     .Answers ul li {
         font-size: small;
         color: white;
-        border: 1px solid rgb(5, 130, 202);
+        border: 1px solid #5696BC;
         margin: 5px;
         padding: 10px;
         border-radius: 10px;
@@ -153,8 +154,8 @@
     margin: 15px auto;
     border-radius: 10px;
     text-align: center;
-    font-weight: bold;
-    background-color:#4CAF50;
+    font-weight: 500;
+    background-color:#E04836;
     padding: 10px;
 }
 
@@ -178,30 +179,28 @@
 
 .Gameover button {
     color: white;
-    background-color: rgb(5, 130, 202);
-    font-weight: bold;border: 2px solid rgb(5, 130, 202);
+    background-color: #2F5168;
+    font-weight: bold;border: 2px solid #2F5168;
+    box-shadow: 2px 1px #5696BC;
     border-radius: 10px;
-    padding: 10px 40px;
+    padding: 40px 40px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 13px;
-     margin: 4px 2px;
+    font-style: italic;
+     margin: 5px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
+    width: 250px;
 }
 
 .Gameover button:hover {
-    background-color: #4CAF50;
-    border: 2px solid #4CAF50;
+    background-color: #5696BC;
+    border: 2px solid #5696BC;
+    box-shadow: 2px 1px white;
     color: white;
-}
-
-.Gameover button:active {
-    color: rgba(0, 0, 255, 0.61);
-    background-color: transparent;
-    border: 2px solid rgba(0, 0, 255, 0.61);
 }
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
@@ -263,7 +262,7 @@
     padding: 5px 10px;
     font-size: smaller;
     color: white;
-    background-color: rgb(5, 130, 202);
+    background-color: #5696BC;
 }
 
 .Table tr th img {
@@ -292,8 +291,8 @@
 
 .ModalInfo button {
     color: white;
-    background-color: rgb(5, 130, 202);
-    font-weight: bold;border: 2px solid rgb(5, 130, 202);
+    background-color: #5696BC;
+    font-weight: bold;border: 2px solid #5696BC;
     border-radius: 10px;
     padding: 16px 32px;
     text-align: center;
@@ -351,15 +350,17 @@
 
 .Button button {
     color: white;
-    background-color: #0582ca;
-    font-weight: bold;border: 2px solid rgb(5, 130, 202);
+    background-color: #2F5168;
+    font-weight: bold;border: 2px solid #2F5168;
+    box-shadow: 2px 1px #5696BC;
     border-radius: 10px;
     padding: 10px 40px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 13px;
-     margin: 4px 2px;
+    font-style: italic;
+     margin: 5px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
@@ -367,15 +368,10 @@
 }
 
 .Button button:hover {
-    background-color: #0471b0;
-    border: 2px solid #0471b0;
+    background-color: #5696BC;
+    border: 2px solid #5696BC;
+    box-shadow: 2px 1px white;
     color: white;
-}
-
-.Button button:active {
-    color: rgba(0, 0, 255, 0.61);
-    background-color: transparent;
-    border: 2px solid rgba(0, 0, 255, 0.61);
 }
 
 .Danger button {

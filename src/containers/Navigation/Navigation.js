@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../store/actions/index';
 // import classes from './Navigation.module.css';
-import Logo from '../../images/logo.png';
+import Logo from '../../images/logo1.png';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import Aux from 'react-aux';
 import './Navigation.module.css';

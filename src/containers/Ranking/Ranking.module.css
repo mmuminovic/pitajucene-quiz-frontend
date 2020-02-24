@@ -35,7 +35,7 @@
     font-weight: bold;
     font-size: small;
     color: white;
-    background-color: rgb(5, 130, 202);
+    background-color: #5696BC;
 }
 
 .Table tr th img {
@@ -115,8 +115,8 @@
 .Ranking button {
     width: 50%;
     color: white;
-    background-color: rgb(5, 130, 202);
-    font-weight: bold;border: 2px solid rgb(5, 130, 202);
+    background-color: #5696BC;
+    font-weight: bold;border: 2px solid #5696BC;
     border-radius: 10px;
     padding: 10px 10px;
     text-align: center;

@@ -27,7 +27,7 @@
     font-weight: 500;
     margin: 5px;
     padding: 10px;
-    border: 1px solid rgb(5, 130, 202);
+    border: 1px solid #5696BC;
     border-radius: 10px;
     text-align: left;
     overflow: auto;
@@ -46,9 +46,9 @@
 
 .Button {
     color: white;
-    background-color: rgb(5, 130, 202);
+    background-color: #5696BC;
     font-weight: 500;
-    border: 2px solid rgb(5, 130, 202);
+    border: 2px solid #5696BC;
     border-radius: 10px;
     padding: 10px 32px;
     text-align: center;

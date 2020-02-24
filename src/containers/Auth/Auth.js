@@ -87,7 +87,7 @@ class Auth extends Component {
     render() {
         let fullName, confirmPassword, errorOrLoading;
         if (!this.state.loading) {
-            errorOrLoading = <p style={{ textAlign: 'center', color: 'red', fontWeight: 'bold' }}>{this.state.errorMessage}</p>;
+            errorOrLoading = <p style={{ textAlign: 'center', color: '#E04836', fontWeight: 'bold' }}>{this.state.errorMessage}</p>;
         } else {
             errorOrLoading = <Spinner />
         }
@@ -99,26 +99,28 @@ class Auth extends Component {
             <div className={classes.MainPage} >
                 <Navigation isAuth={this.state.isAuth} logout={() => this.props.logout()} />
                 <div className={classes.Contents}>
-                    <p style={{ fontSize: 'medium', fontWeight: 'bold', color: '#5696BC', margin: '0' }}>Islamski kviz znanja - pitajucene.com</p>
+                    <p style={{ fontSize: 'medium', fontWeight: '500', fontStyle: 'italic', fontFamily: 'Lucida Bright', color: '#5696BC', margin: '0' }}>Islamski kviz znanja - pitajucene.com</p>
                     <div>
                         <img src={logo} alt="logo" style={{ width: '80px' }} />
                     </div>
-                    <p style={{ fontSize: 'medium', fontWeight: 'bold', width: '45%', color: '#F39D41', margin: '0 auto', border: '1px solid #F39D41' }}>{this.state.loginPage ? 'Prijavljivanje' : 'Registracija'}</p>
                     {errorOrLoading}
-                    <div>
-                        {fullName}
-                    </div>
-                    <div>
-                        <input onKeyPress={this.keyPressed} type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} placeholder="Email" />
-                    </div>
-                    <div>
-                        <input onKeyPress={this.keyPressed} type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} placeholder="Šifra" />
-                    </div>
-                    <div>
-                        {confirmPassword}
-                    </div>
-                    <div>
-                        <button className={classes.Button} onClick={this.state.loginPage ? this.loginHandler : this.signupHandler}>{this.state.loginPage ? 'Prijavi se' : 'Registruj se'}</button>
+                    <div className={classes.AuthForm}>
+                        <p>{this.state.loginPage ? 'Prijavljivanje' : 'Registracija'}</p>
+                        <div>
+                            {fullName}
+                        </div>
+                        <div>
+                            <input onKeyPress={this.keyPressed} type="email" value={this.state.email} onChange={(event) => this.setState({ email: event.target.value })} placeholder="Email" />
+                        </div>
+                        <div>
+                            <input onKeyPress={this.keyPressed} type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} placeholder="Šifra" />
+                        </div>
+                        <div>
+                            {confirmPassword}
+                        </div>
+                        <div>
+                            <button className={classes.Button} onClick={this.state.loginPage ? this.loginHandler : this.signupHandler}>{this.state.loginPage ? 'Prijavi se' : 'Registruj se'}</button>
+                        </div>
                     </div>
                     <div className={classes.Link} >
                         {this.state.loginPage ? <Link to="/prijava" onClick={this.switchHandler} style={{ fontSize: 'medium', fontWeight: 'bold', color: '#E04836', margin: '0' }}>Nemaš profil? Klikni i registruj se</Link> : <Link style={{ fontSize: 'medium', fontWeight: 'bold', color: '#E04836', margin: '0' }} to="/prijava" onClick={this.switchHandler}>Imaš profil? Klikni i prijavi se</Link>}

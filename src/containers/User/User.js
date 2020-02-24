@@ -156,7 +156,7 @@ class User extends Component {
                     } else if (!q.timeIsUp) {
                         const link = `/quiz/${q.questionLink}`;
                         return (
-                            <li key={i} style={{ backgroundColor: 'rgb(5, 130, 202)' }}>
+                            <li key={i} style={{ backgroundColor: '#5696BC' }}>
                                 <p>{q.time}</p>
                                 <p className={classes.Question}>{q.questionText}</p>
                                 <div className={classes.Field}>
