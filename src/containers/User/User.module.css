@@ -1,6 +1,6 @@
 .Title {
     text-align: center;
-    color: #555;
+    color: white;
 }
 
 .Title div {
@@ -52,7 +52,7 @@
     font-weight: bold;
     font-size: small;
     color: white;
-    background-color: #5696BC;
+    background-color: #2F5168;
     width: 50%;
 }
 
@@ -132,12 +132,12 @@
     text-align-last: center;
     margin: 0 20px;
     font-size: small;
-    color: white;
+    color: rgb(36, 21, 4);
     font-weight: bold;
 }
 .List li a {
     font-size: small;
-    color: white;
+    color: rgb(36, 21, 4);
     font-weight: 500;
     font-style: italic;
 }

@@ -114,7 +114,7 @@ class User extends Component {
         if (this.state.quizRemaining) {
             quizRemaining = (
                 <tr>
-                    <th colSpan="2" style={{ backgroundColor: '#cc6a66', padding: '10px' }}>Imate nezavršen kviz. Skrolajte na dole, pronađite ga i nastavite.</th>
+                    <th colSpan="2" style={{ backgroundColor: '#E04836', padding: '10px' }}>Imate nezavršen kviz. Skrolajte na dole, pronađite ga i nastavite.</th>
                 </tr>
             )
         }
@@ -135,7 +135,7 @@ class User extends Component {
                 let wrongAnswers = this.state.games.map((q, i) => {
                     if (q.questionText && q.incorrect) {
                         return (
-                            <li key={i} style={{ backgroundColor: '#cc6a66' }}>
+                            <li key={i} style={{ backgroundColor: '#E04836' }}>
                                 <p>{q.time}</p>
                                 <p>Pitanje:</p>
                                 <p className={classes.Question}>{q.questionText}</p>
@@ -156,9 +156,9 @@ class User extends Component {
                     } else if (!q.timeIsUp) {
                         const link = `/quiz/${q.questionLink}`;
                         return (
-                            <li key={i} style={{ backgroundColor: '#5696BC' }}>
+                            <li key={i} style={{ backgroundColor: 'rgb(69, 109, 136)' }}>
                                 <p>{q.time}</p>
-                                <p className={classes.Question}>{q.questionText}</p>
+                                <p className={classes.Question} style={{color: 'white'}}>{q.questionText}</p>
                                 <div className={classes.Field}>
                                     {this.props.match.params.userId === this.props.user.userId ? <Link to={link}><button style={{ backgroundColor: '#4CAF50', border: '#4CAF50', margin: '5px' }}>Nastavi kviz</button></Link> : <button style={{ backgroundColor: '#4CAF50', border: '#4CAF50', margin: '5px' }}>Kviz u toku</button>}
                                 </div>
@@ -167,7 +167,7 @@ class User extends Component {
 
                     } else if (q.timeIsUp && !q.incorrect) {
                         return (
-                            <li key={i} style={{ backgroundColor: '#6795cc' }}>
+                            <li key={i} style={{ backgroundColor: '#5696BC' }}>
                                 <p>{q.time}</p>
                                 <p className={classes.Question}>{q.questionText}</p>
                                 <span>Ostvareni rezultat:</span><span><img src={star} alt="medal" style={{ width: '12px', marginLeft: '5px', marginRight: '5px' }} /></span><span style={{ paddingTop: '15px' }}>{q.score}</span>
@@ -286,7 +286,7 @@ class User extends Component {
                 <table className={classes.Table} style={{ marginTop: '20px' }}>
                     <thead>
                         <tr>
-                            <th style={{ backgroundColor: '#4CAF50', padding: '10px 0' }}>
+                            <th style={{ backgroundColor: '#F39D41', padding: '10px 0' }}>
                                 Odigrani kvizovi
                             </th>
                         </tr>

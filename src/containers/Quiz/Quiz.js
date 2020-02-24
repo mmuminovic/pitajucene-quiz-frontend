@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Aux from 'react-aux';
+
 import classes from './Quiz.module.css';
 import axios from 'axios';
 import Modal from '../Modal/Modal';
@@ -50,7 +52,8 @@ class Quiz extends Component {
         quote: null,
         liked: false,
         stats: false,
-        correctAnswer: null
+        correctAnswer: null,
+        mounted: false
     }
 
     componentDidMount() {
@@ -68,12 +71,12 @@ class Quiz extends Component {
                 })
         } else {
             this.props.history.push('/');
+            this.getQuote();
             this.getUserInfo();
             this.getNumOfActiveGames();
             this.getNumOfAllGames();
             this.getTheBestToday();
             this.playedToday();
-            this.getQuote();
         }
     }
 
@@ -81,7 +84,7 @@ class Quiz extends Component {
         axios.get('/quotes/get-random-quote', { params: { userId: this.props.user.userId } })
             .then(result => {
                 if (result.data.quoteId) {
-                    this.setState({ quote: result.data });
+                    this.setState({ quote: result.data, mounted: true });
                 }
             })
     }
@@ -188,7 +191,7 @@ class Quiz extends Component {
     }
 
     closeModalHandler = () => {
-        this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false, about: false, quizNotActive: false, stats: false, correctAnswer: null });
+        this.setState({ incorrect: false, started: false, finish: false, reportMode: false, loading: false, about: false, quizNotActive: false, stats: false, correctAnswer: null, mounted: false });
         this.props.history.push('/');
         this.getNumOfActiveGames();
         this.getNumOfAllGames();
@@ -257,12 +260,19 @@ class Quiz extends Component {
                 }
             }
             if (this.state.quote) {
-                quote = <blockquote className={classes.Blockquote}>
-                    &quot;{this.state.quote.quoteText}&quot;
-                        <p style={{ marginTop: '5px' }}>{this.state.quote.quoteSource ? `(${this.state.quote.quoteSource})` : null}</p>
-                    <span>{this.state.quote.quoteAuthor}</span>
-                    <span><img src={this.state.quote.likedByMe || this.state.liked ? liked : like} width="20px" alt="like" onClick={this.likeQuote} style={{ cursor: 'pointer', marginRight: '5px' }} />{this.state.quote.likes}</span>
-                </blockquote>
+                quote = (
+                    <Aux>
+                        <blockquote className={classes.Blockquote}>
+                            &quot;{this.state.quote.quoteText}&quot;
+                                <p style={{ marginTop: '5px' }}>{this.state.quote.quoteSource ? `(${this.state.quote.quoteSource})` : null}</p>
+                            <span>{this.state.quote.quoteAuthor}</span>
+                            <span><img src={this.state.quote.likedByMe || this.state.liked ? liked : like} width="20px" alt="like" onClick={this.likeQuote} style={{ cursor: 'pointer', marginRight: '5px' }} />{this.state.quote.likes}</span>
+                        </blockquote>
+                        <div className={classes.Button}>
+                            <button onClick={this.closeModalHandler}>Zatvori</button>
+                        </div>
+                    </Aux>
+                )
             }
             quizDetails = (
                 <div className={classes.Gameover}>
@@ -280,7 +290,6 @@ class Quiz extends Component {
                         <button onClick={() => this.setState({ incorrect: true, about: true })}>O aplikaciji</button>
                         <button onClick={() => this.setState({ incorrect: true, stats: true })}><img src={chart} alt="quiz" width="20px" />Statistika</button>
                     </div>
-                    {false ? quote : null}
                     <div>
                         <a href="https://www.paypal.me/pitajucenefond" target="_blank" rel="noopener noreferrer">
                             <p style={{ margin: '10px', fontWeight: 'bold', color: 'white' }}>Ugradi se u ovaj hajr, podrži rad stranice i kviza</p>
@@ -376,7 +385,7 @@ class Quiz extends Component {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>v1.3</td>
+                                    <td>v1.4</td>
                                 </tr>
                             </tbody>
                             <thead>
@@ -438,7 +447,9 @@ class Quiz extends Component {
                         <p style={{ textAlign: 'justify', padding: '0 15px', fontSize: 'small' }}>"Ko krene putem na kojem traži znanje, Allah će ga, doista, usmjeriti ka putu od puteva koji vode u Džennet. Doista meleki prostiru svoja krila od dragosti pred onim koji traži znanje..." (dio hadisa)</p>
                         <p>Hadis bilježe Ebu Davud, Tirmizi i drugi.</p>
                     </div>
-                    <Button clicked={this.closeModalHandler} text="Nastavi" />
+                    <div className={classes.Button}>
+                        <button onClick={this.closeModalHandler}>Nastavi</button>
+                    </div>
                 </div>
             );
         } else if (this.state.question && !this.state.gameover) {
@@ -492,8 +503,8 @@ class Quiz extends Component {
             if (!this.state.reportMode) {
                 modalDetails = (
                     <div className={classes.ModalInfo}>
-                        <p>Pogriješili ste odgovor</p>
-                        <p style={{ margin: '10px 0 0 0' }}>Na pitanje: </p>
+                        <p style={{backgroundColor: '#E04836', fontWeight: 'bold', padding: '20px 0', borderRadius: '10px'}}>Pogriješili ste odgovor</p>
+                        <p style={{ margin: '10px 0' }}>Na pitanje: </p>
                         <div>
                             <p style={{ textAlign: 'justify', margin: '10px' }}><strong>{this.state.question.text}</strong></p>
                         </div>
@@ -533,11 +544,19 @@ class Quiz extends Component {
             }
         }
 
+        if (this.state.mounted) {
+            modalDetails = (
+                <div style={{textAlign: 'justify', textAlignLast: 'center'}}>
+                    {quote}
+                </div>
+            )
+        }
+
         return (
             <Container>
                 <Row>
                     <Col md={12}>
-                        <Modal show={this.state.incorrect} modalClosed={this.closeModalHandler}>
+                        <Modal show={this.state.incorrect || this.state.mounted} modalClosed={this.closeModalHandler}>
                             {modalDetails}
                         </Modal>
                         <div className={classes.Quiz}>

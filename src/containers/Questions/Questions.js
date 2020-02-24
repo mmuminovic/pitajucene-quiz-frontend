@@ -103,7 +103,7 @@ class Questions extends Component {
         if (this.state.questions) {
             list = this.state.questions.map(q => {
                 return (
-                    <li key={q._id}><span style={{ float: 'left', padding: '5px' }}>{q.text}</span><span><button className={[classes.Danger, classes.ListButton].join(' ')} onClick={() => this.deleteHandler(q._id, q.points, q.text)}>izbriši</button><button className={[classes.Button, classes.ListButton].join(' ')} onClick={() => this.editHandler(q._id)}>Izmijeni</button><span style={{ color: 'red', padding: '5px', margin: '0 5px' }}>{q.answeredIncorrectly}</span><span style={{ color: 'green', padding: '5px', margin: '0 5px' }}>{q.answeredCorrectly}</span></span></li>
+                    <li key={q._id}><span style={{ float: 'left', padding: '5px' }}>{q.text}</span><span><button className={[classes.Danger, classes.ListButton].join(' ')} onClick={() => this.deleteHandler(q._id, q.points, q.text)}>izbriši</button><button className={[classes.Button, classes.ListButton].join(' ')} onClick={() => this.editHandler(q._id)}>Izmijeni</button><span style={{ color: '#E04836', padding: '5px', margin: '0 5px' }}>{q.answeredIncorrectly}</span><span style={{ color: '#F39D41', padding: '5px', margin: '0 5px' }}>{q.answeredCorrectly}</span></span></li>
                 );
             })
         }

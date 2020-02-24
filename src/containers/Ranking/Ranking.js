@@ -98,7 +98,6 @@ class Ranking extends Component {
     }
 
     listOfLastMonth = () => {
-        this.getRankingLastMonth();
         this.setState({ showLastMonth: true });
     }
 
@@ -135,7 +134,7 @@ class Ranking extends Component {
                     return (
                         <tr key={i}>
                             <td>{i + 1}.</td>
-                            <td>{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'red' }} to={userProfile}> {player.fullName}</Link> : player.fullName}</td>
+                            <td>{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'white' }} to={userProfile}> {player.fullName}</Link> : player.fullName}</td>
                             <td>{player.score}</td>
                             <td>{player.duration}</td>
                         </tr>
@@ -168,7 +167,7 @@ class Ranking extends Component {
                     return (
                         <tr key={i}>
                             <td>{i + 1}.</td>
-                            <td>{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'red' }} to={userProfile}> {player.fullName}</Link> : player.fullName}</td>
+                            <td>{this.props.isAdmin ? <Link style={{ fontSize: 'small', color: 'white' }} to={userProfile}> {player.fullName}</Link> : player.fullName}</td>
                             <td>{player.score}</td>
                             <td>{player.duration}</td>
                         </tr>
@@ -229,7 +228,7 @@ class Ranking extends Component {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td colSpan="4" style={{ backgroundColor: '#4CAF50', fontWeight: '500', color: 'white' }}>Ovog mjeseca:</td>
+                                    <td colSpan="4" style={{ backgroundColor: '#2F5168', fontWeight: '500', color: 'white' }}>Ovog mjeseca:</td>
                                 </tr>
                                 <tr>
                                     <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
@@ -238,7 +237,7 @@ class Ranking extends Component {
                                     <td>{this.state.currentScore.duration}</td>
                                 </tr>
                                 <tr>
-                                    <td colSpan="4" style={{ backgroundColor: '#4CAF50', fontWeight: '500', color: 'white' }}>Prošlog mjeseca:</td>
+                                    <td colSpan="4" style={{ backgroundColor: '#2F5168', fontWeight: '500', color: 'white' }}>Prošlog mjeseca:</td>
                                 </tr>
                                 <tr>
                                     <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>
@@ -247,7 +246,7 @@ class Ranking extends Component {
                                     <td>{this.state.scoreOfTheLastMonth.duration}</td>
                                 </tr>
                                 <tr>
-                                    <td colSpan="4" style={{ backgroundColor: '#4CAF50', fontWeight: '500', color: 'white' }}>Najbolji rezultat ikad:</td>
+                                    <td colSpan="4" style={{ backgroundColor: '#2F5168', fontWeight: '500', color: 'white' }}>Najbolji rezultat ikad:</td>
                                 </tr>
                                 <tr>
                                     <th><img src={star} alt="medal" style={{ width: '20px' }} /></th>

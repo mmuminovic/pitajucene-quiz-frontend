@@ -92,28 +92,28 @@
 }
 
 .Answers ul li:hover {
-    background-color: #5696BC;
+    background-color: #2F5168;
     font-weight: bold;
     color: white;
     cursor: pointer;
 }
 
 .Answers ul li:active {
-    background-color: #4CAF50;
+    background-color: #F39D41;
     font-weight: bold;
     color: white;
     cursor: pointer;
 }
 
 .Answers ul li.Selected {
-    background-color: #4CAF50;
+    background-color: #F39D41;
     font-weight: bold;
     color: white;
     cursor: pointer;
 }
 
 .Answers ul li.Selected:hover {
-    background-color: #4CAF50;
+    background-color: #F39D41;
     font-weight: bold;
     color: white;
     cursor: pointer;
@@ -212,7 +212,7 @@
   font-style:italic;
   color: black;
   padding:1.2em 30px 1em 30px;
-  border-left:8px solid rgb(102,149,204) ;
+  border-left:8px solid #E04836;
   position: relative;
   background-image: url('../../images/oldpaper.jpg');
   background-repeat: no-repeat;
@@ -224,7 +224,7 @@
 .Blockquote::before{
   font-family:Arial;
   content: "\201C";
-  color:rgb(102,149,204);
+  color:#E04836;
   font-size:4em;
   position: absolute;
   left: 0;
@@ -237,6 +237,7 @@
 
 .Blockquote p {
     margin-bottom: 5px;
+    color: #333333;
 }
 
 .Blockquote span {
@@ -280,6 +281,10 @@
     width: 15px;
 }
 
+.Table a {
+    color: white;
+}
+
 .ModalInfo {
     text-align: center;
     padding: 20px;
@@ -317,7 +322,7 @@
 }
 
 .ModalInfo div {
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 5px;
 }
 
@@ -330,11 +335,12 @@
 .Incorrect {
     color: red;
     margin: 5px 0;
+    font-weight: 500;
 }
 
 .Link {
-    color: black;
-    border: 1px solid black;
+    color: white;
+    border: 1px solid white;
     border-radius: 5px;
     padding: 10px 0;
 }
@@ -346,6 +352,14 @@
 
 .Link a:hover {
     color: red;
+}
+
+.ModalInfo .Button {
+    border: none;
+}
+
+.Button {
+    text-align: center;
 }
 
 .Button button {
@@ -375,13 +389,14 @@
 }
 
 .Danger button {
-    background-color: #cc6a66;
-    font-weight: bold;border: 2px solid #cc6a66;
+    background-color: #E04836;
+    font-weight: bold;border: 2px solid #E04836;
+    box-shadow: 2px 1px rgb(240, 133, 122);
 }
 
 .Danger button:hover {
-    background-color: #c4443f;
-    border: 2px solid #c4443f;
+    background-color: rgb(207, 50, 33);
+    border: 2px solid rgb(207, 50, 33);
 }
 
 .InfoButton button {

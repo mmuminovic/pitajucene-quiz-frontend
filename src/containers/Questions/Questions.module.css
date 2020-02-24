@@ -62,22 +62,16 @@
 }
 
 .Button:hover {
-    background-color: #4CAF50;
-    border: 2px solid #4CAF50;
+    background-color: #2F5168;
+    border: 2px solid #2F5168;
     color: white;
-}
-
-.Button:active {
-    color: rgba(0, 0, 255, 0.61);
-    background-color: transparent;
-    border: 2px solid rgba(0, 0, 255, 0.61);
 }
 
 .Danger {
     color: white;
-    background-color: #cc6a66;
+    background-color: #E04836;
     font-weight: 500;
-    border: 2px solid #cc6a66;
+    border: 2px solid #E04836;
     border-radius: 10px;
     padding: 10px 32px;
     text-align: center;
@@ -94,12 +88,6 @@
     background-color: red;
     border: 2px solid red;
     color: white;
-}
-
-.Danger:active {
-    color: rgba(0, 0, 255, 0.61);
-    background-color: transparent;
-    border: 2px solid rgba(0, 0, 255, 0.61);
 }
 
 .ListButton {

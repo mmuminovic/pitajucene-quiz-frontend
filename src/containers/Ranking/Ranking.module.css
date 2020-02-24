@@ -9,7 +9,7 @@
 .Ranking p {
     font-size: medium;
     font-weight: 500;
-    color: #555;
+    color: white;
     margin: 0;
 }
 
@@ -35,7 +35,7 @@
     font-weight: bold;
     font-size: small;
     color: white;
-    background-color: #5696BC;
+    background-color: rgb(69, 109, 136);
 }
 
 .Table tr th img {
@@ -46,7 +46,6 @@
     width: 80%;
     margin: 10px auto;
     text-align: center;
-    background-color: rgba(188, 188, 248, 0.15);
     border-radius: 10px;
     overflow: auto;
 }
@@ -69,40 +68,7 @@
     width: 80%;
     margin: 10px auto;
     text-align: center;
-    background-color: rgba(188, 188, 248, 0.15);
     overflow: auto;
-}
-
-.List ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-}
-
-.List ul li {
-    font-size: small;
-    margin: 5px;
-    padding: 5px;
-    border-radius: 10px;
-    font-weight: bold;
-    color: black;
-}
-
-.List ul li:hover {
-    background-color: #4CAF50;
-    cursor: pointer;
-    color: white;
-}
-
-.List ul li a {
-    color: black;
-    text-decoration: none;
-}
-
-.List ul li a:hover {
-    color: white;
-    text-decoration: none;
 }
 
 @media(min-width: 800px){
@@ -115,8 +81,9 @@
 .Ranking button {
     width: 50%;
     color: white;
-    background-color: #5696BC;
-    font-weight: bold;border: 2px solid #5696BC;
+    background-color: rgb(69, 109, 136);
+    font-weight: bold;
+    border: 2px solid rgb(69, 109, 136);
     border-radius: 10px;
     padding: 10px 10px;
     text-align: center;
@@ -130,14 +97,8 @@
 }
 
 .Ranking button:hover {
-    background-color: #4CAF50;
-    border: 2px solid #4CAF50;
+    background-color: #E04836;
+    border: 2px solid #E04836;
     color: white;
-}
-
-.Ranking button:active {
-    color: rgba(0, 0, 255, 0.61);
-    background-color: transparent;
-    border: 2px solid rgba(0, 0, 255, 0.61);
 }
 

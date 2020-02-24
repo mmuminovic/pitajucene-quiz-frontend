@@ -108,7 +108,7 @@ class Users extends Component {
         if (this.state.users) {
             list = this.state.users.map(user => {
                 return (
-                    <li key={user.userId}><span style={{ float: 'left', padding: '5px' }}>{user.fullName}{user.isWinner ? <img src={winnerIcon} alt="medal" style={{ width: '15px', marginLeft: '10px' }} /> : null}</span><span><button className={[classes.Danger, classes.ListButton].join(' ')} onClick={() => this.deleteHandler(user.userId, user.fullName)}>Izbriši</button><button className={[classes.Button, classes.ListButton].join(' ')} onClick={() => this.editHandler(user.userId)}>Vidi profil</button>{user.numOfGames ? <span style={{ color: 'blue', padding: '5px' }}>Igrao: {user.numOfGames} puta</span> : ''}</span></li>
+                    <li key={user.userId}><span style={{ float: 'left', padding: '5px' }}>{user.fullName}{user.isWinner ? <img src={winnerIcon} alt="medal" style={{ width: '15px', marginLeft: '10px' }} /> : null}</span><span><button className={[classes.Danger, classes.ListButton].join(' ')} onClick={() => this.deleteHandler(user.userId, user.fullName)}>Izbriši</button><button className={[classes.Button, classes.ListButton].join(' ')} onClick={() => this.editHandler(user.userId)}>Vidi profil</button>{user.numOfGames ? <span style={{ color: 'white', padding: '5px' }}>Igrao: {user.numOfGames} puta</span> : ''}</span></li>
                 );
             })
         }
