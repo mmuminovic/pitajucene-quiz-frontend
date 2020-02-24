@@ -333,7 +333,7 @@
 }
 
 .Incorrect {
-    color: red;
+    color: #E04836;
     margin: 5px 0;
     font-weight: 500;
 }
@@ -346,12 +346,12 @@
 }
 
 .Link a {
-    color: blue;
+    color: #E04836;
     text-decoration: none;
 }
 
 .Link a:hover {
-    color: red;
+    color: #F39D41;
 }
 
 .ModalInfo .Button {

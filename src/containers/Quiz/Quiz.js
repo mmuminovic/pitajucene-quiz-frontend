@@ -295,7 +295,7 @@ class Quiz extends Component {
                     </div>
                     <div>
                         <a href="https://www.paypal.me/pitajucenefond" target="_blank" rel="noopener noreferrer">
-                            <p style={{ margin: '10px', fontWeight: 'bold', color: 'white' }}>Ugradi se u ovaj hajr, podrži rad stranice i kviza</p>
+                            <p style={{ margin: '10px 0 5px', fontWeight: 'bold', color: 'white' }}>Ugradi se u ovaj hajr, podrži rad stranice i kviza</p>
                             <img src={paypal} alt="donate" width="120px" />
                         </a>
                     </div>
@@ -319,7 +319,7 @@ class Quiz extends Component {
                         <li>Ovaj kviz je edukativno-zabavanog karaktera, sistemske greške su rijetke ali su moguće te smo iz tog razloga ostavili mogućnost prijave pitanja i link na kojem možete pročitati original odgovor na svako pitanje.</li>
                         <li>Kviz traje <strong>10 minuta.</strong></li>
                         <li>Ukoliko takmičari imaju isti broj bodova biće rangirani prema najkraćem vremenu.</li>
-                        <li>Koje su nagrade ovog mjeseca možete vidjeti na našoj stranici <a href="https://pitajucene.com/nagradni-kviz">pitajucene.com/nagradni-kviz</a></li>
+                        <li>Koje su nagrade ovog mjeseca možete vidjeti na našoj stranici <a style={{color: '#E04836'}} href="https://pitajucene.com/nagradni-kviz">pitajucene.com/nagradni-kviz</a></li>
                         <li>Najbolji u mjesecu će biti kontaktirani putem email adrese s kojom su se registrovali.</li>
                         <li>Knjige koje dajemo kao nagradu su nove ili korištene bez velikih oštećenja, jer mnoge knjige dobijemo kao donaciju.</li>
                         <li>Poštarinu za dostavu knjige izvan Bosne i Hercegovine plaća dobitnik knjige.</li>
