@@ -21,6 +21,9 @@ import chart from '../../images/chart.png';
 import quiz from '../../images/quiz.png';
 import user from '../../images/user.png';
 import paypal from '../../images/paypal.png';
+import about from '../../images/about.png';
+import rules from '../../images/rules.png';
+import play from '../../images/play.png';
 
 class Quiz extends Component {
     state = {
@@ -283,12 +286,12 @@ class Quiz extends Component {
                     {quizRemaining}
 
                     <div>
-                        <button onClick={this.playAgain}>Pokreni kviz</button>
-                        <button onClick={() => this.setState({ incorrect: true })}>Pravila igre</button>
+                        <button onClick={this.playAgain}><img src={play} alt="quiz" width="20px" style={{marginRight: '10px'}} />Pokreni kviz</button>
+                        <button onClick={() => this.setState({ incorrect: true })}><img src={rules} alt="quiz" width="20px" style={{marginRight: '10px'}} />Pravila igre</button>
                     </div>
                     <div>
-                        <button onClick={() => this.setState({ incorrect: true, about: true })}>O aplikaciji</button>
-                        <button onClick={() => this.setState({ incorrect: true, stats: true })}><img src={chart} alt="quiz" width="20px" />Statistika</button>
+                        <button onClick={() => this.setState({ incorrect: true, about: true })}><img src={about} alt="quiz" width="20px" style={{marginRight: '10px'}} />O aplikaciji</button>
+                        <button onClick={() => this.setState({ incorrect: true, stats: true })}><img src={chart} alt="quiz" width="20px" style={{marginRight: '10px'}} />Statistika</button>
                     </div>
                     <div>
                         <a href="https://www.paypal.me/pitajucenefond" target="_blank" rel="noopener noreferrer">
