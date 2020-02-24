@@ -119,6 +119,11 @@
     cursor: pointer;
 }
 
+.Answers ul li.Selected:active {
+    color: white;
+    font-weight: bold;
+}
+
 @media (hover: none) {
     .Answers ul li {
         font-size: small;
