@@ -28,9 +28,10 @@
     color: white;
     font-weight: bold;
 }
+
 .List li a {
     font-size: small;
-    color: rgb(0, 81, 255);
+    color: #F39D41;
     font-weight: 500;
 }
 

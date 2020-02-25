@@ -57,9 +57,9 @@ class Reports extends Component {
                         <p className={classes.Question}><Link to={question}>{report.questionText}</Link></p>
                         <p>Korisnik: <Link to={user}>{report.fullName}</Link> </p>
                         <p>Korisnikov odgovor: </p>
-                        <p style={{ color: 'red', fontWeight: '500' }}>{report.answer}</p>
+                        <p style={{ color: '#F39D41', fontWeight: '500' }}>{report.answer}</p>
                         <p>Korisnikova primedba:</p>
-                        <p style={{ color: 'red', fontWeight: '500' }}>{report.message}</p>
+                        <p style={{ color: '#F39D41', fontWeight: '500' }}>{report.message}</p>
                         {!this.state.solved ? <button onClick={() => this.problemSolved(report._id)}>Pročitano</button> : null}
                     </li>)
                 });

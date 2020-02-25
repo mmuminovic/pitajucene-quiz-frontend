@@ -425,7 +425,7 @@ class Quiz extends Component {
                         <div className={classes.Button}>
                             <button onClick={this.closeModalHandler}>Zatvori</button>
                         </div>
-                        <p>© 2020 Pitaj Učene - <a href="https://pitajucene.com" target="_blank" rel="noopener noreferrer">pitajucene.com</a></p>
+                        <p>© 2020 Pitaj Učene - <a style={{color: '#E04836'}} href="https://pitajucene.com" target="_blank" rel="noopener noreferrer">pitajucene.com</a></p>
                     </div>
                 )
             }
