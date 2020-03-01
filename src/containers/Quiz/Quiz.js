@@ -469,7 +469,7 @@ class Quiz extends Component {
                 </div>
             );
             timerText = <p className={classes.TimerText}>Tajmer se nalazi na dnu ekrana</p>;
-            points = (<p style={{ textAlign: 'center', color: 'white', margin: '0', fontStyle: 'italic' }}>Tačan odgovor nosi: {question.points} bodova</p>);
+            points = (<p style={{ textAlign: 'center', color: 'white', margin: '0', fontStyle: 'italic', fontSize: '13px' }}>Tačan odgovor nosi: <span style={{color: '#F39D41', fontWeight: 'bold'}}>{question.points}</span> bodova</p>);
             let answersArray = [
                 <li key="0" className={this.state.selected === 0 ? classes.Selected : ''} onClick={() => this.submitAnswer(0, false)}>{question.answer0}</li>,
                 <li key="1" className={this.state.selected === 1 ? classes.Selected : ''} onClick={() => this.submitAnswer(1, false)}>{question.answer1}</li>,

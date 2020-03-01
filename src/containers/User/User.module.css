@@ -132,12 +132,12 @@
     text-align-last: center;
     margin: 0 20px;
     font-size: small;
-    color: rgb(36, 21, 4);
+    color: #f39d41;
     font-weight: bold;
 }
 .List li a {
     font-size: small;
-    color: rgb(36, 21, 4);
+    color: #f39d41;
     font-weight: 500;
     font-style: italic;
 }

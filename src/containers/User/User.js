@@ -135,7 +135,7 @@ class User extends Component {
                 let wrongAnswers = this.state.games.map((q, i) => {
                     if (q.questionText && q.incorrect) {
                         return (
-                            <li key={i} style={{ backgroundColor: '#E04836' }}>
+                            <li key={i} style={{ backgroundColor: 'rgba(224, 73, 56, 0.2)' }}>
                                 <p>{q.time}</p>
                                 <p>Pitanje:</p>
                                 <p className={classes.Question}>{q.questionText}</p>
@@ -146,7 +146,7 @@ class User extends Component {
 
                     } else if (!q.incorrect && q.score === 900) {
                         return (
-                            <li key={i} style={{ backgroundColor: '#4CAF50' }}>
+                            <li key={i} style={{ backgroundColor: 'rgba(76, 174, 79, 0.2)' }}>
                                 <p>{q.time}</p>
                                 <p className={classes.Question}>Osvojili ste maksimalan broj bodova. Čestitamo!</p>
                                 <span>Ostvareni rezultat:</span><span><img src={star} alt="medal" style={{ width: '12px', marginLeft: '5px', marginRight: '5px' }} /></span><span style={{ paddingTop: '15px' }}>{q.score}</span>
@@ -156,7 +156,7 @@ class User extends Component {
                     } else if (!q.timeIsUp) {
                         const link = `/quiz/${q.questionLink}`;
                         return (
-                            <li key={i} style={{ backgroundColor: 'rgb(69, 109, 136)' }}>
+                            <li key={i} style={{ backgroundColor: 'rgba(68, 109, 136, 0.2)' }}>
                                 <p>{q.time}</p>
                                 <p className={classes.Question} style={{color: 'white'}}>{q.questionText}</p>
                                 <div className={classes.Field}>
@@ -167,7 +167,7 @@ class User extends Component {
 
                     } else if (q.timeIsUp && !q.incorrect) {
                         return (
-                            <li key={i} style={{ backgroundColor: '#5696BC' }}>
+                            <li key={i} style={{ backgroundColor: 'rgba(87, 151, 188, 0.2)' }}>
                                 <p>{q.time}</p>
                                 <p className={classes.Question}>{q.questionText}</p>
                                 <span>Ostvareni rezultat:</span><span><img src={star} alt="medal" style={{ width: '12px', marginLeft: '5px', marginRight: '5px' }} /></span><span style={{ paddingTop: '15px' }}>{q.score}</span>
@@ -286,7 +286,7 @@ class User extends Component {
                 <table className={classes.Table} style={{ marginTop: '20px' }}>
                     <thead>
                         <tr>
-                            <th style={{ backgroundColor: '#F39D41', padding: '10px 0' }}>
+                            <th style={{ backgroundColor: '#2F5168', padding: '10px 0' }}>
                                 Odigrani kvizovi
                             </th>
                         </tr>

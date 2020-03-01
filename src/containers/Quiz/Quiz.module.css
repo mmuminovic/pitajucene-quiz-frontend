@@ -42,6 +42,7 @@
     font-size: small;
     text-align: center;
     margin: 0 auto;
+    font-style: italic;
 }
 
 @media(max-height: 650px){
@@ -169,6 +170,7 @@
     margin: 0;
     padding: 0;
     color: white;
+    font-size: small;
 }
 
 .Gameover {
