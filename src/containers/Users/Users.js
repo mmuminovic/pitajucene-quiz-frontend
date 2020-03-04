@@ -11,7 +11,6 @@ class Users extends Component {
         users: null,
         numberOfusers: 0,
         loading: false,
-        quizPlayed: null,
         activeUsers: true,
         showModal: false,
         userId: null,
@@ -27,7 +26,7 @@ class Users extends Component {
         axios.get('/get-users')
             .then(users => {
                 let loadedUsers = users.data;
-                this.setState({ users: loadedUsers.users, numberOfusers: loadedUsers.users.length, quizPlayed: loadedUsers.quizPlayed, loading: false });
+                this.setState({ users: loadedUsers.users, numberOfusers: loadedUsers.users.length, loading: false });
             });
     }
 
@@ -123,7 +122,6 @@ class Users extends Component {
             <div className={classes.ListOfUsers}>
                 <p style={{ fontWeight: '500', fontSize: 'medium', margin: '5px' }}>Svi korisnici</p>
                 <p style={{ fontWeight: '500', fontSize: 'small', margin: '5px' }}>Broj korisnika: {this.state.numberOfusers}</p>
-                <p style={{ fontWeight: '500', fontSize: 'small', margin: '5px' }}>Kviz pokrenut ukupno {25000 + this.state.quizPlayed}{/* Because I deleted 2.5k records */} puta.</p>
 
                 <select onChange={(event) => this.choose(event)}>
                     <option value={0}>Aktivni korisnici</option>
