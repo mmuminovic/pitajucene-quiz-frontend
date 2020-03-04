@@ -31,9 +31,15 @@ class Users extends Component {
             });
     }
 
-    getAllUsers = () => {
+    getAllUsers = (i) => {
+        let condition;
+        if (i === 2) {
+            condition = { fullName: 1 }
+        } else {
+            condition = { createdAt: -1 }
+        }
         this.setState({ loading: true });
-        axios.get('/users')
+        axios.get('/users', { params: condition })
             .then(users => {
                 let loadedUsers = users.data;
                 this.setState({ users: loadedUsers, numberOfusers: loadedUsers.length, loading: false });
@@ -53,7 +59,7 @@ class Users extends Component {
         } else if (index === 1) {
             this.getWinners();
         } else {
-            this.getAllUsers();
+            this.getAllUsers(index);
         }
     }
 
@@ -117,11 +123,13 @@ class Users extends Component {
             <div className={classes.ListOfUsers}>
                 <p style={{ fontWeight: '500', fontSize: 'medium', margin: '5px' }}>Svi korisnici</p>
                 <p style={{ fontWeight: '500', fontSize: 'small', margin: '5px' }}>Broj korisnika: {this.state.numberOfusers}</p>
-                <p style={{ fontWeight: '500', fontSize: 'small', margin: '5px' }}>Kviz pokrenut ukupno {this.state.quizPlayed} puta.</p>
+                <p style={{ fontWeight: '500', fontSize: 'small', margin: '5px' }}>Kviz pokrenut ukupno {25000 + this.state.quizPlayed}{/* Because I deleted 2.5k records */} puta.</p>
+
                 <select onChange={(event) => this.choose(event)}>
                     <option value={0}>Aktivni korisnici</option>
                     <option value={1}>Pobjednici</option>
                     <option value={2}>Svi korisnici</option>
+                    <option value={3}>Najnoviji korisnici</option>
                 </select>
                 {loading}
                 <Modal show={this.state.showModal} modalClosed={this.closeModalHandler}>
