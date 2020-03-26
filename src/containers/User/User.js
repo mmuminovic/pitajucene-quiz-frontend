@@ -47,7 +47,7 @@ class User extends Component {
         axios.get(`/users/${userId}`)
             .then(result => {
                 const data = result.data;
-                const quizFound = data.quiz.find(q => !q.timeIsUp && !q.incorrect);
+                const quizFound = data.quiz.find(q => !q.timeIsUp);
                 if (quizFound) {
                     this.setState({ quizRemaining: true })
                 }

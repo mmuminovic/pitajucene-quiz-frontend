@@ -438,7 +438,7 @@ class Quiz extends Component {
     if (!this.state.started) {
       if (this.state.games) {
         const quizFound = this.state.games.find(
-          q => !q.timeIsUp && !q.incorrect
+          q => !q.timeIsUp
         );
         if (quizFound) {
           let myProfileLink = `/korisnik/${this.props.user.userId}`;
