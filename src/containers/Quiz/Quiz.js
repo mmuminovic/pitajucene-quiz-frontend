@@ -194,6 +194,9 @@ class Quiz extends Component {
   };
 
   submitAnswer = async i => {
+    if(this.state.loading) {
+      return;
+    }
     let question = this.state.question;
     let answers = [
       question.answer0,
