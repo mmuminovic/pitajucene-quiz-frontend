@@ -125,6 +125,42 @@
     color: white;
     font-weight: bold;
 }
+.Answers ul li.True {
+    background-color: #4CAF50;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.Answers ul li.True:hover {
+    background-color: #4CAF50;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.Answers ul li.True:active {
+    color: white;
+    font-weight: bold;
+}
+.Answers ul li.False {
+    background-color: #E04836;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.Answers ul li.False:hover {
+    background-color: #E04836;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.Answers ul li.False:active {
+    color: white;
+    font-weight: bold;
+}
 
 @media (hover: none) {
     .Answers ul li {
