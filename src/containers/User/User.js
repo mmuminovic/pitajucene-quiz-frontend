@@ -133,7 +133,18 @@ class User extends Component {
         if (this.state.games) {
             if (this.state.games.length > 0) {
                 let wrongAnswers = this.state.games.map((q, i) => {
-                    if (q.questionText && q.incorrect) {
+                    if (!q.timeIsUp) {
+                        const link = `/quiz/${q.questionLink}`;
+                        return (
+                            <li key={i} style={{ backgroundColor: 'rgba(68, 109, 136, 0.2)' }}>
+                                <p>{q.time}</p>
+                                <p className={classes.Question} style={{color: 'white'}}>{q.questionText}</p>
+                                <div className={classes.Field}>
+                                    {this.props.match.params.userId === this.props.user.userId ? <Link to={link}><button style={{ backgroundColor: '#4CAF50', border: '#4CAF50', margin: '5px' }}>Nastavi kviz</button></Link> : <button style={{ backgroundColor: '#4CAF50', border: '#4CAF50', margin: '5px' }}>Kviz u toku</button>}
+                                </div>
+                            </li>
+                        );
+                    } else if (q.questionText && q.incorrect) {
                         return (
                             <li key={i} style={{ backgroundColor: 'rgba(224, 73, 56, 0.2)' }}>
                                 <p>{q.time}</p>
@@ -150,18 +161,6 @@ class User extends Component {
                                 <p>{q.time}</p>
                                 <p className={classes.Question}>Osvojili ste maksimalan broj bodova. Čestitamo!</p>
                                 <span>Ostvareni rezultat:</span><span><img src={star} alt="medal" style={{ width: '12px', marginLeft: '5px', marginRight: '5px' }} /></span><span style={{ paddingTop: '15px' }}>{q.score}</span>
-                            </li>
-                        )
-
-                    } else if (!q.timeIsUp) {
-                        const link = `/quiz/${q.questionLink}`;
-                        return (
-                            <li key={i} style={{ backgroundColor: 'rgba(68, 109, 136, 0.2)' }}>
-                                <p>{q.time}</p>
-                                <p className={classes.Question} style={{color: 'white'}}>{q.questionText}</p>
-                                <div className={classes.Field}>
-                                    {this.props.match.params.userId === this.props.user.userId ? <Link to={link}><button style={{ backgroundColor: '#4CAF50', border: '#4CAF50', margin: '5px' }}>Nastavi kviz</button></Link> : <button style={{ backgroundColor: '#4CAF50', border: '#4CAF50', margin: '5px' }}>Kviz u toku</button>}
-                                </div>
                             </li>
                         )
 

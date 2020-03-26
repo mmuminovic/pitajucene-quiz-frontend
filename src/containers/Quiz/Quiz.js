@@ -88,7 +88,7 @@ class Quiz extends Component {
               currentScore: data.score,
               ans: null,
               started: true,
-              loading: true,
+              loading: false,
               finished: false,
               continuing: true,
               remainingTime: data.timeRemaining,
@@ -322,7 +322,7 @@ class Quiz extends Component {
       currentScore: 0,
       ans: null,
       started: true,
-      loading: true,
+      loading: false,
       finished: false,
       selected: null,
       question: null
