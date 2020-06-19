@@ -6,8 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 import store from './store';
 
-axios.defaults.baseURL = `${process.env.REACT_APP_BACKEND}`;
-// axios.defaults.baseURL = 'http://localhost:8080';
+// axios.defaults.baseURL = `${process.env.REACT_APP_BACKEND}`;
+// axios.defaults.baseURL = 'http://207.180.253.216:8080';
+axios.defaults.baseURL = 'http://localhost:8080';
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Aux from "react-aux";
-import openSocket from "socket.io-client";
+import io from "socket.io-client";
 
 import classes from "./Quiz.module.css";
 import axios from "axios";
@@ -50,7 +50,7 @@ class Quiz extends Component {
     playedToday: null,
     myAnswer: {
       correct: null,
-      selected: null
+      selected: null,
     },
     theBestToday: null,
     numOfQuestion: 1,
@@ -61,7 +61,7 @@ class Quiz extends Component {
     stats: false,
     correctAnswer: null,
     mounted: false,
-    hardQuestions: []
+    hardQuestions: [],
   };
 
   componentDidMount() {
@@ -69,14 +69,14 @@ class Quiz extends Component {
       this.setState({ loading: true });
       axios
         .post(`/quiz/${this.props.match.params.quizId}`, { continuing: true })
-        .then(result => {
+        .then((result) => {
           if (result.data.message) {
             this.setState({
               message: result.data.message,
               quizNotActive: true,
               loading: false,
               incorrect: true,
-              started: false
+              started: false,
             });
             this.props.history.push("/");
           } else {
@@ -92,7 +92,7 @@ class Quiz extends Component {
               finished: false,
               continuing: true,
               remainingTime: data.timeRemaining,
-              numOfQuestion: data.question.num
+              numOfQuestion: data.question.num,
             });
           }
         });
@@ -105,8 +105,9 @@ class Quiz extends Component {
       this.getTheBestToday();
       this.playedToday();
 
-      const socket = openSocket("http://localhost:8080");
-      socket.on(`${this.props.user.userId}`, data => {
+      const socket = io("http://localhost:8080");
+      socket.emit("login", { userId: this.props.user.userId });
+      socket.on("5e9229c04b637b68515e2e86", (data) => {
         console.log(data);
       });
     }
@@ -115,9 +116,9 @@ class Quiz extends Component {
   getQuote = () => {
     axios
       .get("/quotes/get-random-quote", {
-        params: { userId: this.props.user.userId }
+        params: { userId: this.props.user.userId },
       })
-      .then(result => {
+      .then((result) => {
         if (result.data.quoteId) {
           this.setState({ quote: result.data, mounted: true });
         }
@@ -131,37 +132,37 @@ class Quiz extends Component {
       quoteAuthor: this.state.quote.quoteAuthor,
       quoteSource: this.state.quote.quoteSource,
       likes: this.state.quote.likes + 1,
-      likedByMe: true
+      likedByMe: true,
     };
     let userId = this.props.user.userId;
     if (!this.state.quote.likedByMe) {
       this.setState({ liked: true, quote: quote });
       axios.patch(`/quotes/like/${this.state.quote.quoteId}`, {
-        userId: userId
+        userId: userId,
       });
     }
   };
 
   getNumOfActiveGames = () => {
-    axios.get("/active-games").then(result => {
+    axios.get("/active-games").then((result) => {
       this.setState({ activeGames: result.data.activeGames });
     });
   };
 
   getNumOfAllGames = () => {
-    axios.get("/num-of-games").then(result => {
+    axios.get("/num-of-games").then((result) => {
       this.setState({ quizPlayed: result.data.quizPlayed });
     });
   };
 
   getTheBestToday = () => {
-    axios.get("/best-today").then(result => {
+    axios.get("/best-today").then((result) => {
       this.setState({ theBestToday: result.data });
     });
   };
 
   playedToday = () => {
-    axios.get("/played-today").then(result => {
+    axios.get("/played-today").then((result) => {
       this.setState({ playedToday: result.data.playedToday });
     });
   };
@@ -169,7 +170,7 @@ class Quiz extends Component {
   getUserInfo = () => {
     if (this.props.isAuth) {
       const userId = this.props.user.userId;
-      axios.get(`/users/${userId}`).then(result => {
+      axios.get(`/users/${userId}`).then((result) => {
         const data = result.data;
         this.setState({ games: data.quiz });
       });
@@ -179,22 +180,22 @@ class Quiz extends Component {
   createQuiz = () => {
     axios
       .post("/create-quiz", { userId: this.props.user.userId })
-      .then(result => {
+      .then((result) => {
         const data = result.data;
         this.setState({
           question: data.firstQuestion,
           quiz: data.quiz,
           loading: false,
-          numOfQuestion: 1
+          numOfQuestion: 1,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
 
-  submitAnswer = async i => {
-    if(this.state.loading) {
+  submitAnswer = async (i) => {
+    if (this.state.loading) {
       return;
     }
     let question = this.state.question;
@@ -202,22 +203,22 @@ class Quiz extends Component {
       question.answer0,
       question.answer1,
       question.answer2,
-      question.answer3
+      question.answer3,
     ];
     await this.setState({
       ...this.state,
       myAnswer: {
         ...this.state.myAnswer,
-        selected: i
+        selected: i,
       },
       ans: answers[i],
-      loading: true
+      loading: true,
     });
 
     await setTimeout(() => {
       axios
         .post(`/quiz/${this.state.quiz}`, { answer: answers[i] })
-        .then(async result => {
+        .then(async (result) => {
           const numOfQuestion = this.state.numOfQuestion;
           let indexOfCorrect = null;
           if (result.data.previousQuestion) {
@@ -233,14 +234,14 @@ class Quiz extends Component {
               question: question,
               link: result.data.previousQuestion.link,
               correctAnswer: result.data.previousQuestion.correctAnswer,
-              myAnswer: answers[i]
+              myAnswer: answers[i],
             };
             await this.setState({
               myAnswer: {
                 ...this.state.myAnswer,
-                correct: indexOfCorrect
+                correct: indexOfCorrect,
               },
-              hardQuestions: [...this.state.hardQuestions, previousQuestion]
+              hardQuestions: [...this.state.hardQuestions, previousQuestion],
             });
 
             if (result.data.finished) {
@@ -254,8 +255,8 @@ class Quiz extends Component {
                   currentScore: result.data.score,
                   myAnswer: {
                     selected: null,
-                    correct: null
-                  }
+                    correct: null,
+                  },
                 });
               }, 2000);
             } else {
@@ -265,10 +266,10 @@ class Quiz extends Component {
                   question: result.data.question,
                   myAnswer: {
                     selected: null,
-                    correct: null
+                    correct: null,
                   },
                   loading: false,
-                  numOfQuestion: numOfQuestion + 1
+                  numOfQuestion: numOfQuestion + 1,
                 });
               }, 2000);
             }
@@ -277,8 +278,8 @@ class Quiz extends Component {
               myAnswer: {
                 ...this.state.myAnswer,
                 incorrect: null,
-                correct: i
-              }
+                correct: i,
+              },
             });
             if (result.data.finished) {
               await setTimeout(() => {
@@ -291,8 +292,8 @@ class Quiz extends Component {
                   currentScore: result.data.score,
                   myAnswer: {
                     selected: null,
-                    correct: null
-                  }
+                    correct: null,
+                  },
                 });
               }, 2000);
             } else {
@@ -302,12 +303,12 @@ class Quiz extends Component {
                   question: result.data.question,
                   myAnswer: {
                     selected: null,
-                    correct: null
+                    correct: null,
                   },
                   gameover: result.data.gameover,
                   currentScore: result.data.score,
                   loading: false,
-                  numOfQuestion: numOfQuestion + 1
+                  numOfQuestion: numOfQuestion + 1,
                 });
               }, 2000);
             }
@@ -325,7 +326,7 @@ class Quiz extends Component {
       loading: false,
       finished: false,
       selected: null,
-      question: null
+      question: null,
     });
     this.createQuiz();
   };
@@ -342,7 +343,7 @@ class Quiz extends Component {
       stats: false,
       correctAnswer: null,
       mounted: false,
-      hardQuestions: []
+      hardQuestions: [],
     });
     this.props.history.push("/");
     this.getNumOfActiveGames();
@@ -361,17 +362,17 @@ class Quiz extends Component {
       reportedQuestion: this.state.question.text,
       questionId: this.state.question.id,
       message: this.state.reportMessage,
-      answer: this.state.ans
+      answer: this.state.ans,
     };
 
-    axios.post("/send-report", data).then(result => {
+    axios.post("/send-report", data).then((result) => {
       if (!result.data.error) {
         this.setState({
           reportMode: false,
           loading: false,
           incorrect: false,
           started: false,
-          finish: false
+          finish: false,
         });
       } else {
         this.setState({ errorMessage: result.data.error, loading: false });
@@ -398,18 +399,18 @@ class Quiz extends Component {
 
     let ansArray = [null, null, null, null];
 
-    if (typeof(selected) === "number" && typeof(correct) === "number") {
+    if (typeof selected === "number" && typeof correct === "number") {
       if (selected === correct) {
         ansArray[selected] = classes.True;
       } else {
         ansArray[selected] = classes.False;
         ansArray[correct] = classes.True;
       }
-    } else if (typeof(selected) === "number") {
+    } else if (typeof selected === "number") {
       ansArray[selected] = classes.Selected;
     }
 
-    const renderTime = value => {
+    const renderTime = (value) => {
       if (value === 0) {
         return <div className={timerClasses.timer}>0</div>;
       }
@@ -437,9 +438,7 @@ class Quiz extends Component {
 
     if (!this.state.started) {
       if (this.state.games) {
-        const quizFound = this.state.games.find(
-          q => !q.timeIsUp
-        );
+        const quizFound = this.state.games.find((q) => !q.timeIsUp);
         if (quizFound) {
           let myProfileLink = `/korisnik/${this.props.user.userId}`;
           quizRemaining = (
@@ -493,7 +492,7 @@ class Quiz extends Component {
               fontWeight: "bold",
               color: "#5696BC",
               fontStyle: "italic",
-              margin: "0"
+              margin: "0",
             }}
           >
             Dobrodošli na islamski kviz znanja
@@ -563,7 +562,7 @@ class Quiz extends Component {
                 style={{
                   margin: "10px 0 5px",
                   fontWeight: "bold",
-                  color: "white"
+                  color: "white",
                 }}
               >
                 Ugradi se u ovaj hajr, podrži rad stranice i kviza
@@ -815,7 +814,7 @@ class Quiz extends Component {
               style={{
                 textAlign: "justify",
                 padding: "0 15px",
-                fontSize: "small"
+                fontSize: "small",
               }}
             >
               "Ko krene putem na kojem traži znanje, Allah će ga, doista,
@@ -847,7 +846,7 @@ class Quiz extends Component {
               fontSize: "small",
               color: "white",
               textAlign: "center",
-              margin: "10px 0"
+              margin: "10px 0",
             }}
           >
             {this.state.numOfQuestion}/60
@@ -870,7 +869,7 @@ class Quiz extends Component {
             color: "white",
             margin: "0",
             fontStyle: "italic",
-            fontSize: "13px"
+            fontSize: "13px",
           }}
         >
           Tačan odgovor nosi:{" "}
@@ -908,7 +907,7 @@ class Quiz extends Component {
           onClick={() => this.submitAnswer(3)}
         >
           {question.answer3}
-        </li>
+        </li>,
       ];
       answers = (
         <div className={classes.Answers}>
@@ -922,7 +921,7 @@ class Quiz extends Component {
               textAlign: "center",
               margin: "0",
               fontWeight: "500",
-              color: "white"
+              color: "white",
             }}
           >
             Prostalo vrijeme:
@@ -933,7 +932,7 @@ class Quiz extends Component {
             colors={[
               ["#5696BC", 0.75],
               ["#ff6600", 0.2],
-              ["#ff0000", 0.05]
+              ["#ff0000", 0.05],
             ]}
             renderTime={renderTime}
             onComplete={() => [false]}
@@ -1017,7 +1016,7 @@ class Quiz extends Component {
               style={{
                 fontSize: "medium",
                 fontWeight: "bold",
-                marginBottom: "0"
+                marginBottom: "0",
               }}
             >
               Unesite poruku
@@ -1027,14 +1026,14 @@ class Quiz extends Component {
                 fontSize: "small",
                 fontWeight: "bold",
                 color: "red",
-                margin: "0"
+                margin: "0",
               }}
             >
               {this.state.errorMessage}
             </p>
             <textarea
               style={{ width: "100%" }}
-              onChange={event =>
+              onChange={(event) =>
                 this.setState({ reportMessage: event.target.value })
               }
               placeholder='Ovde napišite vašu primedbu na ovo pitanje a zatim pritisnite dugme "Prijavi". Tekst mora biti minimum 10 a maksimum 200 karaktera.'
@@ -1090,7 +1089,7 @@ class Quiz extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return state;
 };
 
