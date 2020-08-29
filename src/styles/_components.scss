@@ -1,0 +1,52 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.auth-form {
+    border: 0.4rem solid $color-grey-light;
+    padding: 8rem 6rem;
+    border-radius: 10px;
+
+    width: 50%;
+
+    @include respond(big-desktop) {
+        width: 30%;
+    }
+
+    @include respond(tab-land) {
+        width: 55%;
+    }
+
+    @include respond(tab-port) {
+        width: 70%;
+    }
+
+    @include respond(phone) {
+        width: 100%;
+    }
+
+    label {
+        color: $color-white;
+        font-size: 1.4rem;
+    }
+
+    input {
+        font-size: 1.2rem;
+    }
+
+    button {
+        font-size: 1.4rem;
+        font-weight: bold;
+        padding: .5rem 2rem;
+        border-radius: 5px;
+        margin: 1rem 0;
+    }
+
+    img {
+        width: 20rem;
+    }
+}
