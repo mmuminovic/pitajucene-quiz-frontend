@@ -7,7 +7,7 @@
 }
 
 .auth-form {
-    border: 0.4rem solid $color-grey-light;
+    // border: 0.4rem solid $color-grey-light;
     padding: 8rem 6rem;
     border-radius: 10px;
 
@@ -71,5 +71,34 @@
 .button {
     &-submit {
         background-color: $color-blue;
+    }
+}
+
+.home {
+    &-button {
+        display: flex;
+        align-items: center;
+        padding: 2rem 6rem;
+        margin: 2rem 0;
+        border-radius: 1rem;
+        cursor: pointer;
+        background-color: $color-grey;
+        
+        &:hover {
+            background-color: $color-blue;
+        }
+
+        &__icon {
+            width: 5rem;
+            margin: 0 1.5rem;
+        }
+
+        &__text {
+            color: $color-text;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-right: 2rem;
+            letter-spacing: 0.1rem;
+        }
     }
 }

@@ -18,8 +18,17 @@ export default function Register(props) {
                     alert('Submited!')
                 }}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string().required().email().max(250),
-                    password: Yup.string().required().min(6).max(250),
+                    email: Yup.string()
+                        .required('Email adresa mora biti unijeta')
+                        .email('Neispravan format email adrese')
+                        .max(
+                            250,
+                            'Email adresa mora imati najviše 250 karaktera'
+                        ),
+                    password: Yup.string()
+                        .required('Lozinka mora biti unijeta')
+                        .min(6, 'Lozinka mora imati najmanje 6 karaktera')
+                        .max(250, 'Lozinka mora imati najviše 250 karaktera'),
                     fullName: Yup.string()
                         .required('Puno ime i prezime mora biti unijeto')
                         .min(2, 'Ime mora imati najmanje 2 karaktera')
@@ -111,7 +120,10 @@ export default function Register(props) {
                                 </div>
                             </Button>
                             <p>Imaš nalog? Prijavi se</p>
-                            <Button disabled={isSubmitting} onClick={() => history.push('/')}>
+                            <Button
+                                disabled={isSubmitting}
+                                onClick={() => history.push('/')}
+                            >
                                 <div className="center-xy">
                                     <span className="mr-2">Prijavi se</span>
                                     <InputIcon />

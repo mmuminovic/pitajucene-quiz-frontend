@@ -5,6 +5,7 @@ import './styles/main.scss'
 
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Homepage from './pages/Homepage'
 // import Navigation from './containers/Navigation'
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
             {/* <Navigation /> */}
             <Switch>
                 <Route exact path="/register" component={Register} />
-                <Route exact path="/" component={Login} />
+                <Route exact path="/lgoin" component={Login} />
+                <Route exact path="/" component={Homepage} />
             </Switch>
         </BrowserRouter>
     )
