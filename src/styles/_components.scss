@@ -11,14 +11,12 @@
     padding: 8rem 6rem;
     border-radius: 10px;
 
-    width: 50%;
-
     @include respond(big-desktop) {
         width: 30%;
     }
 
     @include respond(tab-land) {
-        width: 55%;
+        width: 60%;
     }
 
     @include respond(tab-port) {
@@ -36,6 +34,7 @@
 
     input {
         font-size: 1.2rem;
+        width: 30rem;
     }
 
     button {
@@ -47,6 +46,11 @@
     }
 
     img {
-        width: 20rem;
+        width: 25rem;
+    }
+
+    h3 {
+        color: $color-white;
+        text-align: center;
     }
 }
