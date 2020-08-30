@@ -78,12 +78,12 @@
     &-button {
         display: flex;
         align-items: center;
-        padding: 2rem 6rem;
+        padding: 2.5rem 6rem;
         margin: 2rem 0;
         border-radius: 1rem;
         cursor: pointer;
         background-color: $color-grey;
-        
+
         &:hover {
             background-color: $color-blue;
         }
@@ -99,6 +99,74 @@
             font-weight: 500;
             margin-right: 2rem;
             letter-spacing: 0.1rem;
+        }
+    }
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    width: 60%;
+
+    @include respond(big-desktop) {
+        width: 50%;
+    }
+
+    @include respond(tab-land) {
+        width: 80%;
+    }
+
+    @include respond(tab-port) {
+        width: 85%;
+    }
+
+    @include respond(phone) {
+        width: 90%;
+    }
+
+    &-question {
+        background-color: $color-grey;
+        padding: 4rem 6rem;
+        font-size: 1.6rem;
+        border-radius: 1rem;
+        color: $color-text;
+        text-align: center;
+    }
+
+    &-answers {
+        margin-top: 2rem;
+
+        &__answer {
+            background-color: $color-grey-light;
+            padding: 2rem 6rem;
+            font-size: 1.6rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+
+            &:hover {
+                background-color: $color-blue;
+                color: $color-white;
+                font-weight: 700;
+            }
+        }
+
+        .selected {
+            background-color: $color-selected;
+            color: $color-white;
+            font-weight: 700;
+        }
+        .correct {
+            background-color: $color-correct;
+            color: $color-white;
+            font-weight: 700;
+        }
+        .incorrect {
+            background-color: $color-incorrect;
+            color: $color-white;
+            font-weight: 700;
         }
     }
 }

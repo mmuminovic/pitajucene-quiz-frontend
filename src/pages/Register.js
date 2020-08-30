@@ -122,7 +122,7 @@ export default function Register(props) {
                             <p>Imaš nalog? Prijavi se</p>
                             <Button
                                 disabled={isSubmitting}
-                                onClick={() => history.push('/')}
+                                onClick={() => history.push('/login')}
                             >
                                 <div className="center-xy">
                                     <span className="mr-2">Prijavi se</span>
