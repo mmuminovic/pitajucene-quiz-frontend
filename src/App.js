@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './styles/main.scss'
 
 import Login from './pages/Login'
+import Register from './pages/Register'
 // import Navigation from './containers/Navigation'
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
         <BrowserRouter>
             {/* <Navigation /> */}
             <Switch>
-                <Route exact to="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/" component={Login} />
             </Switch>
         </BrowserRouter>
     )

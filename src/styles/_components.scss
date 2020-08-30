@@ -11,8 +11,14 @@
     padding: 8rem 6rem;
     border-radius: 10px;
 
+    &__error {
+        color: $color-danger;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
     @include respond(big-desktop) {
-        width: 30%;
+        width: 40%;
     }
 
     @include respond(tab-land) {
@@ -24,7 +30,7 @@
     }
 
     @include respond(phone) {
-        width: 100%;
+        width: 90%;
     }
 
     label {
@@ -40,7 +46,7 @@
     button {
         font-size: 1.4rem;
         font-weight: bold;
-        padding: .5rem 2rem;
+        padding: 0.5rem 2rem;
         border-radius: 5px;
         margin: 1rem 0;
     }
@@ -52,5 +58,18 @@
     h3 {
         color: $color-white;
         text-align: center;
+    }
+
+    p {
+        color: $color-grey-light;
+        font-size: 1.2rem;
+        margin: 0;
+        margin-top: 1rem;
+    }
+}
+
+.button {
+    &-submit {
+        background-color: $color-blue;
     }
 }
