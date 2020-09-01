@@ -17,21 +17,7 @@
         margin-bottom: 1rem;
     }
 
-    @include respond(big-desktop) {
-        width: 40%;
-    }
-
-    @include respond(tab-land) {
-        width: 60%;
-    }
-
-    @include respond(tab-port) {
-        width: 70%;
-    }
-
-    @include respond(phone) {
-        width: 90%;
-    }
+    @include responsive-width;
 
     label {
         color: $color-white;
@@ -108,23 +94,7 @@
     flex-direction: column;
     align-items: stretch;
 
-    width: 60%;
-
-    @include respond(big-desktop) {
-        width: 50%;
-    }
-
-    @include respond(tab-land) {
-        width: 80%;
-    }
-
-    @include respond(tab-port) {
-        width: 85%;
-    }
-
-    @include respond(phone) {
-        width: 90%;
-    }
+    @include responsive-width;
 
     &-question {
         background-color: $color-grey;
@@ -168,5 +138,58 @@
             color: $color-white;
             font-weight: 700;
         }
+    }
+}
+
+.ranking {
+    display: flex;
+    flex-direction: column;
+
+    @include responsive-width;
+
+    &-title {
+        background-color: $color-grey;
+        padding: 2rem 6rem;
+        font-size: 1.6rem;
+        border-radius: 1rem;
+        color: $color-text;
+        text-align: center;
+    }
+    &-user {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $color-grey-light;
+        padding: .5rem 2rem;
+        font-size: 1.6rem;
+        border-radius: 1rem;
+        cursor: pointer;
+        margin-top: 1rem;
+
+        &__scores {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            & > div {
+                margin: 0 1rem;
+                padding: 0.5rem 1rem;
+            }
+
+            &--icon {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+.icon {
+    &-star {
+        font-size: 2rem !important;
+        fill: yellow !important;
+    }
+    &-time {
+        font-size: 2rem !important;
+        fill: red !important;
     }
 }
