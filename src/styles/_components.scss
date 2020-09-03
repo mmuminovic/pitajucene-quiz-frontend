@@ -57,7 +57,17 @@
 .button {
     &-submit {
         background-color: $color-blue;
+        cursor: pointer;
     }
+
+    &-classic {
+        background-color: $color-grey-light;
+        color: $color-black;
+    }
+}
+
+.active {
+    background-color: $color-blue !important;
 }
 
 .home {
@@ -161,10 +171,10 @@
         align-items: center;
         background-color: $color-grey-light;
         padding: .5rem 2rem;
-        font-size: 1.6rem;
+        font-size: 1.3rem;
         border-radius: 1rem;
         cursor: pointer;
-        margin-top: 1rem;
+        margin-top: 0.5rem;
 
         &__scores {
             display: flex;

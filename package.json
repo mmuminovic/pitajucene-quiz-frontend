@@ -8,7 +8,9 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
+    "dotenv": "^8.2.0",
     "formik": "^2.1.5",
     "node-gyp": "^7.1.0",
     "node-sass": "^4.14.1",
@@ -22,10 +24,12 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.1.1",
+    "use-socketio": "^2.0.3",
     "yup": "^0.29.3"
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "NODE_ENV=development && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
