@@ -1,10 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useQuery, useMutation } from 'react-query'
 import Question from '../components/Question'
 import Answer from '../components/Answer'
+import { startQuiz, submitAnswer } from '../services/quiz'
 
 export default function Game(props) {
     const [selected, select] = useState(0)
-    
+    const [started, start] = useState(false)
+
+    const [startGame, starting] = useMutation(() => startQuiz(), {
+        onSuccess: (data) => {},
+        onError: () => {},
+    })
+
+    const [sendAnswer, sendingAnswer] = useMutation(() => submitAnswer(), {
+        onSuccess: () => {},
+        onError: () => {},
+    })
+
     return (
         <div className="wrapper">
             <div className="game">
@@ -29,7 +42,7 @@ export default function Game(props) {
                         text="Yes, it is"
                         onClickHandler={() => select(4)}
                         isSelected={selected === 4}
-                        isCorrect={true}
+                        // isCorrect={}
                     />
                 </div>
             </div>
