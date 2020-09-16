@@ -4,7 +4,7 @@ export const startQuiz = () =>
     new Promise(async (resolve, reject) => {
         try {
             const quiz = await axios.post('/quiz/start', {})
-            resolve(quiz)
+            resolve(quiz.data)
         } catch (error) {
             reject(error)
         }

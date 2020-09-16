@@ -3,49 +3,58 @@ import { useQuery, useMutation } from 'react-query'
 import Question from '../components/Question'
 import Answer from '../components/Answer'
 import { startQuiz, submitAnswer } from '../services/quiz'
+import { Spinner } from 'reactstrap'
 
 export default function Game(props) {
     const [selected, select] = useState(0)
     const [started, start] = useState(false)
+    const [quiz, setQuiz] = useState('')
+    const [question, setQuestion] = useState({
+        text: '',
+        answers: [],
+    })
 
     const [startGame, starting] = useMutation(() => startQuiz(), {
-        onSuccess: (data) => {},
+        onSuccess: (data) => {
+            setQuiz(data.quiz)
+            setQuestion(data.question)
+        },
         onError: () => {},
     })
 
-    const [sendAnswer, sendingAnswer] = useMutation(() => submitAnswer(), {
-        onSuccess: () => {},
-        onError: () => {},
-    })
+    const [sendAnswer, sendingAnswer] = useMutation(
+        () => submitAnswer(quiz, question.answers[selected - 1]),
+        {
+            onSuccess: () => {},
+            onError: () => {},
+        }
+    )
+
+    useEffect(() => {
+        startGame()
+    }, [startGame])
 
     return (
         <div className="wrapper">
-            <div className="game">
-                <Question num={2} question="Is this real question?" />
-                <div className="game-answers">
-                    <Answer
-                        text="No, it is not"
-                        onClickHandler={() => select(1)}
-                        isSelected={selected === 1}
-                    />
-                    <Answer
-                        text="No, it is not too"
-                        onClickHandler={() => select(2)}
-                        isSelected={selected === 2}
-                    />
-                    <Answer
-                        text="No, it is not again"
-                        onClickHandler={() => select(3)}
-                        isSelected={selected === 3}
-                    />
-                    <Answer
-                        text="Yes, it is"
-                        onClickHandler={() => select(4)}
-                        isSelected={selected === 4}
-                        // isCorrect={}
-                    />
+            {starting.status === 'loading' ? (
+                <Spinner />
+            ) : (
+                <div className="game">
+                    <Question num={question.num} question={question.text} />
+                    <div className="game-answers">
+                        {question.answers.map((ans, i) => (
+                            <Answer
+                                text={ans}
+                                onClickHandler={() => {
+                                    select(i + 1)
+                                    return sendAnswer()
+                                }}
+                                isSelected={selected === i + 1}
+                            />
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     )
 }
