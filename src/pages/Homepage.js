@@ -1,9 +1,16 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import HomeButton from '../components/HomeButton'
 
 export default function Homepage() {
     const history = useHistory()
+    const auth = useSelector((state) => state.auth.token)
+    console.log(auth)
+    if(!auth){
+        history.push('/login')
+    }
+    console.log(auth)
     return (
         <div className="wrapper">
             <div className="home">
