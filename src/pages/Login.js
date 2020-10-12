@@ -8,6 +8,7 @@ import * as Yup from 'yup'
 import Button from '../components/Button'
 
 import AuthImage from '../assets/education.png'
+import { login } from '../services/user'
 
 export default function Login(props) {
     const history = useHistory()
@@ -15,8 +16,11 @@ export default function Login(props) {
         <div className="wrapper">
             <Formik
                 initialValues={{ email: '', password: '' }}
-                onSubmit={(values, actions) => {
-                    alert('Submited!')
+                onSubmit={async (values, _) => {
+                    const isAuth = await login(values)
+                    if(isAuth){
+                        history.replace('/');
+                    }
                 }}
                 validationSchema={Yup.object().shape({
                     email: Yup.string()
@@ -93,7 +97,10 @@ export default function Login(props) {
                                 </div>
                             </Button>
                             <p>Nemaš nalog? Registruj se</p>
-                            <Button disabled={isSubmitting} onClick={() => history.push('/register')}>
+                            <Button
+                                disabled={isSubmitting}
+                                onClick={() => history.push('/register')}
+                            >
                                 <div className="center-xy">
                                     <span className="mr-2">Registruj se</span>
                                     <PersonIcon />
