@@ -34,7 +34,7 @@ if (lsTest() === true) {
 
         const currentTime = Date.now() / 1000
         if (decoded.exp < currentTime) {
-            store.dispatch(authSlice.actions.auth({}))
+            store.dispatch(authSlice.actions.auth())
             window.location.href = '/login'
         } else {
             store.dispatch(
@@ -42,10 +42,10 @@ if (lsTest() === true) {
             )
         }
     } else {
-        store.dispatch(authSlice.actions.auth({}))
+        store.dispatch(authSlice.actions.auth())
     }
 } else {
-    store.dispatch(authSlice.actions.auth({}))
+    store.dispatch(authSlice.actions.auth())
 }
 
 function App() {

@@ -178,7 +178,8 @@
         color: $color-text;
         text-align: center;
     }
-    &-user {
+
+    &-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -203,6 +204,10 @@
                 margin-right: 5px;
             }
         }
+    }
+
+    &-list {
+        height: 60vh;
     }
 }
 

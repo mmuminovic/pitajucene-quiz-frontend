@@ -9,9 +9,7 @@ import { Spinner } from 'reactstrap'
 
 const Game = () => {
     const [selected, select] = useState(0)
-    const [started, start] = useState(false)
     const [quiz, setQuiz] = useState('')
-    const [incorrect, setIncorrect] = useState(false)
     const [correctAns, setCorrectAns] = useState('')
     const [question, setQuestion] = useState({
         text: '',
@@ -40,7 +38,6 @@ const Game = () => {
 
                 const changeQuestion = () =>
                     setTimeout(() => {
-                        setIncorrect(false)
                         setCorrectAns('')
                         select(0)
                         if (!data.gameover) {
@@ -48,13 +45,12 @@ const Game = () => {
                         } else {
                             history.push('/')
                         }
-                    }, 1000)
+                    }, 1800)
 
                 setTimeout(() => {
-                    setIncorrect(data.incorrect)
                     setCorrectAns(data.correct)
                     changeQuestion()
-                }, 400)
+                }, 200)
             },
             onError: () => {},
         }
@@ -67,7 +63,10 @@ const Game = () => {
     return (
         <div className="wrapper">
             {!startedSuccessfully ? (
-                <Spinner />
+                <Spinner
+                    type="grow"
+                    style={{ color: '#fff', width: '100px', height: '100px' }}
+                />
             ) : startingError ? (
                 <ErrorMessage />
             ) : (
