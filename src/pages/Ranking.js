@@ -50,8 +50,8 @@ export default function Ranking(props) {
                 <RankingTitle
                     select={select}
                     selected={selected}
-                    currentPeriod={currentPeriod || '...'}
-                    lastPeriod={lastPeriod || '...'}
+                    currentPeriod={currentPeriod || 'Trenutno'}
+                    lastPeriod={lastPeriod || 'Prethodna rang lista'}
                 />
                 <div className="ranking-list">{rankingList}</div>
             </div>

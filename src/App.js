@@ -8,7 +8,7 @@ import Register from './pages/Register'
 import Homepage from './pages/Homepage'
 import Game from './pages/Game'
 import Ranking from './pages/Ranking'
-// import Navigation from './containers/Navigation'
+import Navigation from './containers/Navigation'
 import { useSelector } from 'react-redux'
 import { store } from './store'
 import { authSlice } from './store/authSlice'
@@ -51,7 +51,7 @@ if (lsTest() === true) {
 function App() {
     return (
         <BrowserRouter>
-            {/* <Navigation /> */}
+            <Navigation />
             <Switch>
                 <Route exact path="/game" component={Game} />
                 <Route exact path="/ranking" component={Ranking} />

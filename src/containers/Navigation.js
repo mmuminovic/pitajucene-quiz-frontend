@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import {
     Collapse,
     Navbar,
@@ -13,58 +14,35 @@ import {
     DropdownItem,
     NavbarText,
 } from 'reactstrap'
+import { Menu } from '@material-ui/icons'
+import logo from '../assets/images/logo-white.png'
 
-class Navigation extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isNavOpen: false,
-        }
-    }
+const Navigation = () => {
+    const [isNavOpen, changeNavOpen] = useState(false)
+    const dispatch = useDispatch()
+    const authState = useSelector((state) => state.auth)
 
-    toggle = () => {
-        const { isNavOpen } = this.state
-        this.setState({ ...this.state, isNavOpen: !isNavOpen })
-    }
-
-    render() {
-        const { isNavOpen } = this.state
- 
-        return (
-            <div className="navigation">
-                <Navbar color="light" light expand="md">
-                    <NavbarBrand href="/">reactstrap</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={isNavOpen} navbar>
-                        <Nav className="mr-auto" navbar>
-                            <NavItem>
-                                <NavLink href="/components/">
-                                    Components
-                                </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href="https://github.com/reactstrap/reactstrap">
-                                    GitHub
-                                </NavLink>
-                            </NavItem>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    Options
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem>Option 1</DropdownItem>
-                                    <DropdownItem>Option 2</DropdownItem>
-                                    <DropdownItem divider />
-                                    <DropdownItem>Reset</DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
-                        </Nav>
-                        <NavbarText>Simple Text</NavbarText>
-                    </Collapse>
-                </Navbar>
-            </div>
-        )
-    }
+    return (
+        <div className="navigation">
+            <Navbar expand="xs">
+                <NavbarText>
+                    <img src={logo} alt="logo" width="32px" />
+                </NavbarText>
+                <Nav className="ml-auto" navbar>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav style={{ color: '#fff' }}>
+                            {authState.fullName}
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem>Moj profil</DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem>Odjavi se</DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
+                </Nav>
+            </Navbar>
+        </div>
+    )
 }
 
 export default Navigation
