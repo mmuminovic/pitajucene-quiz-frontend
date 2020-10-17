@@ -52,7 +52,7 @@ export default function Register(props) {
                             <img
                                 src={UserIcon}
                                 alt="authimage"
-                                style={{ width: '100px', margin: '2rem 0' }}
+                                style={{ width: '80px', margin: '1rem 0' }}
                             />
                         </div>
                         <div className="mb-5">

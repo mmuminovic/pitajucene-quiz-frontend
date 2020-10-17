@@ -10,7 +10,10 @@ export default function RankingItem({ place, name, score, time }) {
                     <Star className="ranking-item__scores--icon icon-star" />
                     <span>{score}</span>
                 </div>
-                <div className="d-flex justify-content-center align-items-center">
+                <div
+                    className="d-flex justify-content-center align-items-center"
+                    style={{ width: '90px' }}
+                >
                     <Time className="ranking-item__scores--icon icon-time" />
                     <span>{time}</span>
                 </div>

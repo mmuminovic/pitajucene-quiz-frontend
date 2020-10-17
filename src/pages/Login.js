@@ -18,8 +18,8 @@ export default function Login(props) {
                 initialValues={{ email: '', password: '' }}
                 onSubmit={async (values, _) => {
                     const isAuth = await login(values)
-                    if(isAuth){
-                        history.replace('/');
+                    if (isAuth) {
+                        history.replace('/')
                     }
                 }}
                 validationSchema={Yup.object().shape({
@@ -50,7 +50,12 @@ export default function Login(props) {
                             <h3>Dobrodošli na kviz pitajucene.com</h3>
                         </div>
                         <div className="center-x">
-                            <img src={AuthImage} alt="authimage" />
+                            <img
+                                src={AuthImage}
+                                alt="authimage"
+                                style={{ width: '150px' }}
+                            />
+                            {/* <ExitToAppOutlined htmlColor="#fff" /> */}
                         </div>
                         <div className="mb-5">
                             <h3>Prijava</h3>

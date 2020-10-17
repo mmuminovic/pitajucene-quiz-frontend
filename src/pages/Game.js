@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useMutation } from 'react-query'
 import Question from '../components/Question'
 import Answer from '../components/Answer'
 import ErrorMessage from '../components/ErrorMessage'
 import { startQuiz, submitAnswer } from '../services/quiz'
-import { Spinner } from 'reactstrap'
+import { Loader } from '../components/Spinner'
 
 const Game = () => {
     const [selected, select] = useState(0)
     const [quiz, setQuiz] = useState('')
     const [correctAns, setCorrectAns] = useState('')
+    const [gameover, setGameover] = useState(false)
     const [question, setQuestion] = useState({
         text: '',
         answers: [],
         num: 0,
     })
-
-    const history = useHistory()
 
     const [
         startGame,
@@ -30,7 +29,7 @@ const Game = () => {
         onError: () => {},
     })
 
-    const [sendAnswer, { isLoading }] = useMutation(
+    const [sendAnswer] = useMutation(
         (selectedAns) => submitAnswer(quiz, question.answers[selectedAns - 1]),
         {
             onSuccess: (res) => {
@@ -43,7 +42,7 @@ const Game = () => {
                         if (!data.gameover) {
                             setQuestion(data.question)
                         } else {
-                            history.push('/')
+                            setGameover(true)
                         }
                     }, 1800)
 
@@ -63,12 +62,14 @@ const Game = () => {
     return (
         <div className="wrapper">
             {!startedSuccessfully ? (
-                <Spinner
-                    type="grow"
-                    style={{ color: '#fff', width: '100px', height: '100px' }}
-                />
+                <Loader />
             ) : startingError ? (
                 <ErrorMessage />
+            ) : gameover ? (
+                <div>
+                    Čestitamo! Stigli ste do kraja kviza.
+                    <Link to="/">Idi na početnu</Link>
+                </div>
             ) : (
                 <div className="game">
                     <Question num={question.num + 1} question={question.text} />
