@@ -7,7 +7,7 @@
 }
 
 .auth-form {
-    // border: 0.4rem solid $color-grey-light;
+    // border: 0.4rem solid $color-secondary;
     padding: 8rem 6rem;
     border-radius: 10px;
 
@@ -47,7 +47,7 @@
     }
 
     p {
-        color: $color-grey-light;
+        color: $color-secondary;
         font-size: 1.2rem;
         margin: 0;
         margin-top: 1rem;
@@ -56,15 +56,19 @@
 
 .button {
     &-submit {
-        background-color: $color-grey;
-        border: 1px solid $color-grey-light;
+        background-color: $color-primary;
+        border: 1px solid $color-secondary;
         cursor: pointer;
+
+        &:hover {
+            background-color: $color-blue;
+        }
     }
 
     &-classic {
-        background-color: $color-grey;
-        color: $color-grey-light;
-        border: 1px solid $color-grey-light;
+        background-color: $color-primary;
+        color: $color-secondary;
+        border: 1px solid $color-secondary;
 
         &:hover,
         &:focus,
@@ -76,12 +80,14 @@
 }
 
 .active {
-    background-color: $color-grey-light !important;
-    color: $color-grey !important;
-    border: 1px solid $color-grey;
+    background-color: $color-secondary !important;
+    color: $color-primary !important;
+    border: 1px solid $color-primary;
 }
 
 .home {
+    @include responsive-width;
+
     &-button {
         display: flex;
         align-items: center;
@@ -89,13 +95,13 @@
         margin: 2rem 0;
         border-radius: 1rem;
         cursor: pointer;
-        background-color: $color-grey;
-        border: 1px solid $color-grey-light;
+        background-color: $color-primary;
+        border: 1px solid $color-secondary;
 
         &:hover {
-            background-color: $color-grey-light;
+            background-color: $color-secondary;
             & > * {
-                color: $color-grey;
+                color: $color-primary;
                 font-weight: bold;
             }
         }
@@ -106,7 +112,7 @@
         }
 
         &__text {
-            color: $color-grey-light;
+            color: $color-secondary;
             font-size: 1.6rem;
             font-weight: 500;
             margin-right: 2rem;
@@ -124,30 +130,30 @@
     @include responsive-width;
 
     &-question {
-        background-color: $color-grey;
+        background-color: $color-primary;
         padding: 4rem 6rem;
         font-size: 1.4rem;
         border-radius: 1rem;
-        color: $color-grey-light;
+        color: $color-secondary;
         text-align: center;
-        border: 1px solid $color-grey-light;
+        border: 1px solid $color-secondary;
     }
 
     &-answers {
         margin-top: 2rem;
 
         &__answer {
-            background-color: $color-grey;
-            color: $color-grey-light;
+            background-color: $color-primary;
+            color: $color-secondary;
             padding: 2rem 6rem;
             font-size: 1.3rem;
             border-radius: 1rem;
             cursor: pointer;
             margin-top: 1rem;
-            border: 1px solid $color-grey-light;
+            border: 1px solid $color-secondary;
 
             &:hover {
-                background-color: $color-grey-light;
+                background-color: $color-secondary;
                 font-weight: 700;
                 color: $color-black;
             }
@@ -173,8 +179,9 @@
         }
         .disabled {
             &:hover {
-                background-color: $color-grey-light;
-                color: $color-black;
+                background-color: $color-primary;
+                color: $color-secondary;
+                font-weight: inherit;
             }
         }
     }
@@ -185,8 +192,8 @@
             text-align: center;
             width: 7rem;
             padding: 1.5rem 0;
-            background-color: $color-grey-light;
-            color: $color-grey;
+            background-color: $color-secondary;
+            color: $color-primary;
             font-weight: bold;
             font-size: 1.6rem;
             margin: 0 0.2rem;
@@ -202,13 +209,13 @@
     @include responsive-width;
 
     &-title {
-        background-color: $color-grey;
+        background-color: $color-primary;
         padding: 2rem 6rem;
         font-size: 1.6rem;
         border-radius: 1rem;
         color: $color-text;
         text-align: center;
-        border: 1px solid $color-grey-light;
+        border: 1px solid $color-secondary;
 
         &__buttons {
             display: flex;
@@ -225,14 +232,14 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: $color-grey-light;
-        background-color: $color-grey;
+        color: $color-secondary;
+        background-color: $color-primary;
         padding: 0.5rem 2rem;
         font-size: 1.3rem;
         border-radius: 1rem;
         cursor: pointer;
         margin-top: 0.5rem;
-        border: 1px solid $color-grey-light;
+        border: 1px solid $color-secondary;
 
         &__scores {
             display: flex;
@@ -268,7 +275,7 @@
 }
 
 .message {
-    background-color: $color-grey-light;
+    background-color: $color-secondary;
     padding: 2rem 6rem;
     font-size: 1.6rem;
     border-radius: 1rem;
@@ -280,25 +287,27 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: $color-grey;
+    background-color: $color-primary;
     color: $color-white;
     font-size: 1.6rem;
     & > * {
         font-size: 1.6rem;
     }
     padding: 1rem 3.2rem;
-    border-bottom: 1px solid $color-grey-light;
+    border-bottom: 1px solid $color-secondary;
 }
 
 .congrats {
-    color: $color-grey-light;
+    @include responsive-width;
+
+    color: $color-secondary;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0 10%;
     padding: 4rem;
     text-align: center;
-    border: 1px solid $color-grey-light;
+    border: 1px solid $color-secondary;
 
     h3 {
         margin-top: 1.6rem;
@@ -311,5 +320,35 @@
 
     button {
         font-size: 1.4rem !important;
+    }
+}
+
+.profile {
+    width: 80%;
+
+    @include responsive-width;
+
+    &-card {
+        width: 100%;
+
+        &__text {
+            border: 1px solid $color-secondary;
+            color: $color-secondary;
+            padding: 1rem 1.6rem;
+            font-size: 1.4rem;
+            margin: 0.5rem 0;
+            border-radius: 1rem;
+        }
+
+        &__title {
+            border: 1px solid $color-secondary;
+            color: $color-primary;
+            background-color: $color-secondary;
+            padding: 1rem 6rem;
+            font-size: 1.4rem;
+            border-radius: 1rem;
+            margin: 0.5rem 0;
+            text-align: center;
+        }
     }
 }

@@ -22,6 +22,7 @@ export const TimeProgress = () => {
                         color: colors.secondary,
                         textAlign: 'center',
                         fontSize: '1.2rem',
+                        fontWeight: 'bold',
                         margin: '0',
                     }}
                 >
@@ -29,7 +30,7 @@ export const TimeProgress = () => {
                         {timer.value.m < 10
                             ? '0' + timer.value.m
                             : timer.value.m}
-                    </span>{' '}
+                    </span>{':'}
                     <span>
                         {timer.value.s < 10
                             ? '0' + timer.value.s

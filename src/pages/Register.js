@@ -5,17 +5,32 @@ import { Formik } from 'formik'
 import { Input as InputIcon, Person as PersonIcon } from '@material-ui/icons'
 import Button from '../components/Button'
 import * as Yup from 'yup'
-
+import { useMutation } from 'react-query'
+import { Loader } from '../components/Spinner'
 import UserIcon from '../assets/user.png'
+import { signup } from '../services/user'
 
-export default function Register(props) {
+export default function Register() {
+    const [doSignup, { isLoading }] = useMutation((values) => signup(values), {
+        onSuccess: (res) => {
+            const data = { ...res }
+            if (data.response.status < 300) {
+                history.replace('/login')
+            }
+        },
+    })
     const history = useHistory()
     return (
         <div className="wrapper">
             <Formik
-                initialValues={{ fullName: '', email: '', password: '' }}
-                onSubmit={(values, actions) => {
-                    alert('Submited!')
+                initialValues={{
+                    fullName: '',
+                    email: '',
+                    password: '',
+                    confirmPassword: '',
+                }}
+                onSubmit={(values) => {
+                    doSignup(values)
                 }}
                 validationSchema={Yup.object().shape({
                     email: Yup.string()
@@ -26,6 +41,10 @@ export default function Register(props) {
                             'Email adresa mora imati najviše 250 karaktera'
                         ),
                     password: Yup.string()
+                        .required('Lozinka mora biti unijeta')
+                        .min(6, 'Lozinka mora imati najmanje 6 karaktera')
+                        .max(250, 'Lozinka mora imati najviše 250 karaktera'),
+                    confirmPassword: Yup.string()
                         .required('Lozinka mora biti unijeta')
                         .min(6, 'Lozinka mora imati najmanje 6 karaktera')
                         .max(250, 'Lozinka mora imati najviše 250 karaktera'),
@@ -42,7 +61,6 @@ export default function Register(props) {
                     handleChange,
                     handleBlur,
                     handleSubmit,
-                    isSubmitting,
                 }) => (
                     <Form onSubmit={handleSubmit} className="auth-form">
                         <div>
@@ -58,62 +76,97 @@ export default function Register(props) {
                         <div className="mb-5">
                             <h3>Registracija</h3>
                         </div>
-                        <div className="d-flex flex-column align-items-center">
-                            <FormGroup>
-                                <Label for="fullName">
-                                    Puno ime i prezime:
-                                </Label>
-                                <Input
-                                    id="fullName"
-                                    type="text"
-                                    name="fullName"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.fullName}
-                                />
-                            </FormGroup>
-                            <div className="auth-form__error">
-                                {errors.fullName &&
-                                    touched.fullName &&
-                                    errors.fullName}
+                        {!isLoading && (
+                            <div className="d-flex flex-column align-items-center">
+                                <FormGroup>
+                                    <Label for="fullName">
+                                        Puno ime i prezime:
+                                    </Label>
+                                    <Input
+                                        id="fullName"
+                                        type="text"
+                                        name="fullName"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.fullName}
+                                    />
+                                </FormGroup>
+                                <div className="auth-form__error">
+                                    {errors.fullName &&
+                                        touched.fullName &&
+                                        errors.fullName}
+                                </div>
                             </div>
-                        </div>
-                        <div className="d-flex flex-column align-items-center">
-                            <FormGroup>
-                                <Label for="email">Email:</Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                />
-                            </FormGroup>
-                            <div className="auth-form__error">
-                                {errors.email && touched.email && errors.email}
+                        )}
+                        {!isLoading && (
+                            <div className="d-flex flex-column align-items-center">
+                                <FormGroup>
+                                    <Label for="email">Email:</Label>
+                                    <Input
+                                        id="email"
+                                        type="email"
+                                        name="email"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.email}
+                                    />
+                                </FormGroup>
+                                <div className="auth-form__error">
+                                    {errors.email &&
+                                        touched.email &&
+                                        errors.email}
+                                </div>
                             </div>
-                        </div>
-                        <div className="d-flex flex-column align-items-center">
-                            <FormGroup>
-                                <Label for="password">Password</Label>
-                                <Input
-                                    id="password"
-                                    type="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.password}
-                                />
-                            </FormGroup>
-                            <div className="auth-form__error">
-                                {errors.password &&
-                                    touched.password &&
-                                    errors.password}
+                        )}
+                        {!isLoading && (
+                            <div className="d-flex flex-column align-items-center">
+                                <FormGroup>
+                                    <Label for="password">Lozinka</Label>
+                                    <Input
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.password}
+                                    />
+                                </FormGroup>
+                                <div className="auth-form__error">
+                                    {errors.password &&
+                                        touched.password &&
+                                        errors.password}
+                                </div>
                             </div>
-                        </div>
+                        )}
+                        {!isLoading && (
+                            <div className="d-flex flex-column align-items-center">
+                                <FormGroup>
+                                    <Label for="confirmPassword">
+                                        Potvrdi lozinku
+                                    </Label>
+                                    <Input
+                                        id="confirmPassword"
+                                        type="password"
+                                        name="confirmPassword"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.confirmPassword}
+                                    />
+                                </FormGroup>
+                                <div className="auth-form__error">
+                                    {errors.confirmPassword &&
+                                        touched.confirmPassword &&
+                                        errors.confirmPassword}
+                                </div>
+                            </div>
+                        )}
+                        {isLoading && (
+                            <div className="d-flex justify-content-center my-5">
+                                <Loader />
+                            </div>
+                        )}
                         <div className="d-flex flex-column align-items-center">
-                            <Button type="submit" disabled={isSubmitting}>
+                            <Button type="submit" disabled={isLoading}>
                                 <div className="center-xy">
                                     <span className="mr-2">Registruj se</span>
                                     <PersonIcon />
@@ -121,7 +174,8 @@ export default function Register(props) {
                             </Button>
                             <p>Imaš nalog? Prijavi se</p>
                             <Button
-                                disabled={isSubmitting}
+                                className="submit active"
+                                disabled={isLoading}
                                 onClick={() => history.push('/login')}
                             >
                                 <div className="center-xy">

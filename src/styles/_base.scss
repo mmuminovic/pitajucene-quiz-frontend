@@ -30,7 +30,7 @@ body {
     }
 
     box-sizing: border-box;
-    background-color: $color-grey-dark;
+    background-color: $color-tertiary;
     
     @include respond(tab-port) {
         padding: 0;

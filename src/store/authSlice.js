@@ -27,6 +27,7 @@ export const authSlice = createSlice({
                 localStorage.removeItem('auth_token')
             } else {
                 const token = action.payload.token
+                console.log(token)
                 const decoded = jwtDecode(token)
                 Object.assign(state, { ...decoded, token })
                 localStorage.setItem('auth_token', token)

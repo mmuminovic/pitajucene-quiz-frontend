@@ -4,23 +4,29 @@ import { Input, Label, Form, FormGroup } from 'reactstrap'
 import { Formik } from 'formik'
 import { Input as InputIcon, Person as PersonIcon } from '@material-ui/icons'
 import * as Yup from 'yup'
-
+import { useMutation } from 'react-query'
 import Button from '../components/Button'
 
 import AuthImage from '../assets/education.png'
 import { login } from '../services/user'
+import { Loader } from '../components/Spinner'
 
 export default function Login(props) {
     const history = useHistory()
+    const [doAuth, { isLoading }] = useMutation((values) => login(values), {
+        onSuccess: () => {
+            history.replace('/')
+        },
+        onMutate: () => {
+            console.log('logging in')
+        },
+    })
     return (
         <div className="wrapper">
             <Formik
                 initialValues={{ email: '', password: '' }}
-                onSubmit={async (values, _) => {
-                    const isAuth = await login(values)
-                    if (isAuth) {
-                        history.replace('/')
-                    }
+                onSubmit={(values) => {
+                    doAuth(values)
                 }}
                 validationSchema={Yup.object().shape({
                     email: Yup.string()
@@ -43,7 +49,6 @@ export default function Login(props) {
                     handleChange,
                     handleBlur,
                     handleSubmit,
-                    isSubmitting,
                 }) => (
                     <Form onSubmit={handleSubmit} className="auth-form">
                         <div>
@@ -60,42 +65,53 @@ export default function Login(props) {
                         <div className="mb-5">
                             <h3>Prijava</h3>
                         </div>
-                        <div className="d-flex flex-column align-items-center">
-                            <FormGroup>
-                                <Label for="email">Email adresa:</Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                />
-                            </FormGroup>
-                            <div className="auth-form__error">
-                                {errors.email && touched.email && errors.email}
+                        {!isLoading && (
+                            <div className="d-flex flex-column align-items-center">
+                                <FormGroup>
+                                    <Label for="email">Email adresa:</Label>
+                                    <Input
+                                        id="email"
+                                        type="email"
+                                        name="email"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.email}
+                                    />
+                                </FormGroup>
+                                <div className="auth-form__error">
+                                    {errors.email &&
+                                        touched.email &&
+                                        errors.email}
+                                </div>
                             </div>
-                        </div>
-                        <div className="d-flex flex-column align-items-center">
-                            <FormGroup>
-                                <Label for="password">Lozinka:</Label>
-                                <Input
-                                    id="password"
-                                    type="password"
-                                    name="password"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.password}
-                                />
-                            </FormGroup>
-                            <div className="auth-form__error">
-                                {errors.password &&
-                                    touched.password &&
-                                    errors.password}
+                        )}
+                        {!isLoading && (
+                            <div className="d-flex flex-column align-items-center">
+                                <FormGroup>
+                                    <Label for="password">Lozinka:</Label>
+                                    <Input
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.password}
+                                    />
+                                </FormGroup>
+                                <div className="auth-form__error">
+                                    {errors.password &&
+                                        touched.password &&
+                                        errors.password}
+                                </div>
                             </div>
-                        </div>
+                        )}
+                        {isLoading && (
+                            <div className="d-flex justify-content-center my-5">
+                                <Loader />
+                            </div>
+                        )}
                         <div className="d-flex flex-column align-items-center">
-                            <Button type="submit" disabled={isSubmitting}>
+                            <Button type="submit" disabled={isLoading}>
                                 <div className="center-xy">
                                     <span className="mr-2">Prijavi se</span>
                                     <InputIcon />
@@ -103,7 +119,8 @@ export default function Login(props) {
                             </Button>
                             <p>Nemaš nalog? Registruj se</p>
                             <Button
-                                disabled={isSubmitting}
+                                className="submit active"
+                                disabled={isLoading}
                                 onClick={() => history.push('/register')}
                             >
                                 <div className="center-xy">
