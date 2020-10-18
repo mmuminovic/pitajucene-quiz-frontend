@@ -1,12 +1,7 @@
 import React from 'react'
 import Button from '../components/Button'
 
-export default function RankingTitle({
-    currentPeriod,
-    lastPeriod,
-    select,
-    selected,
-}) {
+const RankingTitle = ({ currentPeriod, lastPeriod, select, selected }) => {
     return (
         <div className="ranking-title">
             <div>Rang lista</div>
@@ -42,3 +37,5 @@ export default function RankingTitle({
         </div>
     )
 }
+
+export default RankingTitle

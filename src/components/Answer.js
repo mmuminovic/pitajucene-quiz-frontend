@@ -1,12 +1,6 @@
 import React from 'react'
 
-export default function Answer({
-    text,
-    isSelected,
-    correct,
-    onClickHandler,
-    answered,
-}) {
+const Answer = ({ text, isSelected, correct, onClickHandler, answered }) => {
     const isCorrect = text === correct
     let answerClassName = 'game-answers__answer'
     if (isSelected && correct === '') {
@@ -40,3 +34,5 @@ export default function Answer({
         </div>
     )
 }
+
+export default Answer

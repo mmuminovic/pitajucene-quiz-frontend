@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Input, Label, Form, FormGroup } from 'reactstrap'
 import { Formik } from 'formik'
@@ -6,20 +6,25 @@ import { Input as InputIcon, Person as PersonIcon } from '@material-ui/icons'
 import Button from '../components/Button'
 import * as Yup from 'yup'
 import { useMutation } from 'react-query'
-import { Loader } from '../components/Spinner'
+import Loader from '../components/Spinner'
 import UserIcon from '../assets/user.png'
 import { signup } from '../services/user'
 
-export default function Register() {
+const Register = () => {
+    const [error, setError] = useState('')
     const [doSignup, { isLoading }] = useMutation((values) => signup(values), {
         onSuccess: (res) => {
             const data = { ...res }
+
             if (data.response.status < 300) {
                 history.replace('/login')
+            } else {
+                setError(data.response.data.error)
             }
         },
     })
     const history = useHistory()
+
     return (
         <div className="wrapper">
             <Formik
@@ -30,6 +35,7 @@ export default function Register() {
                     confirmPassword: '',
                 }}
                 onSubmit={(values) => {
+                    setError('')
                     doSignup(values)
                 }}
                 validationSchema={Yup.object().shape({
@@ -45,9 +51,27 @@ export default function Register() {
                         .min(6, 'Lozinka mora imati najmanje 6 karaktera')
                         .max(250, 'Lozinka mora imati najviše 250 karaktera'),
                     confirmPassword: Yup.string()
-                        .required('Lozinka mora biti unijeta')
-                        .min(6, 'Lozinka mora imati najmanje 6 karaktera')
-                        .max(250, 'Lozinka mora imati najviše 250 karaktera'),
+                        .required('Ponovljena lozinka mora biti unijeta')
+                        .min(
+                            6,
+                            'Ponovljena lozinka mora imati najmanje 6 karaktera'
+                        )
+                        .max(
+                            250,
+                            'Ponovljena lozinka mora imati najviše 250 karaktera'
+                        )
+                        .when('password', (password, field) =>
+                            password
+                                ? field
+                                      .required(
+                                          'Ponovljena lozinka mora biti unijeta'
+                                      )
+                                      .oneOf(
+                                          [Yup.ref('password')],
+                                          'Unete lozinke moraju biti iste'
+                                      )
+                                : field
+                        ),
                     fullName: Yup.string()
                         .required('Puno ime i prezime mora biti unijeto')
                         .min(2, 'Ime mora imati najmanje 2 karaktera')
@@ -78,6 +102,7 @@ export default function Register() {
                         </div>
                         {!isLoading && (
                             <div className="d-flex flex-column align-items-center">
+                                <div className="auth-form__error">{error}</div>
                                 <FormGroup>
                                     <Label for="fullName">
                                         Puno ime i prezime:
@@ -190,3 +215,5 @@ export default function Register() {
         </div>
     )
 }
+
+export default Register

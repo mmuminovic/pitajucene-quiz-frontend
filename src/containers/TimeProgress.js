@@ -1,5 +1,5 @@
 import React from 'react'
-import { TimeProgressBar } from '../components/TimeProgressBar'
+import TimeProgressBar from '../components/TimeProgressBar'
 import { useTimer } from 'react-compound-timer'
 import { AccessAlarm as Time } from '@material-ui/icons'
 import * as colors from '../styles/main.scss'

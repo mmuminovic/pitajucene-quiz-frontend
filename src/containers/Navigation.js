@@ -44,6 +44,9 @@ const Navigation = () => {
                                 <DropdownMenu right>
                                     <DropdownItem
                                         style={{ fontSize: '1.4rem' }}
+                                        onClick={() => {
+                                            history.push('/profile')
+                                        }}
                                     >
                                         Moj profil
                                     </DropdownItem>

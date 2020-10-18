@@ -1,7 +1,7 @@
 import React from 'react'
 import { AccessAlarm as Time, Star } from '@material-ui/icons'
 
-export default function RankingItem({ place, name, score, time }) {
+const RankingItem = ({ place, name, score, time }) => {
     return (
         <div className="ranking-item">
             <div>
@@ -24,3 +24,5 @@ export default function RankingItem({ place, name, score, time }) {
         </div>
     )
 }
+
+export default RankingItem

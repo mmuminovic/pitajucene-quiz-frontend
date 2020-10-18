@@ -3,11 +3,11 @@ import { useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import HomeButton from '../components/HomeButton'
 
-export default function Homepage() {
+const Homepage = () => {
     const history = useHistory()
     const auth = useSelector((state) => state.auth.token)
     console.log(auth)
-    if(!auth){
+    if (!auth) {
         history.push('/login')
     }
     console.log(auth)
@@ -42,3 +42,5 @@ export default function Homepage() {
         </div>
     )
 }
+
+export default Homepage

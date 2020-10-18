@@ -86,10 +86,9 @@
 }
 
 .home {
-    @include responsive-width;
-
     &-button {
         display: flex;
+        justify-content: center;
         align-items: center;
         padding: 2.5rem 6rem;
         margin: 2rem 0;
@@ -146,7 +145,7 @@
             background-color: $color-primary;
             color: $color-secondary;
             padding: 2rem 6rem;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             border-radius: 1rem;
             cursor: pointer;
             margin-top: 1rem;

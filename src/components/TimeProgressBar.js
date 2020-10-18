@@ -1,7 +1,7 @@
 import React from 'react'
 import * as colors from '../styles/main.scss'
 
-export const TimeProgressBar = ({ timer }) => {
+const TimeProgressBar = ({ timer }) => {
     const total = 1000 * 60 * 30
     const passedTime = timer.controls.getTime()
     const remainingInPercentage = 100 * (passedTime / total)
@@ -36,3 +36,5 @@ export const TimeProgressBar = ({ timer }) => {
         </div>
     )
 }
+
+export default TimeProgressBar

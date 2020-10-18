@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function HomeButton({ imageUrl, imageAlt, text, onClick }) {
+const HomeButton = ({ imageUrl, imageAlt, text, onClick }) => {
     return (
         <div className="home-button" onClick={onClick}>
             <img className="home-button__icon" src={imageUrl} alt={imageAlt} />
@@ -8,3 +8,5 @@ export default function HomeButton({ imageUrl, imageAlt, text, onClick }) {
         </div>
     )
 }
+
+export default HomeButton

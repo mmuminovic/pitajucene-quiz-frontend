@@ -11,7 +11,8 @@ import Ranking from './pages/Ranking'
 import Navigation from './containers/Navigation'
 import { store } from './store'
 import { authSlice } from './store/authSlice'
-import { Profile } from './pages/Profile'
+import Profile from './pages/Profile'
+import About from './pages/About'
 
 const lsTest = () => {
     const test = 'test'
@@ -58,6 +59,7 @@ function App() {
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/profile" component={Profile} />
+                <Route exact path="/about" component={About} />
                 <Route exact path="/" component={Homepage} />
             </Switch>
         </BrowserRouter>

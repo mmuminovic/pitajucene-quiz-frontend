@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Input, Label, Form, FormGroup } from 'reactstrap'
 import { Formik } from 'formik'
@@ -9,16 +9,17 @@ import Button from '../components/Button'
 
 import AuthImage from '../assets/education.png'
 import { login } from '../services/user'
-import { Loader } from '../components/Spinner'
+import Loader from '../components/Spinner'
 
-export default function Login(props) {
+const Login = () => {
     const history = useHistory()
+    const [error, setError] = useState('')
     const [doAuth, { isLoading }] = useMutation((values) => login(values), {
         onSuccess: () => {
             history.replace('/')
         },
-        onMutate: () => {
-            console.log('logging in')
+        onError: (error) => {
+            setError(error.message)
         },
     })
     return (
@@ -26,6 +27,7 @@ export default function Login(props) {
             <Formik
                 initialValues={{ email: '', password: '' }}
                 onSubmit={(values) => {
+                    setError('')
                     doAuth(values)
                 }}
                 validationSchema={Yup.object().shape({
@@ -67,6 +69,7 @@ export default function Login(props) {
                         </div>
                         {!isLoading && (
                             <div className="d-flex flex-column align-items-center">
+                                <div className="auth-form__error">{error}</div>
                                 <FormGroup>
                                     <Label for="email">Email adresa:</Label>
                                     <Input
@@ -135,3 +138,5 @@ export default function Login(props) {
         </div>
     )
 }
+
+export default Login

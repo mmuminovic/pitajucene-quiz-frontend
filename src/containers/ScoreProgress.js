@@ -1,9 +1,9 @@
 import React from 'react'
-import { ScoreProgressBar } from '../components/ScoreProgressBar'
+import ScoreProgressBar from '../components/ScoreProgressBar'
 import { Star } from '@material-ui/icons'
 import * as colors from '../styles/main.scss'
 
-export const ScoreProgress = ({ score }) => {
+const ScoreProgress = ({ score }) => {
     return (
         <div style={{ display: 'flex', width: '100%', marginTop: '32px' }}>
             <div>
@@ -26,3 +26,5 @@ export const ScoreProgress = ({ score }) => {
         </div>
     )
 }
+
+export default ScoreProgress

@@ -3,11 +3,11 @@ import RankingTitle from '../components/RankingTitle'
 import RankingItem from '../components/RankingListItem'
 import { rankingLists } from '../services/stats'
 import { useQuery } from 'react-query'
-import { Loader } from '../components/Spinner'
+import Loader from '../components/Spinner'
 
 const ENUM_RANKING = ['currentRankingList', 'rankingLastPeriod', 'top10ranking']
 
-export default function Ranking() {
+const Ranking = () => {
     const [selected, select] = useState(0)
     const [currentPeriod, setCurrentPeriod] = useState('')
     const [lastPeriod, setLastPeriod] = useState('')
@@ -76,3 +76,5 @@ export default function Ranking() {
         </div>
     )
 }
+
+export default Ranking

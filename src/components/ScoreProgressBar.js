@@ -1,7 +1,7 @@
 import React from 'react'
 import * as colors from '../styles/main.scss'
 
-export const ScoreProgressBar = ({ score }) => {
+const ScoreProgressBar = ({ score }) => {
     const scoreProgress = score / 9
     const percentage = scoreProgress + '%'
 
@@ -34,3 +34,5 @@ export const ScoreProgressBar = ({ score }) => {
         </div>
     )
 }
+
+export default ScoreProgressBar

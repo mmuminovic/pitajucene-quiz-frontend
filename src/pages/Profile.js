@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import RankingItem from '../components/RankingListItem'
 import { useQuery } from 'react-query'
 import { myScores } from '../services/stats'
-import { Loader } from '../components/Spinner'
+import Loader from '../components/Spinner'
 
-export const Profile = () => {
+const Profile = () => {
     const [isQueryEnabled, setIsQueryEnabled] = useState(true)
 
     const { data, isLoading } = useQuery('myscores', () => myScores(), {
@@ -57,3 +57,5 @@ export const Profile = () => {
         </div>
     )
 }
+
+export default Profile

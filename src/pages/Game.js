@@ -5,10 +5,11 @@ import Question from '../components/Question'
 import Answer from '../components/Answer'
 import ErrorMessage from '../components/ErrorMessage'
 import { startQuiz, submitAnswer } from '../services/quiz'
-import { Loader } from '../components/Spinner'
-import { CongratsMessage } from '../components/CongratsMessage'
+import Loader from '../components/Spinner'
+import CongratsMessage from '../components/CongratsMessage'
 import { TimeProgress } from '../containers/TimeProgress'
-import { ScoreProgress } from '../containers/ScoreProgress'
+import ScoreProgress from '../containers/ScoreProgress'
+import TimeIsUpMessage from '../components/TimeIsUpMessage'
 
 const Game = () => {
     const history = useHistory()
@@ -16,6 +17,7 @@ const Game = () => {
     const [quiz, setQuiz] = useState('')
     const [correctAns, setCorrectAns] = useState('')
     const [gameover, setGameover] = useState(false)
+    const [isNotActive, setIsNotActive] = useState(false)
     const [score, setScore] = useState(0)
     const [question, setQuestion] = useState({
         text: '',
@@ -31,7 +33,6 @@ const Game = () => {
             setQuiz(data.quiz)
             setQuestion(data.question)
         },
-        onError: () => {},
     })
 
     const [sendAnswer] = useMutation(
@@ -44,7 +45,9 @@ const Game = () => {
                     setTimeout(() => {
                         setCorrectAns('')
                         select(0)
-                        if (!data.gameover) {
+                        if (data.active === false) {
+                            setIsNotActive(true)
+                        } else if (!data.gameover) {
                             setQuestion(data.question)
                         } else {
                             setGameover(true)
@@ -70,6 +73,8 @@ const Game = () => {
                 <Loader />
             ) : startingError ? (
                 <ErrorMessage />
+            ) : isNotActive ? (
+                <TimeIsUpMessage />
             ) : gameover ? (
                 <CongratsMessage onClick={() => history.replace('/')} />
             ) : (

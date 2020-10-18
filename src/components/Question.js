@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Question({ num, question }) {
+const Question = ({ num, question }) => {
     return (
         <div className="game-question">
             <div>Pitanje ({num}/60):</div>
@@ -8,3 +8,5 @@ export default function Question({ num, question }) {
         </div>
     )
 }
+
+export default Question
