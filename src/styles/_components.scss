@@ -119,13 +119,14 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    position: relative;
 
     @include responsive-width;
 
     &-question {
         background-color: $color-grey;
         padding: 4rem 6rem;
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         border-radius: 1rem;
         color: $color-grey-light;
         text-align: center;
@@ -139,7 +140,7 @@
             background-color: $color-grey;
             color: $color-grey-light;
             padding: 2rem 6rem;
-            font-size: 1.6rem;
+            font-size: 1.3rem;
             border-radius: 1rem;
             cursor: pointer;
             margin-top: 1rem;
@@ -175,6 +176,21 @@
                 background-color: $color-grey-light;
                 color: $color-black;
             }
+        }
+    }
+
+    &-timer {
+        span {
+            display: inline-block;
+            text-align: center;
+            width: 7rem;
+            padding: 1.5rem 0;
+            background-color: $color-grey-light;
+            color: $color-grey;
+            font-weight: bold;
+            font-size: 1.6rem;
+            margin: 0 0.2rem;
+            border-radius: 1rem;
         }
     }
 }
@@ -272,4 +288,28 @@
     }
     padding: 1rem 3.2rem;
     border-bottom: 1px solid $color-grey-light;
+}
+
+.congrats {
+    color: $color-grey-light;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10%;
+    padding: 4rem;
+    text-align: center;
+    border: 1px solid $color-grey-light;
+
+    h3 {
+        margin-top: 1.6rem;
+    }
+
+    h4 {
+        font-style: italic;
+        margin-bottom: 2rem;
+    }
+
+    button {
+        font-size: 1.4rem !important;
+    }
 }

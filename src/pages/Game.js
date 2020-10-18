@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useMutation } from 'react-query'
 import Question from '../components/Question'
 import Answer from '../components/Answer'
 import ErrorMessage from '../components/ErrorMessage'
 import { startQuiz, submitAnswer } from '../services/quiz'
 import { Loader } from '../components/Spinner'
+import { CongratsMessage } from '../components/CongratsMessage'
+import { TimeProgress } from '../containers/TimeProgress'
+import { ScoreProgress } from '../containers/ScoreProgress'
 
 const Game = () => {
+    const history = useHistory()
     const [selected, select] = useState(0)
     const [quiz, setQuiz] = useState('')
     const [correctAns, setCorrectAns] = useState('')
     const [gameover, setGameover] = useState(false)
+    const [score, setScore] = useState(0)
     const [question, setQuestion] = useState({
         text: '',
         answers: [],
@@ -34,7 +39,7 @@ const Game = () => {
         {
             onSuccess: (res) => {
                 const { data } = res
-
+                setScore(data.score)
                 const changeQuestion = () =>
                     setTimeout(() => {
                         setCorrectAns('')
@@ -66,10 +71,7 @@ const Game = () => {
             ) : startingError ? (
                 <ErrorMessage />
             ) : gameover ? (
-                <div>
-                    Čestitamo! Stigli ste do kraja kviza.
-                    <Link to="/">Idi na početnu</Link>
-                </div>
+                <CongratsMessage onClick={() => history.replace('/')} />
             ) : (
                 <div className="game">
                     <Question num={question.num + 1} question={question.text} />
@@ -88,6 +90,8 @@ const Game = () => {
                             />
                         ))}
                     </div>
+                    <ScoreProgress score={score} />
+                    <TimeProgress />
                 </div>
             )}
         </div>

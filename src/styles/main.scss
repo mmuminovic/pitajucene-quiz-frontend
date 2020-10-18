@@ -3,3 +3,14 @@
 @import 'base.scss';
 @import 'components.scss';
 @import 'utility.scss';
+
+:export {
+    primary: $color-grey;
+    secondary: $color-grey-light;
+    incorrect: $color-incorrect;
+    danger: $color-danger;
+    red: $color-red;
+    correct: $color-correct;
+    white: $color-white;
+    black: $color-black;
+}
