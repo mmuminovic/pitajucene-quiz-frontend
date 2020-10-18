@@ -6,11 +6,9 @@ import HomeButton from '../components/HomeButton'
 const Homepage = () => {
     const history = useHistory()
     const auth = useSelector((state) => state.auth.token)
-    console.log(auth)
     if (!auth) {
         history.push('/login')
     }
-    console.log(auth)
     return (
         <div className="wrapper">
             <div className="home">
