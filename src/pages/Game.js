@@ -74,7 +74,7 @@ const Game = () => {
             ) : startingError ? (
                 <ErrorMessage />
             ) : isNotActive ? (
-                <TimeIsUpMessage />
+                <TimeIsUpMessage onClick={() => history.replace('/')} />
             ) : gameover ? (
                 <CongratsMessage onClick={() => history.replace('/')} />
             ) : (

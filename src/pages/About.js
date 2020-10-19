@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import Button from '../components/Button'
+import * as colors from '../styles/main.scss'
 
 const About = () => {
     const history = useHistory()
@@ -17,6 +18,7 @@ const About = () => {
                         href="https://pitajucene.com/profile/sedin/"
                         target="_blank"
                         rel="noopener noreferrer"
+                        style={{ color: colors.secondary }}
                     >
                         Sedin Kutlovac
                     </a>
@@ -29,6 +31,7 @@ const About = () => {
                         href="https://pitajucene.com/profile/muhamed-muminovic/"
                         target="_blank"
                         rel="noopener noreferrer"
+                        style={{ color: colors.secondary }}
                     >
                         Muhamed Muminović
                     </a>
@@ -43,6 +46,7 @@ const About = () => {
                         type="submit active"
                         onClick={() => history.push('/')}
                         style={{
+                            marginTop: '1rem',
                             fontSize: '1.4rem',
                             padding: '1rem 1.6rem',
                             borderRadius: '1rem',

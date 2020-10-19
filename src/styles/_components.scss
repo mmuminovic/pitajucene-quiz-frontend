@@ -157,7 +157,7 @@
                 color: $color-black;
 
                 @media (hover: none) {
-                    background-color: transparent;
+                    background-color: $color-primary;
                     font-weight: 500;
                     color: $color-secondary;
                 }
