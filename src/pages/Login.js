@@ -79,6 +79,7 @@ const Login = () => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.email}
+                                        style={{ fontSize: '1.4rem' }}
                                     />
                                 </FormGroup>
                                 <div className="auth-form__error">
@@ -99,6 +100,7 @@ const Login = () => {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         value={values.password}
+                                        style={{ fontSize: '1.4rem' }}
                                     />
                                 </FormGroup>
                                 <div className="auth-form__error">
