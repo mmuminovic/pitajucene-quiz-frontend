@@ -1,10 +1,15 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Button from '../components/Button'
 import * as colors from '../styles/main.scss'
 
 const About = () => {
     const history = useHistory()
+    const auth = useSelector((state) => state.auth.token)
+    if (!auth) {
+        history.push('/login')
+    }
     return (
         <div className="wrapper">
             <div className="profile" style={{ textAlign: 'center' }}>

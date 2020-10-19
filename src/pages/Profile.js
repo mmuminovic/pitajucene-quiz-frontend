@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
-import RankingItem from '../components/RankingListItem'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { myScores } from '../services/stats'
+import RankingItem from '../components/RankingListItem'
 import Loader from '../components/Spinner'
 
 const Profile = () => {
     const [isQueryEnabled, setIsQueryEnabled] = useState(true)
+    const history = useHistory()
+    const auth = useSelector((state) => state.auth.token)
+    if (!auth) {
+        history.push('/login')
+    }
 
     const { data, isLoading } = useQuery('myscores', () => myScores(), {
         enabled: isQueryEnabled,

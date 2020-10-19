@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from 'react-query'
+import { useSelector } from 'react-redux'
 import Question from '../components/Question'
 import Answer from '../components/Answer'
 import ErrorMessage from '../components/ErrorMessage'
@@ -24,6 +25,11 @@ const Game = () => {
         answers: [],
         num: 0,
     })
+
+    const auth = useSelector((state) => state.auth.token)
+    if (!auth) {
+        history.push('/login')
+    }
 
     const [
         startGame,

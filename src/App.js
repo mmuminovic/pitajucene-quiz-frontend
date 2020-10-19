@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
+import { Switch, Route, HashRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './styles/main.scss'
 import jwtDecode from 'jwt-decode'
@@ -51,7 +51,7 @@ if (lsTest() === true) {
 
 function App() {
     return (
-        <BrowserRouter basename="/">
+        <HashRouter>
             <Navigation />
             <Switch>
                 <Route exact path="/game" component={Game} />
@@ -62,7 +62,7 @@ function App() {
                 <Route exact path="/about" component={About} />
                 <Route exact path="/" component={Homepage} />
             </Switch>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 

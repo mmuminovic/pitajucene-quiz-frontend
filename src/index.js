@@ -14,7 +14,6 @@ axios.interceptors.response.use(
     (error) => {
         if (error.response.status === 401) {
             store.dispatch(authSlice.actions.auth())
-            window.location.href = '/login'
         }
         if (error.response.status === 403) {
             window.history.go(-1)

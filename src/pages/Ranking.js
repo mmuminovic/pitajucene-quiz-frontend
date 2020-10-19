@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { useQuery } from 'react-query'
 import RankingTitle from '../components/RankingTitle'
 import RankingItem from '../components/RankingListItem'
 import { rankingLists } from '../services/stats'
-import { useQuery } from 'react-query'
 import Loader from '../components/Spinner'
 
 const ENUM_RANKING = ['currentRankingList', 'rankingLastPeriod', 'top10ranking']
@@ -13,6 +15,11 @@ const Ranking = () => {
     const [lastPeriod, setLastPeriod] = useState('')
     const [rankingList, setRankingList] = useState([])
     const [data, setData] = useState(null)
+    const history = useHistory()
+    const auth = useSelector((state) => state.auth.token)
+    if (!auth) {
+        history.push('/login')
+    }
 
     const { isLoading } = useQuery('ranking', () => rankingLists(), {
         onSuccess: (data) => {
