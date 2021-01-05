@@ -5,6 +5,7 @@ import { useQuery } from 'react-query'
 import { myScores } from '../services/stats'
 import RankingItem from '../components/RankingListItem'
 import Loader from '../components/Spinner'
+import Button from '../components/Button'
 
 const Profile = () => {
     const history = useHistory()
@@ -26,12 +27,14 @@ const Profile = () => {
             ) : (
                 <div className="profile">
                     <div className="profile-card profile-card__title">Ime</div>
-                    <div className="profile-card profile-card__text">Test</div>
+                    <div className="profile-card profile-card__text">
+                        {data.data.user.fullName}
+                    </div>
                     <div className="profile-card profile-card__title">
                         Email
                     </div>
                     <div className="profile-card profile-card__text">
-                        test@test.com
+                        {data.data.user.email}
                     </div>
                     <div className="profile-card profile-card__title">
                         Najbolji rezultat u ovom kolu
@@ -57,6 +60,25 @@ const Profile = () => {
                         score={data.data.theBestScore.score}
                         time={data.data.theBestScore.duration}
                     />
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <Button
+                            type="submit active"
+                            onClick={() => history.push('/')}
+                            style={{
+                                marginTop: '1rem',
+                                fontSize: '1.4rem',
+                                padding: '1rem 1.6rem',
+                                borderRadius: '1rem',
+                            }}
+                        >
+                            Vrati se na početnu
+                        </Button>
+                    </div>
                 </div>
             )}
         </div>

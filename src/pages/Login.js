@@ -57,11 +57,15 @@ const Login = () => {
                             <h3>Dobrodošli na kviz pitajucene.com</h3>
                         </div>
                         <div className="center-x">
-                            <img
-                                src={AuthImage}
-                                alt="authimage"
-                                style={{ width: '150px' }}
-                            />
+                            <div
+                                style={{ width: '150px', textAlign: 'center' }}
+                            >
+                                <img
+                                    src={AuthImage}
+                                    alt="authimage"
+                                    style={{ width: '100%', resize: 'both' }}
+                                />
+                            </div>
                             {/* <ExitToAppOutlined htmlColor="#fff" /> */}
                         </div>
                         <div className="mb-5">
@@ -131,6 +135,24 @@ const Login = () => {
                                 <div className="center-xy">
                                     <span className="mr-2">Registruj se</span>
                                     <PersonIcon />
+                                </div>
+                            </Button>
+                            <p>ili nastavi kao gost</p>
+                            <Button
+                                className="submit active"
+                                disabled={isLoading}
+                                onClick={() =>
+                                    doAuth({
+                                        email: '',
+                                        password: '',
+                                        isGuest: true,
+                                    })
+                                }
+                            >
+                                <div className="center-xy">
+                                    <span className="mr-2">
+                                        Nastavi kao gost
+                                    </span>
                                 </div>
                             </Button>
                         </div>

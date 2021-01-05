@@ -63,7 +63,7 @@ const Game = () => {
                 setTimeout(() => {
                     setCorrectAns(data.correct)
                     changeQuestion()
-                }, 200)
+                }, 800)
             },
             onError: () => {},
         }

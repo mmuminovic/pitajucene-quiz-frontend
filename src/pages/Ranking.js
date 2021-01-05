@@ -6,6 +6,7 @@ import RankingTitle from '../components/RankingTitle'
 import RankingItem from '../components/RankingListItem'
 import { rankingLists } from '../services/stats'
 import Loader from '../components/Spinner'
+import Button from '../components/Button'
 
 const ENUM_RANKING = ['currentRankingList', 'rankingLastPeriod', 'top10ranking']
 
@@ -78,6 +79,25 @@ const Ranking = () => {
                         lastPeriod={lastPeriod}
                     />
                     <div className="ranking-list">{rankingList}</div>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <Button
+                            type="submit active"
+                            onClick={() => history.push('/')}
+                            style={{
+                                marginTop: '1rem',
+                                fontSize: '1.4rem',
+                                padding: '1rem 1.6rem',
+                                borderRadius: '1rem',
+                            }}
+                        >
+                            Vrati se na početnu
+                        </Button>
+                    </div>
                 </div>
             )}
         </div>

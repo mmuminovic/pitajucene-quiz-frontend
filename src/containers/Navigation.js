@@ -13,6 +13,7 @@ import {
 import logo from '../assets/images/logo-white.png'
 import { authSlice } from '../store/authSlice'
 import jwtDecode from 'jwt-decode'
+import { Menu } from '@material-ui/icons'
 
 const Navigation = () => {
     const history = useHistory()
@@ -81,9 +82,23 @@ const Navigation = () => {
                                         fontSize: '1.4rem',
                                     }}
                                 >
-                                    {authState.fullName}
+                                    <Menu
+                                        htmlColor="#fff"
+                                        style={{
+                                            width: '24px',
+                                            height: '24px',
+                                        }}
+                                    />
                                 </DropdownToggle>
                                 <DropdownMenu right>
+                                    <DropdownItem
+                                        style={{ fontSize: '1.4rem' }}
+                                        onClick={() => {
+                                            history.push('/')
+                                        }}
+                                    >
+                                        Početna
+                                    </DropdownItem>
                                     <DropdownItem
                                         style={{ fontSize: '1.4rem' }}
                                         onClick={() => {

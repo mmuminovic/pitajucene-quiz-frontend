@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, HashRouter } from 'react-router-dom'
+import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './styles/main.scss'
 import Login from './pages/Login'
@@ -13,7 +13,7 @@ import About from './pages/About'
 
 function App() {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <Navigation />
             <Switch>
                 <Route exact path="/game" component={Game} />
@@ -24,7 +24,7 @@ function App() {
                 <Route exact path="/about" component={About} />
                 <Route exact path="/" component={Homepage} />
             </Switch>
-        </HashRouter>
+        </BrowserRouter>
     )
 }
 

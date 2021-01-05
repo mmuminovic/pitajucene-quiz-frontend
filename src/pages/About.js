@@ -14,7 +14,7 @@ const About = () => {
         <div className="wrapper">
             <div className="profile" style={{ textAlign: 'center' }}>
                 <div className="profile-card profile-card__title">Verzija</div>
-                <div className="profile-card profile-card__text">v2.0 beta</div>
+                <div className="profile-card profile-card__text">v2.0</div>
                 <div className="profile-card profile-card__title">
                     Kontakt osoba
                 </div>

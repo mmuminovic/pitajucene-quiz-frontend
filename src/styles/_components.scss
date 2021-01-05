@@ -264,7 +264,8 @@
 
     &-list {
         margin-top: 1rem;
-        height: 60vh;
+        height: 50vh;
+        overflow: auto;
     }
 }
 
@@ -298,7 +299,7 @@
     & > * {
         font-size: 1.6rem;
     }
-    padding: 1rem 3.2rem;
+    padding: 2.4rem 3.2rem 1rem;
     border-bottom: 1px solid $color-secondary;
 }
 
@@ -356,4 +357,9 @@
             text-align: center;
         }
     }
+}
+
+.text-white {
+    color: $color-white;
+    margin: 0;
 }

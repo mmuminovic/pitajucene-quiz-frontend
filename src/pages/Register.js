@@ -91,11 +91,19 @@ const Register = () => {
                             <h3>Dobrodošli na kviz pitajucene.com</h3>
                         </div>
                         <div className="center-x">
-                            <img
-                                src={UserIcon}
-                                alt="authimage"
-                                style={{ width: '80px', margin: '1rem 0' }}
-                            />
+                            <div
+                                style={{
+                                    width: '150px',
+                                    textAlign: 'center',
+                                    margin: '1rem 0',
+                                }}
+                            >
+                                <img
+                                    src={UserIcon}
+                                    alt="authimage"
+                                    style={{ width: '100%', resize: 'both' }}
+                                />
+                            </div>
                         </div>
                         <div className="mb-5">
                             <h3>Registracija</h3>
