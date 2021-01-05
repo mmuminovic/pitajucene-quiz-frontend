@@ -19,27 +19,17 @@ const About = () => {
                     Kontakt osoba
                 </div>
                 <div className="profile-card profile-card__text">
-                    <a
-                        href="https://pitajucene.com/profile/sedin/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: colors.secondary }}
-                    >
+                    <span style={{ color: colors.secondary }}>
                         Sedin Kutlovac
-                    </a>
+                    </span>
                 </div>
                 <div className="profile-card profile-card__title">
                     Software developer
                 </div>
                 <div className="profile-card profile-card__text">
-                    <a
-                        href="https://pitajucene.com/profile/muhamed-muminovic/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: colors.secondary }}
-                    >
+                    <span style={{ color: colors.secondary }}>
                         Muhamed Muminović
-                    </a>
+                    </span>
                 </div>
                 <div
                     style={{
