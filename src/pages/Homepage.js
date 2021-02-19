@@ -38,7 +38,7 @@ const Homepage = () => {
           text="O aplikaciji"
           onClick={() => history.push('/about')}
         />
-        {!isFetching ? (
+        {!isFetching && stats.data ? (
           <div style={{ textAlign: 'center' }}>
             <div className="text-white">
               <span>Trenutno igra: </span>
