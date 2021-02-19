@@ -38,7 +38,7 @@ const Homepage = () => {
           text="O aplikaciji"
           onClick={() => history.push('/about')}
         />
-        {!isFetching && stats.data.activeGames && stats.data.gamesToday && (
+        {!isFetching ? (
           <div style={{ textAlign: 'center' }}>
             <div className="text-white">
               <span>Trenutno igra: </span>
@@ -49,7 +49,7 @@ const Homepage = () => {
               <span>{stats.data.gamesToday}</span>
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );
