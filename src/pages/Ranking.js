@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import RankingTitle from '../components/RankingTitle'
@@ -17,10 +16,6 @@ const Ranking = () => {
     const [rankingList, setRankingList] = useState([])
     const [data, setData] = useState(null)
     const history = useHistory()
-    const auth = useSelector((state) => state.auth.token)
-    if (!auth) {
-        history.push('/login')
-    }
 
     const { isLoading } = useQuery('ranking', () => rankingLists(), {
         onSuccess: (data) => {

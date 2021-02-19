@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { myScores } from '../services/stats'
@@ -9,10 +8,6 @@ import Button from '../components/Button'
 
 const Profile = () => {
     const history = useHistory()
-    const auth = useSelector((state) => state.auth.token)
-    if (!auth) {
-        history.push('/login')
-    }
 
     const { data, isLoading } = useQuery('myscores', () => myScores(), {
         refetchOnMount: false,
