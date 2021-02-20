@@ -40,6 +40,9 @@ const AdminQuestions = () => {
                   </select>
                 </div>
               </tr>
+              <tr>
+                <td>Ukupan broj pitanja ((( {questions ? questions.length : ''} )))</td>
+              </tr>
               <tr className="question-table__header">
                 <td>Pitanje</td>
                 <td>
