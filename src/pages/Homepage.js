@@ -1,11 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import HomeButton from '../components/HomeButton';
 import { useQuery } from 'react-query';
 import { homeStats } from '../services/stats';
 
 const Homepage = () => {
   const history = useHistory();
+  const userId = useSelector((state) => state.auth.id);
 
   const { data: stats = { data: {} }, isFetching } = useQuery('stats', () => homeStats(), {
     refetchOnWindowFocus: true,
@@ -30,7 +32,7 @@ const Homepage = () => {
           imageUrl={require('../assets/images/rules.png')}
           imageAlt="rules"
           text="Moj profil"
-          onClick={() => history.push('/profile')}
+          onClick={() => history.push('/profile', { id: userId })}
         />
         <HomeButton
           imageUrl={require('../assets/images/about.png')}
