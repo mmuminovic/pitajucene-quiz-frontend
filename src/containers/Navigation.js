@@ -91,7 +91,7 @@ const Navigation = () => {
                   <DropdownItem
                     style={{ fontSize: '1.4rem' }}
                     onClick={() => {
-                      history.push('/profile');
+                      history.push('/profile', { id: authState.id });
                     }}
                   >
                     Moj profil
