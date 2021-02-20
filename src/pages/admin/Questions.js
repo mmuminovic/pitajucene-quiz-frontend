@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Table } from 'reactstrap';
 import { Edit, Check, Cancel } from '@material-ui/icons';
@@ -8,7 +8,19 @@ import Button from '../../components/Button';
 
 const AdminQuestions = () => {
   const history = useHistory();
-  const { data: questions = [] } = useQuery('getQuestions', () => getQuestions());
+  const [sortBy, setSortBy] = useState('answeredCorrectly');
+  const { data: questions = [], refetch } = useQuery('getQuestions', () => getQuestions({ sortBy }), {
+    refetchOnMount: true,
+  });
+
+  const onChangeSortHandler = (e) => {
+    setSortBy(e.target.value);
+  };
+
+  useEffect(() => {
+    refetch();
+  }, [sortBy, refetch]);
+
   return (
     <div className="wrapper">
       <div>
@@ -20,6 +32,14 @@ const AdminQuestions = () => {
         <div className="question-wrapper">
           <Table dark striped>
             <thead>
+              <tr>
+                <div className="question__edit mt-2 mb-2">
+                  <select id="points" name="points" value={sortBy} onChange={onChangeSortHandler}>
+                    <option value={'answeredCorrectly'}>Po broju tačnih odgovora</option>
+                    <option value={'answeredIncorrectly'}>Po broju netačnih odgovora</option>
+                  </select>
+                </div>
+              </tr>
               <tr className="question-table__header">
                 <td>Pitanje</td>
                 <td>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { useSelector } from 'react-redux';
 import { getScores } from '../services/stats';
 import RankingItem from '../components/RankingListItem';
 import Loader from '../components/Spinner';

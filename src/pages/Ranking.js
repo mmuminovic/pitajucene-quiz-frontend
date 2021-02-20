@@ -66,7 +66,7 @@ const Ranking = () => {
       setLastPeriod(data.data.rankingLastPeriod.rankingListTitle);
     }
     setRankingList(list);
-  }, [selected, data]);
+  }, [selected, data, history, isAdmin]);
 
   return (
     <div className="wrapper">
