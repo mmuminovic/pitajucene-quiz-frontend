@@ -96,6 +96,19 @@ const Navigation = () => {
                   >
                     Moj profil
                   </DropdownItem>
+                  {authState.isAdmin && (
+                    <>
+                      <DropdownItem divider />
+                      <DropdownItem
+                        style={{ fontSize: '1.4rem' }}
+                        onClick={() => {
+                          history.push('/admin/questions');
+                        }}
+                      >
+                        Pitanja
+                      </DropdownItem>
+                    </>
+                  )}
                   <DropdownItem divider />
                   <DropdownItem
                     style={{ fontSize: '1.4rem' }}
