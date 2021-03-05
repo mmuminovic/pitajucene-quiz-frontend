@@ -19,6 +19,7 @@ function App() {
       <Switch>
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/statistics" component={Statistics} />
         {Object.keys(USER_ROUTES).map((route) => (
           <PrivateRoute
             key={USER_ROUTES[route].path}
