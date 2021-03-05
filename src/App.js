@@ -8,6 +8,8 @@ import { ADMIN_ROUTES, USER_ROUTES } from './routes';
 import { PrivateRoute } from './hooks/PrivateRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Statistics from './pages/admin/Statistics'
+
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.token);

@@ -1,9 +1,14 @@
 import axios from 'axios';
 
+// get statistics 
 export const getStats = () =>
   new Promise(async (resolve, reject) => {
     try {
-      const quiz = await axios.get('/stats/get-stats');
+      const quiz = await axios.get('/stats/get-stats', {
+        headers: {
+          'Authorization': `${process.env.REACT_APP_ADMIN_HEADER}`
+        }
+      });
       resolve(quiz);
     } catch (error) {
       reject(error);
@@ -39,3 +44,4 @@ export const getScores = (id) =>
       reject(error);
     }
   });
+

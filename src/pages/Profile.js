@@ -11,11 +11,13 @@ const Profile = (props) => {
   const playerId = props.location.state.id;
   console.log(playerId);
 
+  // ovo koristis za fecovanje
   const { data, isLoading } = useQuery('scores', () => getScores(playerId), {
     refetchOnMount: false,
     refetchOnReconnect: true,
     refetchOnWindowFocus: true,
   });
+  //
 
   return (
     <div className="wrapper">
