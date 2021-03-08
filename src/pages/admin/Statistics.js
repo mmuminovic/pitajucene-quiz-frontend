@@ -63,7 +63,7 @@ const Statistics = () => {
             ) : (
                 <>
                     <h1 style={{ color: 'white' }}>
-                        Broj igraca u 2020-oj godini
+                        Broj igraca u 2021-oj godini
                     </h1>
                 </>
             )}
