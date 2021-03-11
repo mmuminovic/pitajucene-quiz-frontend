@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
 import { getStats } from '../../services/stats'
 import Spinner from '../../components/Spinner'
@@ -12,50 +12,59 @@ import {
     Bar,
     ResponsiveContainer,
 } from 'recharts'
+import { EditLocation } from '@material-ui/icons'
+
+const months = [
+    'Januar',
+    'Februar',
+    'Mart',
+    'April',
+    'Maj',
+    'Jun',
+    'Jul',
+    'Avgust',
+    'Septembar',
+    'Oktobar',
+    'Novembar',
+    'Decembar',
+]
+
+const monthsDropdownOptions = ['Svi', ...months]
+console.log(monthsDropdownOptions)
 
 const Statistics = () => {
+    const [stats, setStats] = useState(null)
+    const [data, setData] = useState(null)
+    const [selectedYear, setSelectedYear] = useState(2021)
+    const [month, setMonth] = useState('')
 
-    const months = [
-        'Januar',
-        'Februar',
-        'Mart',
-        'April',
-        'Maj',
-        'Jun',
-        'Jul',
-        'Avgust',
-        'Septembar',
-        'Oktobar',
-        'Novembar',
-        'Decembar',
-    ];
-    
-
-    const [stats, setStats] = useState(null);
-    const [data, setData] = useState(null);
-    const [selectedYear, setSelectedYear] = useState(2021);
-
-    const { isLoading } = useQuery('stats', () => getStats(), {
+    const { isLoading } = useQuery('stats', () => getStats(month), {
         refetchOnMount: false,
         refetchOnReconnect: false,
         refetchOnWindowFocus: false,
         onSuccess: (res) => {
-            setStats(res.data);
-            console.log(res.data);
-
-            const statsMapped = res.data.stats[selectedYear].map((val, i) => {
-                return {
-                    name: months[i],
-                    value: val
-                }
-            })
-            setData(statsMapped);
+            setStats(res.data)
+            const years = Object.keys(res.data.stats)
+            console.log(years)
+            const theLastYear = years[years.length - 1]
+            setSelectedYear(theLastYear)
+            console.log(theLastYear)
         },
     })
 
-    
+    useEffect(() => {
+        // console.log(stats, selectedYear)
+        if (stats) {
+            const statsMapped = stats.stats[selectedYear].map((val, i) => {
+                return {
+                    name: months[i],
+                    value: val,
+                }
+            })
+            setData(statsMapped)
+        }
+    }, [selectedYear, stats])
 
-    
     return (
         <div className="wrapper">
             {isLoading ? (
@@ -63,8 +72,24 @@ const Statistics = () => {
             ) : (
                 <>
                     <h1 style={{ color: 'white' }}>
-                        Broj igraca u 2021-oj godini
+                        Broj igraca u {selectedYear}-oj godini
                     </h1>
+                    <select
+                        value={selectedYear}
+                        onChange={(event) => {
+                            setSelectedYear(parseInt(event.target.value))
+                        }}
+                    >
+                        {Object.keys(stats.stats).map((key) => (
+                            <option key={key} value={key}>
+                                {key}
+                            </option>
+                        ))}
+                    </select>
+
+                    <select>
+                        {Object.keys(monthsDropdownOptions).map((el) => <option key={el} value={el}>{el}</option>)}
+                    </select>
                 </>
             )}
             <ResponsiveContainer width="45%" height="35%">

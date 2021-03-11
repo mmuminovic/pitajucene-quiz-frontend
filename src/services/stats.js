@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-// get statistics 
-export const getStats = () =>
+
+export const getStats = (month) =>
   new Promise(async (resolve, reject) => {
     try {
-      const quiz = await axios.get('/stats/get-stats', {
+      const quiz = await axios.get(`stats/get-stats?=${month}`, { 
         headers: {
           'Authorization': `${process.env.REACT_APP_ADMIN_HEADER}`
         }
