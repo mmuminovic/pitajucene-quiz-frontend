@@ -28,3 +28,13 @@ export const signup = (data) =>
             reject(error)
         }
     })
+
+export const setWinner = (id) =>
+    new Promise(async (resolve, reject) => {
+        try {
+            const user = await axios.patch(`/user/set-winner/${id}`, {})
+            resolve(user)
+        } catch (error) {
+            reject(error)
+        }
+    })

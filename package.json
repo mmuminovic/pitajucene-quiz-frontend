@@ -34,8 +34,8 @@
         "yup": "^0.29.3"
     },
     "scripts": {
-        "start": "Set NODE_ENV=production && Set PORT=8001 && react-scripts start",
-        "dev": "Set NODE_ENV=development && react-scripts start",
+        "start": "NODE_ENV=production && PORT=8001 react-scripts start",
+        "dev": "NODE_ENV=development && react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
