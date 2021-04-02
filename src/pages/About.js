@@ -15,17 +15,11 @@ const About = () => {
                     Kontakt osoba
                 </div>
                 <div className="profile-card profile-card__text">
-                    <span style={{ color: colors.secondary }}>
+                    <div style={{ color: colors.secondary }}>
                         Sedin Kutlovac
-                    </span>
-                </div>
-                <div className="profile-card profile-card__title">
-                    Software developer
-                </div>
-                <div className="profile-card profile-card__text">
-                    <span style={{ color: colors.secondary }}>
-                        Muhamed Muminović
-                    </span>
+                    </div>
+                    <div style={{ color: colors.secondary }}>+38762645414 (WhatsApp)</div>
+                    <div style={{ color: colors.secondary }}>info@pitajucene.com</div>
                 </div>
                 <div
                     style={{
