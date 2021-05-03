@@ -8,6 +8,8 @@ import { ADMIN_ROUTES, USER_ROUTES } from './routes';
 import { PrivateRoute } from './hooks/PrivateRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Statistics from './pages/admin/Statistics'
+
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.token);
@@ -19,6 +21,7 @@ function App() {
       <Switch>
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/statistics" component={Statistics} />
         {Object.keys(USER_ROUTES).map((route) => (
           <PrivateRoute
             key={USER_ROUTES[route].path}
