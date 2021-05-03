@@ -3,11 +3,7 @@ import axios from 'axios'
 export const getStats = (month) =>
     new Promise(async (resolve, reject) => {
         try {
-            const quiz = await axios.get(`stats/get-stats?month=${month}`, {
-                headers: {
-                    Authorization: `${process.env.REACT_APP_ADMIN_HEADER}`,
-                },
-            })
+            const quiz = await axios.get(`stats/get-stats?month=${month}`)
             resolve(quiz.data)
         } catch (error) {
             reject(error)
