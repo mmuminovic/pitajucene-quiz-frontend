@@ -31,46 +31,75 @@ const months = [
 const monthsDropdownOptions = ['Svi', ...months]
 
 const Statistics = () => {
-    const [stats, setStats] = useState(null)
-    const [data, setData] = useState(null)
-    const [selectedYear, setSelectedYear] = useState(2021)
-    const [month, setMonth] = useState('')
+    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
+    const [month, setMonth] = useState('') // u pocetku nemam izabran mesec pa ce da mi da rezultate za godine
 
-    const { isLoading } = useQuery('stats', () => getStats(month), {
-        refetchOnMount: false,
-        refetchOnReconnect: false,
-        refetchOnWindowFocus: false,
-        onSuccess: (res) => {
-            if (res.data.stats) {
-                setStats(res.data)
-            } else if (res.data.month) {
-                setMonth(res.data)
-            }
-            console.log(res.data, 'ON MONTH CLICK')
-            console.log(res.data, 'RES.DATA')
-            console.log(month, 'MONTH')
-            const years = Object.keys(res.data.stats)
-            console.log(years)
-            const theLastYear = years[years.length - 1]
-            setSelectedYear(theLastYear)
-            console.log(theLastYear)
-        },
-    })
+    // ovaj month moze da bude broj od 0 do 11 ili prazan string
+    // ako je broj onda je izabran mesec a ako je string onda nije izabran
+
+    const [data, setData] = useState([]) // podaci koje prikazujemo
+    const [stats, setStats] = useState(null) // svi podaci, za sve godine
+
+    /* 
+    
+    Meni je ovaj stats isti objekat bilo da imam mesec ili godine izabrane
+    
+    stats = {
+        2021: [...],
+        2020: [...]
+    }
+
+    */
+
+    const { isLoading, refetch: refetchStats } = useQuery(
+        'stats',
+        () => getStats(month),
+        {
+            refetchOnMount: false,
+            onSuccess: (res) => {
+                let resultStats = {}
+                if (typeof month === 'number') {
+                    resultStats = res.month // ovde imam i za 2020, 2021,...
+                } else {
+                    resultStats = res.stats
+                }
+
+                const theLastYear = Object.keys(resultStats).sort(
+                    (a, b) => b - a
+                )
+
+                if (theLastYear.length !== 0) {
+                    setSelectedYear(theLastYear[0])
+                } else {
+                    setSelectedYear(new Date().getFullYear())
+                }
+
+                setStats(resultStats)
+            },
+        }
+    )
 
     useEffect(() => {
-        console.log(stats, selectedYear, 'STATS i SELECTED YEAR')
-        if (stats) {
-            const statsMapped = stats.stats[selectedYear].map((val, i) => {
-                return {
-                    name: months[i],
-                    value: val,
-                }
-            })
-            setData(statsMapped)
-        }
-    }, [selectedYear, stats])
+        refetchStats()
+    }, [month, refetchStats])
 
-    console.log(month)
+    useEffect(() => {
+        if (stats) {
+            let statsData = stats[selectedYear] || []
+            if (typeof month === 'number') {
+                statsData = statsData.map((el, i) => ({
+                    name: i + 1,
+                    value: el,
+                }))
+            } else {
+                statsData = statsData.map((el, i) => ({
+                    name: months[i],
+                    value: el,
+                }))
+            }
+            setData(statsData)
+        }
+    }, [stats, selectedYear, month])
 
     return (
         <div className="wrapper">
@@ -81,23 +110,29 @@ const Statistics = () => {
                     <h1 style={{ color: 'white' }}>
                         Broj igraca u {selectedYear}-oj godini
                     </h1>
-                    <select
-                        value={selectedYear}
-                        onChange={(event) => {
-                            setSelectedYear(parseInt(event.target.value))
-                        }}
-                    >
-                        {Object.keys(stats.stats).map((key) => (
-                            <option key={key} value={key}>
-                                {key}
-                            </option>
-                        ))}
-                    </select>
+                    {stats && (
+                        <select
+                            value={selectedYear}
+                            onChange={(event) => {
+                                setSelectedYear(parseInt(event.target.value))
+                            }}
+                        >
+                            {Object.keys(stats).map((key) => (
+                                <option key={key} value={key}>
+                                    {key}
+                                </option>
+                            ))}
+                        </select>
+                    )}
 
                     <select
-                        value={month}
+                        value={months[month]}
                         onChange={(event) => {
-                            setMonth(event.target.value)
+                            if (event.target.value !== 'Svi') {
+                                setMonth(months.indexOf(event.target.value))
+                            } else {
+                                setMonth('')
+                            }
                         }}
                     >
                         {monthsDropdownOptions.map((el, index) => (
@@ -108,36 +143,44 @@ const Statistics = () => {
                     </select>
                 </>
             )}
-            <ResponsiveContainer width="45%" height="35%">
-                <BarChart
-                    width={300}
-                    height={150}
-                    data={data}
-                    margin={{
-                        top: 5,
-                        right: 30,
-                        left: 20,
-                        bottom: 5,
-                    }}
-                    barSize={30}
-                >
-                    <XAxis
-                        dataKey="name"
-                        scale="point"
-                        padding={{ left: 10, right: 10 }}
-                    />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Bar
-                        dataKey="value"
-                        name="Odigrano"
-                        fill="#8884d8"
-                        background={{ fill: '#eee' }}
-                    />
-                </BarChart>
-            </ResponsiveContainer>
+            {data.length === 0 ? (
+                <div style={{ width: '55%' }}>
+                    <h1 style={{ color: 'white', textAlign: 'center' }}>
+                        Nema rezultata
+                    </h1>
+                </div>
+            ) : (
+                <ResponsiveContainer width="55%" height="35%">
+                    <BarChart
+                        width={300}
+                        height={150}
+                        data={data}
+                        margin={{
+                            top: 5,
+                            right: 30,
+                            left: 20,
+                            bottom: 5,
+                        }}
+                        barSize={30}
+                    >
+                        <XAxis
+                            dataKey="name"
+                            scale="point"
+                            padding={{ left: 10, right: 10 }}
+                        />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <Bar
+                            dataKey="value"
+                            name="Odigrano"
+                            fill="#8884d8"
+                            background={{ fill: '#eee' }}
+                        />
+                    </BarChart>
+                </ResponsiveContainer>
+            )}
         </div>
     )
 }
