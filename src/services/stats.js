@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getStats = (month) =>
   new Promise(async (resolve, reject) => {
     try {
-      const quiz = await axios.get(`stats/get-stats?=${month}`, { 
+      const quiz = await axios.get(`stats/get-stats?month=${month}`, { 
         headers: {
           'Authorization': `${process.env.REACT_APP_ADMIN_HEADER}`
         }

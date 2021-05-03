@@ -12,7 +12,6 @@ import {
     Bar,
     ResponsiveContainer,
 } from 'recharts'
-import { EditLocation } from '@material-ui/icons'
 
 const months = [
     'Januar',
@@ -30,7 +29,6 @@ const months = [
 ]
 
 const monthsDropdownOptions = ['Svi', ...months]
-console.log(monthsDropdownOptions)
 
 const Statistics = () => {
     const [stats, setStats] = useState(null)
@@ -43,7 +41,14 @@ const Statistics = () => {
         refetchOnReconnect: false,
         refetchOnWindowFocus: false,
         onSuccess: (res) => {
-            setStats(res.data)
+            if (res.data.stats) {
+                setStats(res.data)
+            } else if (res.data.month) {
+                setMonth(res.data)
+            }
+            console.log(res.data, 'ON MONTH CLICK')
+            console.log(res.data, 'RES.DATA')
+            console.log(month, 'MONTH')
             const years = Object.keys(res.data.stats)
             console.log(years)
             const theLastYear = years[years.length - 1]
@@ -53,7 +58,7 @@ const Statistics = () => {
     })
 
     useEffect(() => {
-        // console.log(stats, selectedYear)
+        console.log(stats, selectedYear, 'STATS i SELECTED YEAR')
         if (stats) {
             const statsMapped = stats.stats[selectedYear].map((val, i) => {
                 return {
@@ -64,6 +69,8 @@ const Statistics = () => {
             setData(statsMapped)
         }
     }, [selectedYear, stats])
+
+    console.log(month)
 
     return (
         <div className="wrapper">
@@ -87,8 +94,17 @@ const Statistics = () => {
                         ))}
                     </select>
 
-                    <select>
-                        {Object.keys(monthsDropdownOptions).map((el) => <option key={el} value={el}>{el}</option>)}
+                    <select
+                        value={month}
+                        onChange={(event) => {
+                            setMonth(event.target.value)
+                        }}
+                    >
+                        {monthsDropdownOptions.map((el, index) => (
+                            <option key={index} value={el}>
+                                {el}
+                            </option>
+                        ))}
                     </select>
                 </>
             )}
