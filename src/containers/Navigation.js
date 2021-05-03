@@ -107,6 +107,14 @@ const Navigation = () => {
                       >
                         Pitanja
                       </DropdownItem>
+                      <DropdownItem
+                        style={{ fontSize: '1.4rem' }}
+                        onClick={() => {
+                          history.push('/statistics');
+                        }}
+                      >
+                        Statistika
+                      </DropdownItem>
                     </>
                   )}
                   <DropdownItem divider />
