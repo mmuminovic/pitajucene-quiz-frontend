@@ -41,14 +41,12 @@ const Statistics = () => {
     const [stats, setStats] = useState(null) // svi podaci, za sve godine
 
     /* 
-    
     Meni je ovaj stats isti objekat bilo da imam mesec ili godine izabrane
     
     stats = {
         2021: [...],
         2020: [...]
     }
-
     */
 
     const { isLoading, refetch: refetchStats } = useQuery(
@@ -85,6 +83,7 @@ const Statistics = () => {
 
     useEffect(() => {
         if (stats) {
+            console.log(stats, '------STATS IN USE EFFECT')
             let statsData = stats[selectedYear] || []
             if (typeof month === 'number') {
                 statsData = statsData.map((el, i) => ({
@@ -100,6 +99,8 @@ const Statistics = () => {
             setData(statsData)
         }
     }, [stats, selectedYear, month])
+
+    console.log(month, '--------MONTH VALUE ON SELECT')
 
     return (
         <div className="wrapper">

@@ -96,6 +96,15 @@ const Navigation = () => {
                   >
                     Moj profil
                   </DropdownItem>
+
+                  <DropdownItem
+                    style={{ fontSize: '1.4rem' }}
+                    onClick={() => {
+                      history.push('/multiplayer', { id: authState.id });
+                    }}
+                  >
+                    Igraj 1 vs 1
+                  </DropdownItem>
                   {authState.isAdmin && (
                     <>
                       <DropdownItem divider />
