@@ -1,10 +1,11 @@
 import React from 'react'
 import { Spinner } from 'reactstrap'
+import * as colors from '../styles/main.scss'
 
 const Loader = () => (
     <Spinner
         type="grow"
-        style={{ color: '#d8dffd', width: '70px', height: '70px' }}
+        style={{ color: colors.secondary, width: '70px', height: '70px' }}
     />
 )
 
