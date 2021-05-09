@@ -14,7 +14,7 @@ const ScoreProgressBar = ({ score }) => {
         >
             <div
                 style={{
-                    backgroundColor: 'yellow',
+                    backgroundColor: colors.yellow,
                     height: '8px',
                     width: percentage,
                     position: 'absolute',
